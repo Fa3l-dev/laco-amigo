@@ -1,0 +1,49 @@
+body {
+    background-color: #F4F8F8;
+    font-family: 'Inter', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Animação suave para a logo no Splash Screen */
+@keyframes pulseSubtle {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.06);
+    }
+}
+
+.animate-pulse-subtle {
+    animation: pulseSubtle 2.2s infinite ease-in-out;
+}
+
+.tab-btn.active {
+    color: #0D7A82;
+    border-bottom: 4px solid #0D7A82;
+    font-weight: 800;
+    background-color: rgba(13, 122, 130, 0.08);
+}
+
+.tab-btn:not(.active) {
+    color: #64748B;
+    border-bottom: 4px solid transparent;
+}
+
+input:focus, select:focus, button:focus, a:focus {
+    outline: 3px solid #0D7A82 !important;
+    outline-offset: 2px;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #0D7A82;
+    border-radius: 4px;
+}

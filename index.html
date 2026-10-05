@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Ficheiro de Estilos Customizados -->
+    <link rel="stylesheet" href="style.css">
     
     <script>
         tailwind.config = {
@@ -29,57 +31,62 @@
             }
         }
     </script>
-    
-    <style>
-        body {
-            background-color: #F4F8F8;
-            font-family: 'Inter', sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        .tab-btn.active {
-            color: #0D7A82;
-            border-bottom: 4px solid #0D7A82;
-            font-weight: 800;
-            background-color: rgba(13, 122, 130, 0.08);
-        }
-
-        .tab-btn:not(.active) {
-            color: #64748B;
-            border-bottom: 4px solid transparent;
-        }
-
-        input:focus, select:focus, button:focus, a:focus {
-            outline: 3px solid #0D7A82 !important;
-            outline-offset: 2px;
-        }
-
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #0D7A82;
-            border-radius: 4px;
-        }
-    </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between text-gray-800 antialiased bg-slate-50">
 
-    <!-- Header Bar with Logo and App Name in Top Right -->
+    <!-- TELA DE CARREGAMENTO (SPLASH SCREEN - APP MOBILE) -->
+    <div id="splashScreen" class="fixed inset-0 z-50 bg-gradient-to-b from-brandTeal to-teal-900 flex flex-col items-center justify-between p-6 transition-opacity duration-700 ease-out">
+        
+        <!-- Top Spacer para centralizar melhor no mobile -->
+        <div class="w-full h-8"></div>
+
+        <!-- CONTEÚDO CENTRALIZADO (LOGO E NOME) -->
+        <div class="flex flex-col items-center text-center space-y-5 my-auto max-w-xs sm:max-w-sm w-full px-4">
+            
+            <!-- Logo Emblem SVG Ampliado com animação de pulso -->
+            <div class="relative w-28 h-28 sm:w-32 sm:h-32 flex items-center justify-center bg-white rounded-full shadow-2xl border-4 border-white/20 p-2 animate-pulse-subtle shrink-0">
+                <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-md">
+                    <path d="M50 88 C20 70 5 50 5 32 C5 18 16 8 30 8 C40 8 47 14 50 20 C53 14 60 8 70 8 C84 8 95 18 95 32 C95 50 80 70 50 88 Z" fill="#D93B3B"/>
+                    <path d="M12 75 C 5 50, 15 25, 30 18 C 22 30, 20 50, 32 70 C 45 90, 75 92, 88 80 C 70 98, 30 95, 12 75 Z" fill="#0D7A82"/>
+                    <path d="M 40 30 A 5 5 0 1 0 40 20 A 5 5 0 1 0 40 30 Z M 35 32 L 45 32 C 48 32 50 34 50 37 L 48 55 C 48 57 46 58 44 58 L 44 72 C 44 74 42 75 40 75 L 38 75 C 36 75 34 74 34 72 L 34 58 L 32 58 C 30 58 28 57 28 55 L 30 37 C 30 34 32 32 35 32 Z" fill="#FFFFFF"/>
+                    <path d="M 60 35 A 4.5 4.5 0 1 0 60 26 A 4.5 4.5 0 1 0 60 35 Z M 55 37 L 65 37 C 67 37 69 39 69 41 L 67 56 C 67 58 66 59 64 59 L 64 70 A 2 2 0 0 1 62 72 L 61 72 A 2 2 0 0 1 59 70 L 59 59 L 57 59 L 57 70 A 2 2 0 0 1 55 72 L 54 72 A 2 2 0 0 1 52 70 L 52 56 L 51 41 C 51 39 53 37 55 37 Z" fill="#FFFFFF"/>
+                    <path d="M 69 48 L 71 48 L 71 74 L 69 74 Z M 69 48 C 69 45 73 45 73 48" stroke="#FFFFFF" stroke-width="2" fill="none"/>
+                </svg>
+            </div>
+
+            <!-- Nome da App -->
+            <div class="space-y-1">
+                <h1 class="text-3xl sm:text-4xl font-black text-white tracking-tight leading-tight">
+                    Laço <span class="text-brandRed">Amigo</span>
+                </h1>
+                <p class="text-teal-100/90 text-sm sm:text-base font-medium">Apoio, carinho e conexão na melhor idade</p>
+            </div>
+
+            <!-- Spinner / Barra de Carregamento -->
+            <div class="pt-4 flex flex-col items-center gap-3">
+                <div class="w-8 h-8 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
+                <span class="text-xs font-semibold uppercase tracking-wider text-teal-200">A carregar...</span>
+            </div>
+        </div>
+
+        <!-- Rodapé do Splash (Acessibilidade & Segurança) -->
+        <div class="pb-4 text-center">
+            <p class="text-xs text-teal-200/80 font-medium">Versão 1.0 • Design Acessível</p>
+        </div>
+    </div>
+
+    <!-- Header Bar com Logo e Nome no Canto Superior Direito -->
     <header class="w-full bg-white border-b border-slate-200 px-4 py-3 sm:px-8 shadow-sm sticky top-0 z-30">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
             
-            <!-- Left Side Subtitle / Tagline -->
+            <!-- Lado Esquerdo: Tagline / Subtítulo -->
             <div class="flex items-center gap-2 text-slate-700 font-semibold text-sm sm:text-base">
                 <i class="fa-solid fa-heart text-brandRed text-lg"></i>
                 <span class="hidden sm:inline">Apoio, carinho e conexão na melhor idade</span>
                 <span class="sm:hidden">Apoio a idosos</span>
             </div>
 
-            <!-- RIGHT SIDE: Logo Marca & Name (Top Right) -->
+            <!-- Lado Direito: Logo e Nome -->
             <div class="flex items-center gap-3 ml-auto">
                 <div class="text-right">
                     <h1 class="text-2xl sm:text-3xl font-black text-brandTeal tracking-tight leading-tight">
@@ -87,7 +94,6 @@
                     </h1>
                 </div>
                 
-                <!-- Logo SVG reproducing exact emblem -->
                 <div class="relative w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center bg-white rounded-full shadow-md border border-slate-200 p-1 shrink-0">
                     <svg viewBox="0 0 100 100" class="w-full h-full">
                         <path d="M50 88 C20 70 5 50 5 32 C5 18 16 8 30 8 C40 8 47 14 50 20 C53 14 60 8 70 8 C84 8 95 18 95 32 C95 50 80 70 50 88 Z" fill="#D93B3B"/>
@@ -104,7 +110,7 @@
     <main class="flex-grow flex items-center justify-center p-4 sm:p-6 lg:p-8">
         <div class="max-w-2xl w-full bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-200 my-4">
             
-            <!-- Welcome Header Banner -->
+            <!-- Banner de Boas-Vindas -->
             <div class="bg-gradient-to-r from-brandTeal to-teal-800 text-white p-6 sm:p-8 text-center relative overflow-hidden">
                 <div class="relative z-10">
                     <span class="inline-flex items-center gap-1.5 bg-white/20 backdrop-blur-md text-white text-xs sm:text-sm font-semibold px-3.5 py-1 rounded-full mb-3 border border-white/30">
@@ -118,7 +124,7 @@
             </div>
 
             <div class="p-6 sm:p-8">
-                <!-- Navigation Tabs (Cadastrar / Entrar) -->
+                <!-- Abas de Navegação (Cadastrar / Entrar) -->
                 <div class="flex border-b-2 border-slate-200 mb-6 rounded-t-xl overflow-hidden">
                     <button id="tabRegister" type="button"
                             class="tab-btn active flex-1 py-3.5 text-base sm:text-lg font-extrabold transition-all duration-200 focus:outline-none text-center flex items-center justify-center gap-2">
@@ -132,13 +138,13 @@
                     </button>
                 </div>
 
-                <!-- Global Notification Alert Box -->
+                <!-- Notificações e Alertas -->
                 <div id="alertBox" class="hidden mb-6 p-4 rounded-xl text-base font-semibold flex items-center gap-3 shadow-md transition-all">
                     <i id="alertIcon" class="text-xl"></i>
                     <span id="alertMessage"></span>
                 </div>
 
-                <!-- Saved Session Status Card -->
+                <!-- Sessão Salva -->
                 <div id="savedSessionCard" class="hidden mb-6 p-4 bg-teal-50 border-2 border-brandTeal rounded-2xl flex items-center justify-between">
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 bg-brandTeal text-white rounded-full flex items-center justify-center font-bold text-lg shrink-0">
@@ -154,10 +160,10 @@
                     </button>
                 </div>
 
-                <!-- SECTION 1: REGISTER FORM -->
+                <!-- FORMULÁRIO DE CADASTRO -->
                 <form id="registerForm" class="space-y-4">
                     
-                    <!-- Full Name Field -->
+                    <!-- Nome Completo -->
                     <div>
                         <label for="regName" class="block text-slate-800 text-base font-bold mb-1.5">
                             Nome Completo <span class="text-brandRed">*</span>
@@ -171,7 +177,7 @@
                         </div>
                     </div>
 
-                    <!-- Email Field -->
+                    <!-- E-mail -->
                     <div>
                         <label for="regEmail" class="block text-slate-800 text-base font-bold mb-1.5">
                             E-mail <span class="text-brandRed">*</span>
@@ -185,9 +191,8 @@
                         </div>
                     </div>
 
-                    <!-- Phone and CPF Grid -->
+                    <!-- Telefone e CPF -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <!-- Phone Field -->
                         <div>
                             <label for="regPhone" class="block text-slate-800 text-base font-bold mb-1.5">
                                 Telefone / WhatsApp <span class="text-brandRed">*</span>
@@ -201,7 +206,6 @@
                             </div>
                         </div>
 
-                        <!-- CPF Field -->
                         <div>
                             <label for="regCPF" class="block text-slate-800 text-base font-bold mb-1.5">
                                 CPF <span class="text-brandRed">*</span>
@@ -216,16 +220,14 @@
                         </div>
                     </div>
 
-                    <!-- SEPARATED ADDRESS SECTION -->
+                    <!-- ENDEREÇO -->
                     <div class="p-4 bg-slate-50 border-2 border-slate-200 rounded-2xl space-y-4 my-2">
                         <div class="flex items-center gap-2 border-b border-slate-200 pb-2 text-brandTeal font-extrabold text-lg">
                             <i class="fa-solid fa-location-dot"></i>
                             <span>Endereço de Residência</span>
                         </div>
 
-                        <!-- Estado e Cidade Grid -->
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                            <!-- Estado (UF) -->
                             <div class="sm:col-span-1">
                                 <label for="regState" class="block text-slate-800 text-base font-bold mb-1.5">
                                     Estado (UF) <span class="text-brandRed">*</span>
@@ -245,7 +247,6 @@
                                 </select>
                             </div>
 
-                            <!-- Cidade -->
                             <div class="sm:col-span-2">
                                 <label for="regCity" class="block text-slate-800 text-base font-bold mb-1.5">
                                     Cidade <span class="text-brandRed">*</span>
@@ -255,7 +256,6 @@
                             </div>
                         </div>
 
-                        <!-- Bairro -->
                         <div>
                             <label for="regNeighborhood" class="block text-slate-800 text-base font-bold mb-1.5">
                                 Bairro <span class="text-brandRed">*</span>
@@ -264,9 +264,7 @@
                                    class="w-full px-4 py-3.5 text-base sm:text-lg border-2 border-slate-300 rounded-xl focus:border-brandTeal focus:ring-0 bg-white font-medium">
                         </div>
 
-                        <!-- Rua e Numero/Casa Grid -->
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                            <!-- Rua / Logradouro -->
                             <div class="sm:col-span-2">
                                 <label for="regStreet" class="block text-slate-800 text-base font-bold mb-1.5">
                                     Rua / Logradouro <span class="text-brandRed">*</span>
@@ -275,7 +273,6 @@
                                        class="w-full px-4 py-3.5 text-base sm:text-lg border-2 border-slate-300 rounded-xl focus:border-brandTeal focus:ring-0 bg-white font-medium">
                             </div>
 
-                            <!-- Número / Casa -->
                             <div class="sm:col-span-1">
                                 <label for="regNumber" class="block text-slate-800 text-base font-bold mb-1.5">
                                     Nº / Casa <span class="text-brandRed">*</span>
@@ -285,7 +282,6 @@
                             </div>
                         </div>
 
-                        <!-- Complemento (Opcional) -->
                         <div>
                             <label for="regComplement" class="block text-slate-800 text-base font-bold mb-1.5">
                                 Complemento <span class="text-slate-400 font-normal">(Opcional)</span>
@@ -295,7 +291,7 @@
                         </div>
                     </div>
 
-                    <!-- Password Field (Minimum 8 digits rule) -->
+                    <!-- Senha -->
                     <div>
                         <label for="regPassword" class="block text-slate-800 text-base font-bold mb-1.5">
                             Senha (mínimo de 8 dígitos) <span class="text-brandRed">*</span>
@@ -312,7 +308,6 @@
                                 <i id="toggleRegIcon" class="fa-solid fa-eye"></i>
                             </button>
                         </div>
-                        <!-- Password Strength & Min Length Indicator -->
                         <div class="mt-2 space-y-1">
                             <div class="flex justify-between items-center text-xs font-semibold">
                                 <span id="passCharCount" class="text-slate-500">Mínimo 8 dígitos (0/8)</span>
@@ -324,7 +319,7 @@
                         </div>
                     </div>
 
-                    <!-- Confirm Password Field -->
+                    <!-- Confirmar Senha -->
                     <div>
                         <label for="regConfirmPassword" class="block text-slate-800 text-base font-bold mb-1.5">
                             Confirmar Senha <span class="text-brandRed">*</span>
@@ -343,7 +338,7 @@
                         </div>
                     </div>
 
-                    <!-- Save Credentials Option during Register -->
+                    <!-- Salvar Credenciais -->
                     <div class="pt-2">
                         <label class="flex items-center gap-3 cursor-pointer p-3 rounded-xl bg-teal-50/80 hover:bg-teal-50 border border-teal-200 transition-colors">
                             <input type="checkbox" id="regSaveCredentials" checked class="w-6 h-6 text-brandTeal border-2 border-slate-400 rounded focus:ring-brandTeal accent-brandTeal cursor-pointer shrink-0">
@@ -353,7 +348,7 @@
                         </label>
                     </div>
 
-                    <!-- Terms and Privacy Policy Checkbox -->
+                    <!-- Termos e Privacidade -->
                     <div class="pt-1">
                         <label class="flex items-start gap-3 cursor-pointer p-3 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 transition-colors">
                             <input type="checkbox" id="termsCheck" required class="mt-1 w-6 h-6 text-brandTeal border-2 border-slate-400 rounded focus:ring-brandTeal accent-brandTeal cursor-pointer shrink-0">
@@ -369,7 +364,6 @@
                         </label>
                     </div>
 
-                    <!-- Submit Button -->
                     <button type="submit" class="w-full bg-brandTeal hover:bg-brandTealHover text-white text-lg sm:text-xl font-extrabold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 mt-4 flex items-center justify-center gap-3">
                         <i class="fa-solid fa-user-check"></i>
                         <span>CADASTRAR MEU PERFIL</span>
@@ -383,7 +377,7 @@
                     </p>
                 </form>
 
-                <!-- SECTION 2: LOGIN FORM -->
+                <!-- FORMULÁRIO DE LOGIN -->
                 <form id="loginForm" class="space-y-5 hidden">
                     
                     <div class="text-center mb-4">
@@ -391,7 +385,6 @@
                         <p class="text-slate-600 text-base">Informe seus dados para acessar o Laço Amigo</p>
                     </div>
 
-                    <!-- Email Field -->
                     <div>
                         <label for="loginEmail" class="block text-slate-800 text-base font-bold mb-1.5">
                             Seu E-mail
@@ -405,7 +398,6 @@
                         </div>
                     </div>
 
-                    <!-- Password Field -->
                     <div>
                         <div class="flex justify-between items-center mb-1.5">
                             <label for="loginPassword" class="block text-slate-800 text-base font-bold">
@@ -429,7 +421,6 @@
                         </div>
                     </div>
 
-                    <!-- Remember / Save Login Checkbox -->
                     <div class="pt-1">
                         <label class="flex items-center gap-3 cursor-pointer p-3 rounded-xl bg-teal-50/80 hover:bg-teal-50 border border-teal-200 transition-colors">
                             <input type="checkbox" id="rememberMe" checked class="w-6 h-6 text-brandTeal border-2 border-slate-400 rounded focus:ring-brandTeal accent-brandTeal cursor-pointer shrink-0">
@@ -437,7 +428,6 @@
                         </label>
                     </div>
 
-                    <!-- Submit Button -->
                     <button type="submit" class="w-full bg-brandTeal hover:bg-brandTealHover text-white text-lg sm:text-xl font-extrabold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 mt-2 flex items-center justify-center gap-3">
                         <i class="fa-solid fa-right-to-bracket"></i>
                         <span>ENTRAR NO APP</span>
@@ -466,7 +456,7 @@
         </div>
     </footer>
 
-    <!-- Modal Dialog (For Terms and Privacy Info) -->
+    <!-- Modal Dialog -->
     <div id="modalOverlay" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-100 transform transition-all">
             <div class="flex justify-between items-center border-b border-slate-200 pb-4 mb-4">
@@ -482,339 +472,7 @@
         </div>
     </div>
 
-    <script>
-        // Constants
-        const STORAGE_KEY = 'laco_amigo_user_session';
-
-        // DOM Element Cache
-        const tabRegister = document.getElementById('tabRegister');
-        const tabLogin = document.getElementById('tabLogin');
-        const registerForm = document.getElementById('registerForm');
-        const loginForm = document.getElementById('loginForm');
-        
-        const alertBox = document.getElementById('alertBox');
-        const alertIcon = document.getElementById('alertIcon');
-        const alertMessage = document.getElementById('alertMessage');
-        
-        const savedSessionCard = document.getElementById('savedSessionCard');
-        const savedUserEmail = document.getElementById('savedUserEmail');
-        const btnClearSaved = document.getElementById('btnClearSaved');
-
-        const regPasswordInput = document.getElementById('regPassword');
-        const regConfirmPasswordInput = document.getElementById('regConfirmPassword');
-        const loginPasswordInput = document.getElementById('loginPassword');
-
-        const modalOverlay = document.getElementById('modalOverlay');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalBody = document.getElementById('modalBody');
-
-        // On Load Initialization
-        window.addEventListener('DOMContentLoaded', () => {
-            setupEventListeners();
-            loadSavedUserSession();
-        });
-
-        // Attach listeners cleanly to prevent syntax or escaping errors
-        function setupEventListeners() {
-            // Tab Buttons
-            tabRegister.addEventListener('click', () => switchTab('register'));
-            tabLogin.addEventListener('click', () => switchTab('login'));
-            document.getElementById('btnGoToLogin').addEventListener('click', () => switchTab('login'));
-            document.getElementById('btnGoToRegister').addEventListener('click', () => switchTab('register'));
-
-            // Clear saved credentials
-            btnClearSaved.addEventListener('click', clearSavedCredentials);
-
-            // Inputs Masks
-            document.getElementById('regCPF').addEventListener('input', function() { maskCPF(this); });
-            document.getElementById('regPhone').addEventListener('input', function() { maskPhone(this); });
-
-            // Password strength checker
-            regPasswordInput.addEventListener('input', function() { checkPasswordStrength(this.value); });
-
-            // Password toggles
-            document.getElementById('btnToggleRegPassword').addEventListener('click', () => {
-                togglePasswordVisibility('regPassword', 'toggleRegIcon');
-            });
-            document.getElementById('btnToggleConfirmPassword').addEventListener('click', () => {
-                togglePasswordVisibility('regConfirmPassword', 'toggleConfirmIcon');
-            });
-            document.getElementById('btnToggleLoginPassword').addEventListener('click', () => {
-                togglePasswordVisibility('loginPassword', 'toggleLoginIcon');
-            });
-
-            // Forms Submit
-            registerForm.addEventListener('submit', handleRegister);
-            loginForm.addEventListener('submit', handleLogin);
-
-            // Modal Trigger Links
-            document.getElementById('btnModalTerms').addEventListener('click', () => {
-                showModal('Termos de Uso', 'Ao se cadastrar no Laço Amigo, você concorda em utilizar a plataforma de forma respeitosa, promovendo o bem-estar e o apoio seguro a idosos e seus responsáveis.');
-            });
-            document.getElementById('btnModalPrivacy').addEventListener('click', () => {
-                showModal('Política de Privacidade', 'Seus dados pessoais, CPF e endereço estão seguros e protegidos. As informações gravadas neste dispositivo servem para facilitar seu acesso direto.');
-            });
-            document.getElementById('btnForgotPassword').addEventListener('click', () => {
-                showModal('Recuperação de Senha', 'Informe seu e-mail cadastrado na tela de login para receber as instruções de redefinição de senha.');
-            });
-
-            // Modal Close
-            document.getElementById('btnCloseModalX').addEventListener('click', closeModal);
-            document.getElementById('btnCloseModalBtn').addEventListener('click', closeModal);
-        }
-
-        // Switch between Cadastrar and Entrar tabs
-        function switchTab(tab) {
-            hideAlert();
-            if (tab === 'register') {
-                tabRegister.classList.add('active');
-                tabLogin.classList.remove('active');
-                registerForm.classList.remove('hidden');
-                loginForm.classList.add('hidden');
-            } else {
-                tabLogin.classList.add('active');
-                tabRegister.classList.remove('active');
-                loginForm.classList.remove('hidden');
-                registerForm.classList.add('hidden');
-            }
-        }
-
-        // Mask function for CPF: 000.000.000-00
-        function maskCPF(input) {
-            let v = input.value.replace(/\D/g, '');
-            if (v.length > 11) v = v.substring(0, 11);
-            v = v.replace(/(\d{3})(\d)/, '$1.$2');
-            v = v.replace(/(\d{3})(\d)/, '$1.$2');
-            v = v.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-            input.value = v;
-        }
-
-        // Mask function for Phone: (00) 00000-0000
-        function maskPhone(input) {
-            let v = input.value.replace(/\D/g, '');
-            if (v.length > 11) v = v.substring(0, 11);
-            v = v.replace(/^(\d{2})(\d)/g, '($1) $2');
-            v = v.replace(/(\d{5})(\d)/, '$1-$2');
-            input.value = v;
-        }
-
-        // Password strength and minimum 8-digit checker
-        function checkPasswordStrength(val) {
-            const charCount = document.getElementById('passCharCount');
-            const label = document.getElementById('passStrengthLabel');
-            const bar = document.getElementById('passStrengthBar');
-
-            const len = val.length;
-            charCount.textContent = 'Mínimo 8 dígitos (' + len + '/8)';
-
-            if (len < 8) {
-                charCount.className = 'text-brandRed font-bold';
-                label.textContent = 'Curta (mínimo 8 dígitos)';
-                label.className = 'text-brandRed font-bold';
-                bar.style.width = Math.min((len / 8) * 40, 40) + '%';
-                bar.className = 'h-full bg-brandRed transition-all duration-300';
-            } else if (len >= 8 && len < 12) {
-                charCount.className = 'text-emerald-600 font-bold';
-                label.textContent = 'Senha Válida';
-                label.className = 'text-amber-600 font-bold';
-                bar.style.width = '75%';
-                bar.className = 'h-full bg-amber-500 transition-all duration-300';
-            } else {
-                charCount.className = 'text-emerald-600 font-bold';
-                label.textContent = 'Senha Forte';
-                label.className = 'text-emerald-600 font-bold';
-                bar.style.width = '100%';
-                bar.className = 'h-full bg-emerald-500 transition-all duration-300';
-            }
-        }
-
-        // Toggle password visibility
-        function togglePasswordVisibility(inputId, iconId) {
-            const input = document.getElementById(inputId);
-            const icon = document.getElementById(iconId);
-            if (input.type === 'password') {
-                input.type = 'text';
-                icon.className = 'fa-solid fa-eye-slash';
-            } else {
-                input.type = 'password';
-                icon.className = 'fa-solid fa-eye';
-            }
-        }
-
-        // Register Submission Logic
-        function handleRegister(e) {
-            e.preventDefault();
-
-            const name = document.getElementById('regName').value.trim();
-            const email = document.getElementById('regEmail').value.trim();
-            const phone = document.getElementById('regPhone').value.trim();
-            const cpf = document.getElementById('regCPF').value.trim();
-            
-            const state = document.getElementById('regState').value;
-            const city = document.getElementById('regCity').value.trim();
-            const neighborhood = document.getElementById('regNeighborhood').value.trim();
-            const street = document.getElementById('regStreet').value.trim();
-            const number = document.getElementById('regNumber').value.trim();
-            const complement = document.getElementById('regComplement').value.trim();
-
-            const password = regPasswordInput.value;
-            const confirmPassword = regConfirmPasswordInput.value;
-            const termsChecked = document.getElementById('termsCheck').checked;
-            const saveCreds = document.getElementById('regSaveCredentials').checked;
-
-            // Password Validation
-            if (password.length < 8) {
-                showAlert('error', 'A senha precisa ter no mínimo 8 dígitos!');
-                regPasswordInput.focus();
-                return;
-            }
-
-            if (password !== confirmPassword) {
-                showAlert('error', 'As senhas informadas não correspondem. Por favor, verifique!');
-                regConfirmPasswordInput.focus();
-                return;
-            }
-
-            if (!termsChecked) {
-                showAlert('error', 'É necessário aceitar os Termos de Uso e Política de Privacidade.');
-                return;
-            }
-
-            // Create User Object
-            const userData = {
-                name: name,
-                email: email,
-                phone: phone,
-                cpf: cpf,
-                address: {
-                    state: state,
-                    city: city,
-                    neighborhood: neighborhood,
-                    street: street,
-                    number: number,
-                    complement: complement
-                },
-                password: password
-            };
-
-            if (saveCreds) {
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(userData));
-                showSavedSessionCard(email);
-            }
-
-            showAlert('success', 'Cadastro realizado com sucesso! Seja bem-vindo(a) ao Laço Amigo, ' + name.split(' ')[0] + '!');
-            
-            setTimeout(() => {
-                switchTab('login');
-                document.getElementById('loginEmail').value = email;
-                document.getElementById('loginPassword').value = password;
-            }, 1500);
-        }
-
-        // Login Submission Logic
-        function handleLogin(e) {
-            e.preventDefault();
-
-            const email = document.getElementById('loginEmail').value.trim();
-            const password = loginPasswordInput.value;
-            const rememberMe = document.getElementById('rememberMe').checked;
-
-            if (password.length < 8) {
-                showAlert('error', 'A senha deve conter no mínimo 8 dígitos.');
-                return;
-            }
-
-            if (rememberMe) {
-                const existing = localStorage.getItem(STORAGE_KEY);
-                let userData = existing ? JSON.parse(existing) : {};
-                userData.email = email;
-                userData.password = password;
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(userData));
-                showSavedSessionCard(email);
-            }
-
-            showAlert('success', 'Login efetuado com sucesso! Entrando na plataforma...');
-        }
-
-        // Load credentials from localStorage
-        function loadSavedUserSession() {
-            try {
-                const savedData = localStorage.getItem(STORAGE_KEY);
-                if (savedData) {
-                    const user = JSON.parse(savedData);
-                    
-                    if (user.email) {
-                        document.getElementById('loginEmail').value = user.email;
-                        document.getElementById('regEmail').value = user.email;
-                        showSavedSessionCard(user.email);
-                    }
-                    if (user.password) {
-                        document.getElementById('loginPassword').value = user.password;
-                    }
-                    if (user.name) document.getElementById('regName').value = user.name;
-                    if (user.cpf) document.getElementById('regCPF').value = user.cpf;
-                    if (user.phone) document.getElementById('regPhone').value = user.phone;
-
-                    if (user.address) {
-                        if (user.address.state) document.getElementById('regState').value = user.address.state;
-                        if (user.address.city) document.getElementById('regCity').value = user.address.city;
-                        if (user.address.neighborhood) document.getElementById('regNeighborhood').value = user.address.neighborhood;
-                        if (user.address.street) document.getElementById('regStreet').value = user.address.street;
-                        if (user.address.number) document.getElementById('regNumber').value = user.address.number;
-                        if (user.address.complement) document.getElementById('regComplement').value = user.address.complement;
-                    }
-                }
-            } catch (err) {
-                console.error("Erro ao carregar dados salvos:", err);
-            }
-        }
-
-        function showSavedSessionCard(email) {
-            savedUserEmail.textContent = email;
-            savedSessionCard.classList.remove('hidden');
-        }
-
-        function clearSavedCredentials() {
-            localStorage.removeItem(STORAGE_KEY);
-            savedSessionCard.classList.add('hidden');
-            document.getElementById('loginEmail').value = '';
-            document.getElementById('loginPassword').value = '';
-            showAlert('info', 'As informações salvas foram limpas deste dispositivo com sucesso.');
-        }
-
-        // Alert message helper
-        function showAlert(type, msg) {
-            alertBox.classList.remove('hidden', 'bg-red-100', 'text-red-800', 'border-red-300', 'bg-emerald-100', 'text-emerald-800', 'border-emerald-300', 'bg-sky-100', 'text-sky-800', 'border-sky-300');
-            
-            if (type === 'error') {
-                alertBox.classList.add('bg-red-100', 'text-red-800', 'border-2', 'border-red-300');
-                alertIcon.className = 'fa-solid fa-circle-exclamation text-brandRed';
-            } else if (type === 'success') {
-                alertBox.classList.add('bg-emerald-100', 'text-emerald-800', 'border-2', 'border-emerald-300');
-                alertIcon.className = 'fa-solid fa-circle-check text-emerald-600';
-            } else {
-                alertBox.classList.add('bg-sky-100', 'text-sky-800', 'border-2', 'border-sky-300');
-                alertIcon.className = 'fa-solid fa-circle-info text-brandTeal';
-            }
-
-            alertMessage.textContent = msg;
-            alertBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
-
-        function hideAlert() {
-            alertBox.classList.add('hidden');
-        }
-
-        // Modal Helpers
-        function showModal(title, text) {
-            modalTitle.textContent = title;
-            modalBody.textContent = text;
-            modalOverlay.classList.remove('hidden');
-        }
-
-        function closeModal() {
-            modalOverlay.classList.add('hidden');
-        }
-    </script>
+    <!-- Ficheiro de Script JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>
