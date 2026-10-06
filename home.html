@@ -34,6 +34,20 @@
 </head>
 <body class="min-h-screen flex flex-col justify-between text-slate-800 antialiased bg-[#F4F8F8]">
 
+    <!-- TELA DE CARREGAMENTO (SPLASH SCREEN) -->
+    <div id="splashScreen" class="fixed inset-0 z-50 bg-gradient-to-b from-brandTeal to-teal-900 flex flex-col items-center justify-between p-6 transition-opacity duration-700">
+        <div></div>
+        <div class="flex flex-col items-center text-center space-y-4">
+            <div class="w-32 h-32 bg-white rounded-full flex items-center justify-center shadow-2xl p-1 overflow-hidden animate-pulse">
+                <img src="logo.png" alt="Logo Laço Amigo" class="w-full h-full object-cover rounded-full" onerror="this.src='https://via.placeholder.com/150'">
+            </div>
+            <h1 class="text-3xl font-black text-white">Laço <span class="text-brandRed">Amigo</span></h1>
+            <p class="text-teal-100 text-sm">Apoio e conexão para idosos</p>
+            <div class="w-8 h-8 border-4 border-white/30 border-t-white rounded-full animate-spin mt-2"></div>
+        </div>
+        <p class="text-xs text-teal-200/80">Versão 1.0</p>
+    </div>
+
     <!-- Cabeçalho Acessível -->
     <header class="w-full bg-white border-b-2 border-slate-200 px-4 py-4 sm:px-8 shadow-sm sticky top-0 z-30">
         <div class="max-w-5xl mx-auto flex justify-between items-center">
@@ -191,8 +205,6 @@
 
             <!-- Botões de Ação de Emergência -->
             <div class="space-y-4">
-                
-                <!-- Opção 1: Avisar Família / Cuidador -->
                 <button id="btnNotifyFamily" type="button" class="w-full bg-brandTeal hover:bg-brandTealHover text-white p-5 rounded-2xl text-xl font-extrabold flex items-center justify-start gap-4 shadow-md transition-all">
                     <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center text-2xl shrink-0">
                         <i class="fa-solid fa-users"></i>
@@ -203,7 +215,6 @@
                     </div>
                 </button>
 
-                <!-- Opção 2: SAMU (192) -->
                 <a href="tel:192" class="w-full bg-brandRed hover:bg-brandRedHover text-white p-5 rounded-2xl text-xl font-extrabold flex items-center justify-start gap-4 shadow-md transition-all">
                     <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center text-2xl shrink-0">
                         <i class="fa-solid fa-truck-medical"></i>
@@ -214,7 +225,6 @@
                     </div>
                 </a>
 
-                <!-- Opção 3: Polícia (190) -->
                 <a href="tel:190" class="w-full bg-slate-800 hover:bg-slate-900 text-white p-5 rounded-2xl text-xl font-extrabold flex items-center justify-start gap-4 shadow-md transition-all">
                     <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center text-2xl shrink-0">
                         <i class="fa-solid fa-shield-halved"></i>
@@ -224,7 +234,6 @@
                         <span class="text-xs text-slate-300 font-semibold uppercase">Segurança e proteção</span>
                     </div>
                 </a>
-
             </div>
 
             <!-- Botão de Voltar / Cancelar -->
@@ -252,6 +261,15 @@
         const STORAGE_KEY = 'laco_amigo_user_session';
 
         document.addEventListener('DOMContentLoaded', () => {
+            // Remove a Splash Screen após 1.5 segundos
+            const splash = document.getElementById('splashScreen');
+            if (splash) {
+                setTimeout(() => {
+                    splash.classList.add('opacity-0', 'pointer-events-none');
+                    setTimeout(() => splash.remove(), 700);
+                }, 1500);
+            }
+
             // Leitura da sessão
             const savedData = localStorage.getItem(STORAGE_KEY);
             const userNameElement = document.getElementById('userName');
@@ -285,17 +303,14 @@
             const btnNotifyFamily = document.getElementById('btnNotifyFamily');
 
             if (btnOpenEmergency && emergencyModal && btnCloseEmergency) {
-                // Abrir Modal
                 btnOpenEmergency.addEventListener('click', () => {
                     emergencyModal.classList.remove('hidden');
                 });
 
-                // Fechar Modal
                 btnCloseEmergency.addEventListener('click', () => {
                     emergencyModal.classList.add('hidden');
                 });
 
-                // Fechar ao clicar fora do conteúdo
                 emergencyModal.addEventListener('click', (e) => {
                     if (e.target === emergencyModal) {
                         emergencyModal.classList.add('hidden');
@@ -303,7 +318,6 @@
                 });
             }
 
-            // Ação de Notificar Família
             if (btnNotifyFamily) {
                 btnNotifyFamily.addEventListener('click', () => {
                     alert('Sinal de alerta enviado para seus familiares e cuidadores cadastrados!');
