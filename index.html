@@ -24,15 +24,22 @@
     <!-- TELA DE CARREGAMENTO (SPLASH SCREEN) -->
     <div id="splashScreen" class="fixed inset-0 z-50 bg-gradient-to-b from-brandTeal to-teal-900 flex flex-col items-center justify-between p-6 transition-opacity duration-700">
         <div></div>
+        
         <div class="flex flex-col items-center text-center space-y-4">
             <div class="w-32 h-32 bg-white rounded-full flex items-center justify-center shadow-2xl p-1 overflow-hidden animate-pulse">
                 <img src="logo.png" alt="Logo Laço Amigo" class="w-full h-full object-cover rounded-full">
             </div>
             <h1 class="text-3xl font-black text-white">Laço <span class="text-brandRed">Amigo</span></h1>
-            <p class="text-teal-100 text-sm">Laço amigo, um laço de cuidado</p>
+            <p class="text-teal-100 text-sm font-semibold">Apoio e conexão para idosos</p>
             <div class="w-8 h-8 border-4 border-white/30 border-t-white rounded-full animate-spin mt-2"></div>
         </div>
-        <p class="text-xs text-teal-200/80">Versão 1.0</p>
+
+        <div class="text-center max-w-xs space-y-1">
+            <p class="text-xs text-teal-100 font-medium leading-relaxed">
+                Uma plataforma criada para facilitar o cuidado, a comunicação e a autonomia dos idosos.
+            </p>
+            <p class="text-[10px] text-teal-200/60 pt-1">Versão 1.0</p>
+        </div>
     </div>
 
     <!-- HEADER -->
@@ -83,10 +90,8 @@
                 </p>
             </form>
 
-            <!-- TELA DE CADASTRO (INSPIRADA NO NOVO LAYOUT) -->
+            <!-- TELA DE CADASTRO GERAL -->
             <form id="formCadastro" class="space-y-3.5 hidden">
-                
-                <!-- Nome Completo -->
                 <div>
                     <label class="form-label">Nome Completo <span class="text-red-500">*</span></label>
                     <div class="relative">
@@ -95,7 +100,6 @@
                     </div>
                 </div>
 
-                <!-- E-mail -->
                 <div>
                     <label class="form-label">E-mail <span class="text-red-500">*</span></label>
                     <div class="relative">
@@ -104,7 +108,6 @@
                     </div>
                 </div>
 
-                <!-- Telefone / WhatsApp e CPF -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                         <label class="form-label">Telefone / WhatsApp <span class="text-red-500">*</span></label>
@@ -122,14 +125,12 @@
                     </div>
                 </div>
 
-                <!-- BLOCÃO: ENDEREÇO DE RESIDÊNCIA -->
                 <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 space-y-3">
                     <div class="flex items-center gap-1.5 text-brandTeal font-bold text-sm border-b border-slate-200/80 pb-2">
                         <i class="fa-solid fa-location-dot"></i>
                         <span>Endereço de Residência</span>
                     </div>
 
-                    <!-- Estado e Cidade -->
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
                         <div>
                             <label class="form-label">Estado (UF) <span class="text-red-500">*</span></label>
@@ -144,13 +145,11 @@
                         </div>
                     </div>
 
-                    <!-- Bairro -->
                     <div>
                         <label class="form-label">Bairro <span class="text-red-500">*</span></label>
                         <input type="text" id="bairro" placeholder="Ex: Centro / Jardim das Flores" class="input-field" required>
                     </div>
 
-                    <!-- Rua e Número -->
                     <div class="grid grid-cols-3 gap-2.5">
                         <div class="col-span-2">
                             <label class="form-label">Rua / Logradouro <span class="text-red-500">*</span></label>
@@ -162,14 +161,12 @@
                         </div>
                     </div>
 
-                    <!-- Complemento -->
                     <div>
                         <label class="form-label">Complemento <span class="text-slate-400 font-normal">(Opcional)</span></label>
-                        <input type="text" id="complemento" placeholder="Ex: Apto 102, Bloco B ou Próximo à praça" class="input-field">
+                        <input type="text" id="complemento" placeholder="Ex: Apto 102, Bloco B" class="input-field">
                     </div>
                 </div>
 
-                <!-- Senha -->
                 <div>
                     <label class="form-label">Senha (mínimo de 8 dígitos) <span class="text-red-500">*</span></label>
                     <div class="relative">
@@ -181,7 +178,6 @@
                     </div>
                 </div>
 
-                <!-- Confirmar Senha -->
                 <div>
                     <label class="form-label">Confirmar Senha <span class="text-red-500">*</span></label>
                     <div class="relative">
@@ -193,22 +189,21 @@
                     </div>
                 </div>
 
-                <!-- Checkboxes -->
                 <div class="space-y-2 pt-1">
                     <label class="flex items-center gap-2 bg-teal-50/50 border border-teal-100 p-2.5 rounded-xl cursor-pointer text-xs font-semibold text-slate-700">
                         <input type="checkbox" class="w-4 h-4 text-brandTeal rounded border-slate-300 focus:ring-brandTeal" checked>
-                        <span>Salvar minhas informações neste dispositivo para logins futuros</span>
+                        <span>Salvar minhas informações neste dispositivo</span>
                     </label>
 
                     <label class="flex items-center gap-2 border border-slate-200 p-2.5 rounded-xl cursor-pointer text-xs text-slate-600">
                         <input type="checkbox" class="w-4 h-4 text-brandTeal rounded border-slate-300 focus:ring-brandTeal" required>
-                        <span>Li e concordo com os <a href="#" class="text-brandTeal font-bold underline">Termos de Uso</a> e a <a href="#" class="text-brandTeal font-bold underline">Política de Privacidade</a>. <span class="text-red-500">*</span></span>
+                        <span>Li e concordo com os <a href="#" class="text-brandTeal font-bold underline">Termos de Uso</a>. <span class="text-red-500">*</span></span>
                     </label>
                 </div>
 
                 <button type="submit" class="btn-primary flex items-center justify-center gap-2 uppercase tracking-wide text-sm font-extrabold mt-3">
-                    <i class="fa-solid fa-user-plus"></i>
-                    <span>CADASTRAR MEU PERFIL</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                    <span>CONTINUAR</span>
                 </button>
 
                 <p class="text-center text-sm font-medium text-slate-600 pt-2">
@@ -253,12 +248,139 @@
                 </button>
             </section>
 
+            <!-- PASSO EXCLUSIVO DO RESPONSÁVEL: VÍNCULO/CADASTRO DO IDOSO -->
+            <section id="stepResponsavel" class="hidden space-y-4">
+                <div class="text-center mb-2">
+                    <span class="bg-amber-100 text-amber-700 text-xs font-bold px-3 py-1 rounded-full">VÍNCULO DE IDOSO</span>
+                    <h2 class="text-xl font-black text-slate-800 mt-2">O idoso já está cadastrado?</h2>
+                </div>
+
+                <div class="grid grid-cols-1 gap-3">
+                    <label class="flex items-center gap-3 bg-slate-50 border-2 border-slate-200 p-3.5 rounded-2xl cursor-pointer hover:border-brandTeal">
+                        <input type="radio" name="opcaoIdoso" value="sim" onchange="toggleFormularioIdoso('sim')" class="w-4 h-4 text-brandTeal">
+                        <span class="font-bold text-sm text-slate-800">Sim, ele já tem uma conta</span>
+                    </label>
+
+                    <label class="flex items-center gap-3 bg-slate-50 border-2 border-slate-200 p-3.5 rounded-2xl cursor-pointer hover:border-brandTeal">
+                        <input type="radio" name="opcaoIdoso" value="nao" onchange="toggleFormularioIdoso('nao')" class="w-4 h-4 text-brandTeal">
+                        <span class="font-bold text-sm text-slate-800">Não, ele nunca foi cadastrado</span>
+                    </label>
+                </div>
+
+                <!-- SE SIM: APENAS CPF DO IDOSO -->
+                <form id="formCpfIdoso" class="hidden space-y-3 pt-2">
+                    <div>
+                        <label class="form-label">CPF do Idoso <span class="text-red-500">*</span></label>
+                        <div class="relative">
+                            <i class="fa-solid fa-address-card input-icon"></i>
+                            <input type="text" id="cpfIdosoExistente" placeholder="000.000.000-00" class="input-field pl-9" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-primary">Vincular e Concluir</button>
+                </form>
+
+                <!-- SE NÃO: FORMULÁRIO COMPLETO DO IDOSO -->
+                <form id="formCadastroIdoso" class="hidden space-y-3 pt-2">
+                    <p class="text-xs font-bold text-amber-800 bg-amber-50 p-2.5 rounded-xl border border-amber-200">
+                        Preencha os dados do idoso. A conta dele ficará salva para quando ele quiser logar diretamente.
+                    </p>
+
+                    <div>
+                        <label class="form-label">Nome Completo do Idoso <span class="text-red-500">*</span></label>
+                        <input type="text" id="nomeIdoso" placeholder="Digite o nome completo do idoso" class="input-field" required>
+                    </div>
+
+                    <div>
+                        <label class="form-label">E-mail do Idoso <span class="text-red-500">*</span></label>
+                        <input type="email" id="emailIdoso" placeholder="idoso@exemplo.com" class="input-field" required>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="form-label">Telefone / WhatsApp <span class="text-red-500">*</span></label>
+                            <input type="tel" id="telefoneIdoso" placeholder="(00) 00000-0000" class="input-field" required>
+                        </div>
+                        <div>
+                            <label class="form-label">CPF <span class="text-red-500">*</span></label>
+                            <input type="text" id="cpfIdosoNovo" placeholder="000.000.000-00" class="input-field" required>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 border border-slate-200 rounded-2xl p-3 space-y-2.5">
+                        <span class="text-xs font-bold text-brandTeal block">Endereço do Idoso</span>
+                        
+                        <div class="grid grid-cols-3 gap-2">
+                            <div>
+                                <label class="form-label">UF <span class="text-red-500">*</span></label>
+                                <select id="estadoIdoso" class="input-field text-xs" required>
+                                    <option value="">UF</option>
+                                    <option>PE</option><option>PB</option><option>AL</option><option>SP</option><option>RJ</option>
+                                </select>
+                            </div>
+                            <div class="col-span-2">
+                                <label class="form-label">Cidade <span class="text-red-500">*</span></label>
+                                <input type="text" id="cidadeIdoso" placeholder="Cidade" class="input-field" required>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="form-label">Bairro <span class="text-red-500">*</span></label>
+                            <input type="text" id="bairroIdoso" placeholder="Bairro" class="input-field" required>
+                        </div>
+
+                        <div class="grid grid-cols-3 gap-2">
+                            <div class="col-span-2">
+                                <label class="form-label">Rua / Logradouro <span class="text-red-500">*</span></label>
+                                <input type="text" id="ruaIdoso" placeholder="Rua" class="input-field" required>
+                            </div>
+                            <div>
+                                <label class="form-label">Nº <span class="text-red-500">*</span></label>
+                                <input type="text" id="numeroIdoso" placeholder="123" class="input-field" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="form-label">Senha para o Idoso <span class="text-red-500">*</span></label>
+                        <input type="password" id="senhaIdoso" placeholder="Mínimo 8 dígitos" class="input-field" minlength="8" required>
+                    </div>
+
+                    <label class="flex items-center gap-2 border border-slate-200 p-2.5 rounded-xl text-xs text-slate-600">
+                        <input type="checkbox" required>
+                        <span>Li e concordo com os <a href="#" class="text-brandTeal font-bold underline">Termos e Condições</a>. <span class="text-red-500">*</span></span>
+                    </label>
+
+                    <button type="submit" class="btn-primary">Finalizar e Ir para Painel</button>
+                </form>
+
+                <button type="button" onclick="backToPerfil()" class="w-full text-center text-xs font-bold text-slate-500 hover:text-brandTeal pt-2">
+                    <i class="fa-solid fa-arrow-left"></i> Voltar à escolha de perfil
+                </button>
+            </section>
+
         </div>
     </main>
 
     <footer class="w-full bg-white border-t border-slate-200 py-3 text-center text-xs text-slate-600 z-10">
         © 2026 Laço Amigo • Design Acessível
     </footer>
+
+    <!-- SCRIPT DE FECHAMENTO GARANTIDO DO SPLASH SCREEN -->
+    <script>
+        function closeSplash() {
+            const splash = document.getElementById('splashScreen');
+            if (splash) {
+                splash.style.opacity = '0';
+                splash.style.pointerEvents = 'none';
+                setTimeout(function() {
+                    splash.style.display = 'none';
+                }, 500);
+            }
+        }
+        window.addEventListener('DOMContentLoaded', function() { setTimeout(closeSplash, 1200); });
+        window.addEventListener('load', function() { setTimeout(closeSplash, 1200); });
+        setTimeout(closeSplash, 2000); // Fallback absoluto
+    </script>
 
     <script src="script.js"></script>
 </body>

@@ -1,60 +1,103 @@
-body {
-    background-color: #F4F8F8;
-    font-family: 'Inter', sans-serif;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-/* Campos de entrada reaproveitáveis */
+body {
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    background-color: #F4F8F8;
+    color: #1E293B;
+}
+
+/* Transição para opacidade suave do Splash Screen */
+.transition-opacity {
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Regra extra de segurança para ocultar o splash screen */
+#splashScreen.pointer-events-none {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    display: none !important;
+}
+
+.form-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #475569;
+    margin-bottom: 0.25rem;
+}
+
 .input-field {
     width: 100%;
-    padding: 0.75rem 1rem;
-    background-color: #F8FAFC;
-    border: 1px solid #CBD5E1;
-    border-radius: 0.75rem;
+    padding: 0.625rem 0.875rem;
     font-size: 0.875rem;
+    font-weight: 600;
+    color: #1E293B;
+    background-color: #FFFFFF;
+    border: 2px solid #E2E8F0;
+    border-radius: 0.75rem;
     outline: none;
-    transition: all 0.2s;
+    transition: all 0.2s ease;
 }
 
 .input-field:focus {
     border-color: #0D7A82;
-    box-shadow: 0 0 0 2px rgba(13, 122, 130, 0.2);
+    box-shadow: 0 0 0 3px rgba(13, 122, 130, 0.15);
 }
 
-/* Botão principal */
+.input-icon {
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94A3B8;
+    font-size: 0.875rem;
+}
+
 .btn-primary {
     width: 100%;
-    padding: 0.875rem;
+    padding: 0.75rem 1rem;
     background-color: #0D7A82;
-    color: white;
+    color: #FFFFFF;
     font-weight: 800;
-    border-radius: 0.875rem;
-    transition: background-color 0.2s;
+    border: none;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
 .btn-primary:hover {
     background-color: #095B61;
 }
 
-/* Cards de Perfil */
+.btn-primary:active {
+    transform: scale(0.98);
+}
+
 .card-perfil {
     width: 100%;
-    text-align: left;
-    padding: 1rem;
-    border-radius: 1rem;
-    border: 2px solid #E2E8F0;
-    background-color: #F8FAFC;
     display: flex;
     align-items: center;
     gap: 1rem;
-    transition: all 0.25s transform, all 0.25s box-shadow;
+    padding: 1rem;
+    background-color: #FFFFFF;
+    border: 2px solid #E2E8F0;
+    border-radius: 1rem;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
 .card-perfil:hover {
-    transform: scale(1.02);
-    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transform: translateY(-2px);
 }
 
-.icon-box {
+.card-perfil .icon-box {
     width: 3rem;
     height: 3rem;
     border-radius: 0.75rem;
@@ -63,4 +106,29 @@ body {
     justify-content: center;
     font-size: 1.25rem;
     flex-shrink: 0;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes pulse {
+    50% { opacity: .8; transform: scale(1.02); }
+}
+
+.animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(-5%); animation-timing-function: cubic-bezier(0.8, 0, 1, 1); }
+    50% { transform: none; animation-timing-function: cubic-bezier(0, 0, 0.2, 1); }
+}
+
+.animate-bounce {
+    animation: bounce 1s infinite;
 }

@@ -4,13 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Laço Amigo - Painel do Voluntário</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <!-- Estilos Customizados -->
     <link rel="stylesheet" href="style.css">
 
     <script>
@@ -24,9 +20,7 @@
                         brandTealHover: '#095B61',
                         brandBg: '#F4F8F8'
                     },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    }
+                    fontFamily: { sans: ['Inter', 'sans-serif'] }
                 }
             }
         }
@@ -34,11 +28,31 @@
 </head>
 <body class="min-h-screen flex flex-col justify-between text-slate-800 antialiased bg-[#F4F8F8]">
 
-    <!-- Cabeçalho Principal -->
+    <!-- TELA DE CARREGAMENTO (SPLASH SCREEN) -->
+    <div id="splashScreen" class="fixed inset-0 z-50 bg-gradient-to-b from-brandTeal to-teal-900 flex flex-col items-center justify-between p-6 transition-opacity duration-700">
+        <div></div>
+        
+        <div class="flex flex-col items-center text-center space-y-4">
+            <div class="w-32 h-32 bg-white rounded-full flex items-center justify-center shadow-2xl p-1 overflow-hidden animate-pulse">
+                <img src="logo.png" alt="Logo Laço Amigo" class="w-full h-full object-cover rounded-full">
+            </div>
+            <h1 class="text-3xl font-black text-white">Laço <span class="text-brandRed">Amigo</span></h1>
+            <p class="text-teal-100 text-sm font-semibold">Painel do Voluntário</p>
+            <div class="w-8 h-8 border-4 border-white/30 border-t-white rounded-full animate-spin mt-2"></div>
+        </div>
+
+        <div class="text-center max-w-xs space-y-1">
+            <p class="text-xs text-teal-100 font-medium leading-relaxed">
+                Uma plataforma criada para facilitar o cuidado, a comunicação e a autonomia dos idosos.
+            </p>
+            <p class="text-[10px] text-teal-200/60 pt-1">Versão 1.0</p>
+        </div>
+    </div>
+
+    <!-- HEADER PRINCIPAL -->
     <header class="w-full bg-white border-b-2 border-slate-200 px-4 py-4 sm:px-8 shadow-sm sticky top-0 z-30">
         <div class="max-w-5xl mx-auto flex justify-between items-center">
             
-            <!-- Saudação do Voluntário -->
             <div class="flex items-center gap-3 sm:gap-4">
                 <div class="w-12 h-12 sm:w-14 sm:h-14 bg-brandTeal text-white rounded-full flex items-center justify-center font-bold text-2xl shadow-sm border-2 border-teal-100 shrink-0">
                     <i class="fa-solid fa-user-gear"></i>
@@ -48,11 +62,10 @@
                         <span class="text-xs sm:text-sm font-bold text-slate-500 uppercase tracking-wider block">Voluntário(a)</span>
                         <span class="bg-teal-100 text-brandTeal text-xs font-black px-2 py-0.5 rounded-full border border-teal-300">Ativo</span>
                     </div>
-                    <h2 id="userName" class="text-lg sm:text-2xl font-black text-slate-900">Carlos Andrade</h2>
+                    <h2 id="userName" class="text-lg sm:text-2xl font-black text-slate-900">Voluntário</h2>
                 </div>
             </div>
 
-            <!-- Marca e Botão de Sair -->
             <div class="flex items-center gap-3 sm:gap-5">
                 <div class="text-right hidden sm:block">
                     <h1 class="text-2xl font-black text-brandTeal tracking-tight">
@@ -68,10 +81,9 @@
         </div>
     </header>
 
-    <!-- Conteúdo Principal -->
+    <!-- CONTEÚDO PRINCIPAL -->
     <main class="flex-grow max-w-5xl w-full mx-auto p-4 sm:p-6 space-y-6">
 
-        <!-- Controlo de Disponibilidade -->
         <section class="bg-white p-5 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-4">
                 <div id="statusIndicator" class="w-4 h-4 bg-emerald-500 rounded-full animate-pulse"></div>
@@ -87,7 +99,6 @@
             </button>
         </section>
 
-        <!-- Resumo de Apoio do Voluntário -->
         <section class="grid grid-cols-2 sm:grid-cols-3 gap-4">
             <div class="bg-white p-4 rounded-2xl border-2 border-slate-200 text-center">
                 <span class="text-3xl font-black text-brandTeal">12</span>
@@ -103,7 +114,6 @@
             </div>
         </section>
 
-        <!-- Título da Lista de Notificações -->
         <div class="flex items-center justify-between pt-2">
             <h3 class="text-xl sm:text-2xl font-black text-slate-800 flex items-center gap-3">
                 <i class="fa-solid fa-bell text-brandTeal text-2xl"></i>
@@ -114,10 +124,7 @@
             </span>
         </div>
 
-        <!-- Lista de Pedidos Ativos -->
         <section class="space-y-4">
-
-            <!-- Card Pedido 1: EMERGÊNCIA (Alta Prioridade) -->
             <div class="bg-red-50 border-4 border-red-500 p-6 rounded-3xl shadow-md space-y-4">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b-2 border-red-200 pb-3">
                     <div class="flex items-center gap-3">
@@ -145,106 +152,53 @@
                         <i class="fa-solid fa-hand-holding-hand text-lg"></i> Aceitar e Prestar Apoio
                     </button>
                     <a href="tel:81999999999" class="w-full sm:w-1/2 bg-white hover:bg-slate-100 text-slate-800 font-extrabold p-3.5 rounded-2xl text-center border-2 border-slate-300 transition-all flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-phone text-brandTeal"></i> Ligar para o Contacto
+                        <i class="fa-solid fa-phone text-brandTeal"></i> Ligar para o Contato
                     </a>
                 </div>
             </div>
-
-            <!-- Card Pedido 2: Ir à Farmácia -->
-            <div class="bg-white border-2 border-slate-200 hover:border-brandTeal p-6 rounded-3xl shadow-sm space-y-4 transition-all">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3">
-                    <div class="flex items-center gap-3">
-                        <span class="bg-emerald-100 text-emerald-800 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider border border-emerald-300">
-                            <i class="fa-solid fa-prescription-bottle-medical mr-1"></i> Ir à Farmácia
-                        </span>
-                        <span class="text-xs font-bold text-slate-500"><i class="fa-regular fa-clock mr-1"></i> Há 15 minutos</span>
-                    </div>
-                    <span class="text-sm font-extrabold text-slate-700"><i class="fa-solid fa-location-dot text-brandTeal mr-1"></i> A 1.2 km de você</span>
-                </div>
-
-                <div class="flex items-start gap-4">
-                    <div class="w-14 h-14 bg-emerald-100 text-emerald-700 rounded-2xl flex items-center justify-center text-2xl font-black shrink-0 border border-emerald-200">
-                        <i class="fa-solid fa-pills"></i>
-                    </div>
-                    <div class="space-y-1">
-                        <h4 class="text-xl font-black text-slate-900">Seu José Augusto (82 anos)</h4>
-                        <p class="text-slate-700 text-sm font-bold">Precisa de ajuda para ir buscar medicamentos de uso contínuo.</p>
-                        <p class="text-xs text-slate-500 font-bold">Av. Principal, nº 450</p>
-                    </div>
-                </div>
-
-                <div class="flex flex-col sm:flex-row gap-3 pt-2">
-                    <button type="button" onclick="acceptCall('Seu José Augusto')" class="w-full bg-brandTeal hover:bg-brandTealHover text-white font-extrabold p-3.5 rounded-2xl text-center transition-all shadow-md flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-check text-lg"></i> Aceitar Pedido
-                    </button>
-                </div>
-            </div>
-
-            <!-- Card Pedido 3: Compras de Mercado -->
-            <div class="bg-white border-2 border-slate-200 hover:border-brandTeal p-6 rounded-3xl shadow-sm space-y-4 transition-all">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3">
-                    <div class="flex items-center gap-3">
-                        <span class="bg-amber-100 text-amber-800 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider border border-amber-300">
-                            <i class="fa-solid fa-cart-shopping mr-1"></i> Fazer Compras
-                        </span>
-                        <span class="text-xs font-bold text-slate-500"><i class="fa-regular fa-clock mr-1"></i> Há 40 minutos</span>
-                    </div>
-                    <span class="text-sm font-extrabold text-slate-700"><i class="fa-solid fa-location-dot text-brandTeal mr-1"></i> A 800m de você</span>
-                </div>
-
-                <div class="flex items-start gap-4">
-                    <div class="w-14 h-14 bg-amber-100 text-amber-700 rounded-2xl flex items-center justify-center text-2xl font-black shrink-0 border border-amber-200">
-                        <i class="fa-solid fa-basket-shopping"></i>
-                    </div>
-                    <div class="space-y-1">
-                        <h4 class="text-xl font-black text-slate-900">Dona Tereza Souza (75 anos)</h4>
-                        <p class="text-slate-700 text-sm font-bold">Acompanhamento para compras de frutas e pão na feira local.</p>
-                        <p class="text-xs text-slate-500 font-bold">Rua Sol Nascente, nº 88</p>
-                    </div>
-                </div>
-
-                <div class="flex flex-col sm:flex-row gap-3 pt-2">
-                    <button type="button" onclick="acceptCall('Dona Tereza Souza')" class="w-full bg-brandTeal hover:bg-brandTealHover text-white font-extrabold p-3.5 rounded-2xl text-center transition-all shadow-md flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-check text-lg"></i> Aceitar Pedido
-                    </button>
-                </div>
-            </div>
-
         </section>
 
     </main>
 
-    <!-- Rodapé -->
     <footer class="w-full bg-white border-t-2 border-slate-200 py-4 px-4 text-center mt-6">
         <div class="max-w-5xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 text-slate-700 font-bold text-base">
             <p>© 2026 Laço Amigo - Área do Voluntário.</p>
-            <div class="flex items-center gap-4 text-brandTeal">
-                <span class="flex items-center gap-2"><i class="fa-solid fa-heart text-brandRed"></i> Obrigado por fazer a diferença!</span>
-            </div>
         </div>
     </footer>
 
-    <!-- Lógica JavaScript -->
+    <!-- SCRIPT DE FECHAMENTO GARANTIDO DO SPLASH SCREEN -->
+    <script>
+        function closeSplash() {
+            const splash = document.getElementById('splashScreen');
+            if (splash) {
+                splash.style.opacity = '0';
+                splash.style.pointerEvents = 'none';
+                setTimeout(function() {
+                    splash.style.display = 'none';
+                }, 500);
+            }
+        }
+        window.addEventListener('DOMContentLoaded', function() { setTimeout(closeSplash, 1200); });
+        window.addEventListener('load', function() { setTimeout(closeSplash, 1200); });
+        setTimeout(closeSplash, 2000);
+    </script>
+
     <script>
         const STORAGE_KEY = 'laco_amigo_user_session';
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Sessão do utilizador
             const savedData = localStorage.getItem(STORAGE_KEY);
             const userNameElement = document.getElementById('userName');
 
             if (savedData) {
                 try {
                     const user = JSON.parse(savedData);
-                    if (user.name) {
-                        userNameElement.textContent = user.name;
-                    }
+                    if (user.name) userNameElement.textContent = user.name;
                 } catch (e) {
-                    console.error('Erro ao ler a sessão', e);
+                    console.error('Erro na leitura da sessão', e);
                 }
             }
 
-            // Logout
             const btnLogout = document.getElementById('btnLogout');
             if (btnLogout) {
                 btnLogout.addEventListener('click', () => {
@@ -253,33 +207,30 @@
                 });
             }
 
-            // Toggle de Disponibilidade
             const btnToggleStatus = document.getElementById('btnToggleStatus');
             const statusIndicator = document.getElementById('statusIndicator');
             const statusText = document.getElementById('statusText');
             const btnStatusText = document.getElementById('btnStatusText');
             let isAvailable = true;
 
-            btnToggleStatus.addEventListener('click', () => {
-                isAvailable = !isAvailable;
-
-                if (isAvailable) {
-                    statusIndicator.className = 'w-4 h-4 bg-emerald-500 rounded-full animate-pulse';
-                    statusText.textContent = 'Está DISPONÍVEL para receber chamados na sua região.';
-                    btnStatusText.textContent = 'Pausar Recebimento';
-                    btnToggleStatus.className = 'w-full sm:w-auto bg-emerald-100 hover:bg-emerald-200 text-emerald-800 px-6 py-3 rounded-2xl font-extrabold border-2 border-emerald-300 transition-all text-sm flex items-center justify-center gap-2';
-                } else {
-                    statusIndicator.className = 'w-4 h-4 bg-slate-400 rounded-full';
-                    statusText.textContent = 'Status INDISPONÍVEL. Você não receberá alertas temporariamente.';
-                    btnStatusText.textContent = 'Ficar Disponível';
-                    btnToggleStatus.className = 'w-full sm:w-auto bg-slate-200 hover:bg-slate-300 text-slate-800 px-6 py-3 rounded-2xl font-extrabold border-2 border-slate-400 transition-all text-sm flex items-center justify-center gap-2';
-                }
-            });
+            if (btnToggleStatus) {
+                btnToggleStatus.addEventListener('click', () => {
+                    isAvailable = !isAvailable;
+                    if (isAvailable) {
+                        statusIndicator.className = 'w-4 h-4 bg-emerald-500 rounded-full animate-pulse';
+                        statusText.textContent = 'Está DISPONÍVEL para receber chamados na sua região.';
+                        btnStatusText.textContent = 'Pausar Recebimento';
+                    } else {
+                        statusIndicator.className = 'w-4 h-4 bg-slate-400 rounded-full';
+                        statusText.textContent = 'Status INDISPONÍVEL.';
+                        btnStatusText.textContent = 'Ficar Disponível';
+                    }
+                });
+            }
         });
 
-        // Função para simular o aceite de um pedido
         function acceptCall(name) {
-            alert(`Você aceitou o pedido de ${name}! O endereço e o contacto para combinação foram libertados no seu perfil.`);
+            alert(`Você aceitou o pedido de ${name}! O endereço foi liberado no seu perfil.`);
         }
     </script>
 </body>
