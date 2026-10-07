@@ -59,7 +59,7 @@ function backToPerfil() {
 let tempUserData = {};
 
 function setupForms() {
-    // 1. SUBMIT LOGIN
+    // 1. LOGIN
     const formLogin = document.getElementById('formLogin');
     if (formLogin) {
         formLogin.addEventListener('submit', (e) => {
@@ -79,7 +79,7 @@ function setupForms() {
                     localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
                     redirectToRolePage(user.perfil);
                 } else {
-                    alert('Senha incorreta! Verifique os dados.');
+                    alert('Senha incorreta!');
                 }
             } else {
                 const defaultUser = { name: email.split('@')[0], email: email, perfil: 'Idoso' };
@@ -89,7 +89,7 @@ function setupForms() {
         });
     }
 
-    // 2. SUBMIT CADASTRO GERAL
+    // 2. CADASTRO GERAL
     const formCadastro = document.getElementById('formCadastro');
     if (formCadastro) {
         formCadastro.addEventListener('submit', (e) => {
@@ -121,13 +121,12 @@ function setupForms() {
         });
     }
 
-    // 3. RESPONSÁVEL: APENAS VINCULAR CPF DO IDOSO
+    // 3. RESPONSÁVEL: VINCULAR CPF IDOSO
     const formCpfIdoso = document.getElementById('formCpfIdoso');
     if (formCpfIdoso) {
         formCpfIdoso.addEventListener('submit', (e) => {
             e.preventDefault();
-            const cpfIdoso = document.getElementById('cpfIdosoExistente').value.trim();
-            tempUserData.cpfIdosoVinculado = cpfIdoso;
+            tempUserData.cpfIdosoVinculado = document.getElementById('cpfIdosoExistente').value.trim();
             finalizarCadastroResponsavel();
         });
     }
@@ -143,11 +142,6 @@ function setupForms() {
                 email: document.getElementById('emailIdoso').value.trim(),
                 telefone: document.getElementById('telefoneIdoso').value,
                 cpf: document.getElementById('cpfIdosoNovo').value,
-                cidade: document.getElementById('cidadeIdoso').value,
-                estado: document.getElementById('estadoIdoso').value,
-                bairro: document.getElementById('bairroIdoso').value,
-                rua: document.getElementById('ruaIdoso').value,
-                numero: document.getElementById('numeroIdoso').value,
                 senha: document.getElementById('senhaIdoso').value,
                 perfil: 'Idoso'
             };
@@ -157,7 +151,7 @@ function setupForms() {
             localStorage.setItem(USERS_DB_KEY, JSON.stringify(registeredUsers));
 
             tempUserData.cpfIdosoVinculado = novoIdoso.cpf;
-            alert(`O idoso ${novoIdoso.name} foi cadastrado com sucesso! A conta dele já está ativa e pronta para login.`);
+            alert(`O idoso ${novoIdoso.name} foi cadastrado com sucesso!`);
 
             finalizarCadastroResponsavel();
         });

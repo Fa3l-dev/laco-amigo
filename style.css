@@ -11,18 +11,18 @@ body {
     color: #1E293B;
 }
 
-/* Transição para opacidade suave do Splash Screen */
+/* Splash Screen & Opacidade */
 .transition-opacity {
     transition: opacity 0.5s ease-in-out;
 }
 
-/* Regra extra de segurança para ocultar o splash screen */
 #splashScreen.pointer-events-none {
     opacity: 0 !important;
     pointer-events: none !important;
     display: none !important;
 }
 
+/* Formulários & Campos Acessíveis */
 .form-label {
     display: block;
     font-size: 0.75rem;
@@ -113,11 +113,11 @@ body {
 }
 
 .animate-spin {
-    animation: spin 1s linear infinite;
+    animation: spin 1.2s linear infinite;
 }
 
 @keyframes pulse {
-    50% { opacity: .8; transform: scale(1.02); }
+    50% { opacity: .85; transform: scale(1.02); }
 }
 
 .animate-pulse {

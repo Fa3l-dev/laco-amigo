@@ -28,26 +28,29 @@
 </head>
 <body class="min-h-screen flex flex-col justify-between text-slate-800 antialiased bg-[#F4F8F8]">
 
-    <!-- TELA DE CARREGAMENTO (SPLASH SCREEN) -->
+    <!-- SPLASH SCREEN -->
     <div id="splashScreen" class="fixed inset-0 z-50 bg-gradient-to-b from-brandTeal to-teal-900 flex flex-col items-center justify-between p-6 transition-opacity duration-700">
         <div></div>
         
         <div class="flex flex-col items-center text-center space-y-4">
-            <div class="w-32 h-32 bg-white rounded-full flex items-center justify-center shadow-2xl p-1 overflow-hidden animate-pulse">
-                <img src="logo.png" alt="Logo Laço Amigo" class="w-full h-full object-cover rounded-full">
+            <div class="relative w-36 h-36 flex items-center justify-center">
+                <div class="absolute inset-0 border-4 border-teal-300/30 border-t-brandRed rounded-full animate-spin"></div>
+                <div class="w-28 h-28 bg-white rounded-full flex items-center justify-center shadow-2xl p-1 overflow-hidden animate-pulse">
+                    <img src="logo.png" alt="Logo Laço Amigo" class="w-full h-full object-cover rounded-full" onerror="this.src='https://via.placeholder.com/150'">
+                </div>
             </div>
             <h1 class="text-3xl font-black text-white">Laço <span class="text-brandRed">Amigo</span></h1>
-            <p class="text-teal-100 text-sm font-semibold">Laço Amigo, um laço de cuidado</p>
-            <div class="w-8 h-8 border-4 border-white/30 border-t-white rounded-full animate-spin mt-2"></div>
+            <p class="text-teal-100 text-sm font-semibold">Laço amigo, um laço de cuidado</p>
         </div>
 
-        <div class="text-center max-w-xs space-y-1">
-            <p class="text-xs text-teal-100 font-medium leading-relaxed">
-                Uma plataforma criada para facilitar o cuidado, a comunicação e a autonomia dos idosos.
+        
             </p>
-            <p class="text-[10px] text-teal-200/60 pt-1">Versão 1.0</p>
+            <p class="text-xs text-teal-100/90 font-medium leading-relaxed">
+                Facilitando o cuidado, a comunicação e a autonomia dos idosos.
+            </p>
+            <p class="text-[10px] text-teal-200/60 pt-1">Versão 2.0 Mega Update</p>
         </div>
-    </div>
+    
 
     <!-- HEADER -->
     <header class="w-full bg-white border-b-2 border-slate-200 px-4 py-4 sm:px-8 shadow-sm sticky top-0 z-30">
@@ -77,125 +80,296 @@
         </div>
     </header>
 
-    <!-- CONTEÚDO PRINCIPAL -->
+    <!-- DASHBOARD DO RESPONSÁVEL (MANTIDO E INTEGRADO) -->
     <main class="flex-grow max-w-5xl w-full mx-auto p-4 sm:p-6 space-y-6">
 
-        <!-- ALERTA DE SERVIÇO EM NOME DO IDOSO -->
-        <div class="bg-amber-50 border-2 border-amber-200 p-4 rounded-2xl flex items-center gap-3">
-            <i class="fa-solid fa-circle-info text-amber-600 text-xl"></i>
-            <p class="text-sm font-bold text-amber-900">
-                Você está conectado como responsável. Os pedidos feitos abaixo serão atribuídos ao seu idoso vinculado.
-            </p>
+        <!-- SAUDAÇÃO & BOTÃO DE EMERGÊNCIA -->
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div>
+                <h2 class="text-2xl sm:text-3xl font-black text-slate-900">Olá, <span id="respName">João</span>! 👋</h2>
+                <p class="text-slate-600 font-semibold text-sm sm:text-base">Como está o cuidado de <strong class="text-brandTeal">Dona Maria da Silva</strong> hoje?</p>
+            </div>
+
+            <button id="btnOpenEmergency" type="button" class="w-full sm:w-auto bg-brandRed hover:bg-brandRedHover text-white px-5 py-3 rounded-2xl font-black text-sm shadow-md transition-all flex items-center justify-center gap-2 border-2 border-red-700 shrink-0">
+                <i class="fa-solid fa-triangle-exclamation text-yellow-300 animate-pulse"></i>
+                <span>SOLICITAR EMERGÊNCIA</span>
+            </button>
         </div>
 
-        <!-- EMERGÊNCIA PARA O IDOSO -->
-        <section>
-            <button id="btnOpenEmergency" type="button" class="w-full bg-brandRed hover:bg-brandRedHover text-white p-6 sm:p-8 rounded-3xl shadow-lg transition-all transform active:scale-95 flex flex-col sm:flex-row items-center justify-between gap-4 border-4 border-red-700">
-                <div class="flex items-center gap-5 text-center sm:text-left">
-                    <div class="w-16 h-16 sm:w-20 sm:h-20 bg-white text-brandRed rounded-full flex items-center justify-center text-3xl sm:text-4xl shadow-md shrink-0">
-                        <i class="fa-solid fa-phone-volume animate-bounce"></i>
+        <!-- CARD DO IDOSO VINCULADO -->
+        <section class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-md">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+                <div class="flex items-center gap-4">
+                    <div class="w-16 h-16 bg-teal-100 text-brandTeal rounded-2xl flex items-center justify-center text-3xl font-black shrink-0 border-2 border-teal-200">
+                        👵
                     </div>
                     <div>
-                        <span class="text-yellow-300 text-sm font-black uppercase tracking-wider block mb-1">
-                            <i class="fa-solid fa-triangle-exclamation"></i> Solicitar Ajuda ao Idoso
-                        </span>
-                        <h2 class="text-2xl sm:text-4xl font-black leading-tight">SOLICITAR EMERGÊNCIA</h2>
-                        <p class="text-red-100 text-base sm:text-lg font-bold mt-1">Toque aqui para acionar suporte ou socorro rápido</p>
+                        <div class="flex items-center gap-2">
+                            <h3 class="text-xl sm:text-2xl font-black text-slate-900">Maria da Silva</h3>
+                            <span class="bg-emerald-100 text-emerald-800 text-xs font-black px-2.5 py-0.5 rounded-full border border-emerald-300">🟢 Tudo certo</span>
+                        </div>
+                        <p class="text-xs text-slate-500 font-bold mt-0.5">Última atividade: hoje às 08:42 • 📍 Paulista, PE</p>
                     </div>
                 </div>
-                <div class="bg-white text-brandRed font-black px-6 py-3 rounded-2xl text-lg sm:text-xl shadow-md shrink-0 uppercase">
-                    Chamar Agora
+
+                <button type="button" onclick="alert('Exibindo histórico de idoso.')" class="bg-teal-50 hover:bg-teal-100 text-brandTeal border-2 border-teal-200 px-4 py-2 rounded-xl text-xs font-black transition-colors w-full sm:w-auto text-center">
+                    Ver perfil do idoso
+                </button>
+            </div>
+
+            <!-- BEM-ESTAR DO IDOSO -->
+            <div class="pt-4">
+                <h4 class="text-xs font-black text-slate-500 uppercase tracking-wider mb-2">Como está o idoso hoje?</h4>
+                <div class="grid grid-cols-3 gap-3">
+                    <div class="bg-emerald-50 border-2 border-emerald-300 p-3 rounded-2xl flex items-center justify-center sm:justify-start gap-2">
+                        <span class="text-2xl">😊</span>
+                        <span class="text-xs sm:text-sm font-black text-emerald-900">Bem (Informado às 08:00)</span>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-200 p-3 rounded-2xl flex items-center justify-center sm:justify-start gap-2 opacity-50">
+                        <span class="text-2xl">😐</span>
+                        <span class="text-xs sm:text-sm font-bold text-slate-600 hidden sm:inline">Normal</span>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-200 p-3 rounded-2xl flex items-center justify-center sm:justify-start gap-2 opacity-50">
+                        <span class="text-2xl">😟</span>
+                        <span class="text-xs sm:text-sm font-bold text-slate-600 hidden sm:inline">Precisa de atenção</span>
+                    </div>
                 </div>
-            </button>
+            </div>
         </section>
 
-        <div class="pt-2">
-            <h3 class="text-xl sm:text-2xl font-black text-slate-800 flex items-center gap-3">
-                <i class="fa-solid fa-hand-holding-heart text-brandTeal text-2xl"></i>
-                <span>O que deseja solicitar para o idoso?</span>
+        <!-- SEÇÃO DE ALERTAS IMPORTANTES -->
+        <section class="space-y-3">
+            <h3 class="text-lg font-black text-slate-800 flex items-center gap-2">
+                <i class="fa-solid fa-bell text-amber-500"></i> Alertas Importantes
             </h3>
-            <p class="text-slate-600 text-base font-semibold mt-1">Escolha uma opção com um toque:</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <div class="bg-amber-50 border-2 border-amber-300 p-4 rounded-2xl flex items-start gap-3 shadow-sm">
+                    <div class="w-10 h-10 bg-amber-200 text-amber-800 rounded-xl flex items-center justify-center text-lg shrink-0">💊</div>
+                    <div>
+                        <h4 class="text-xs font-black text-amber-900 uppercase">Medicamento</h4>
+                        <p class="text-xs font-bold text-amber-800 mt-0.5">O lembrete das 14:00 ainda não foi confirmado.</p>
+                    </div>
+                </div>
+
+                <div class="bg-blue-50 border-2 border-blue-300 p-4 rounded-2xl flex items-start gap-3 shadow-sm">
+                    <div class="w-10 h-10 bg-blue-200 text-blue-800 rounded-xl flex items-center justify-center text-lg shrink-0">🏥</div>
+                    <div>
+                        <h4 class="text-xs font-black text-blue-900 uppercase">Consulta</h4>
+                        <p class="text-xs font-bold text-blue-800 mt-0.5">Consulta marcada para amanhã às 08:30.</p>
+                    </div>
+                </div>
+
+                <div class="bg-emerald-50 border-2 border-emerald-300 p-4 rounded-2xl flex items-start gap-3 shadow-sm">
+                    <div class="w-10 h-10 bg-emerald-200 text-emerald-800 rounded-xl flex items-center justify-center text-lg shrink-0">🤝</div>
+                    <div>
+                        <h4 class="text-xs font-black text-emerald-900 uppercase">Ajuda Confirmada</h4>
+                        <p class="text-xs font-bold text-emerald-800 mt-0.5">O ajudante Carlos confirmou presença.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AÇÕES RÁPIDAS -->
+        <section class="space-y-3 pt-2">
+            <div>
+                <h3 class="text-xl font-black text-slate-800 flex items-center gap-2">
+                    <i class="fa-solid fa-bolt text-brandTeal"></i> Ações Rápidas
+                </h3>
+                <p class="text-xs font-bold text-slate-500">Solicite um serviço em nome de Dona Maria:</p>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <button type="button" onclick="solicitarServico('Ir à Farmácia')" class="bg-white p-4 rounded-2xl border-2 border-slate-200 hover:border-brandTeal shadow-sm hover:shadow-md transition-all flex flex-col items-center text-center gap-2">
+                    <div class="w-12 h-12 bg-emerald-100 text-emerald-700 rounded-xl flex items-center justify-center text-2xl">💊</div>
+                    <span class="text-xs font-black text-slate-800">Solicitar Farmácia</span>
+                </button>
+
+                <button type="button" onclick="solicitarServico('Fazer Compras')" class="bg-white p-4 rounded-2xl border-2 border-slate-200 hover:border-brandTeal shadow-sm hover:shadow-md transition-all flex flex-col items-center text-center gap-2">
+                    <div class="w-12 h-12 bg-amber-100 text-amber-700 rounded-xl flex items-center justify-center text-2xl">🛒</div>
+                    <span class="text-xs font-black text-slate-800">Solicitar Compras</span>
+                </button>
+
+                <button type="button" onclick="solicitarServico('Acompanhante')" class="bg-white p-4 rounded-2xl border-2 border-slate-200 hover:border-brandTeal shadow-md hover:shadow-md transition-all flex flex-col items-center text-center gap-2">
+                    <div class="w-12 h-12 bg-purple-100 text-purple-700 rounded-xl flex items-center justify-center text-2xl">🏥</div>
+                    <span class="text-xs font-black text-slate-800">Acompanhante</span>
+                </button>
+
+                <button type="button" onclick="solicitarServico('Ajuda em Casa')" class="bg-white p-4 rounded-2xl border-2 border-slate-200 hover:border-brandTeal shadow-sm hover:shadow-md transition-all flex flex-col items-center text-center gap-2">
+                    <div class="w-12 h-12 bg-blue-100 text-blue-700 rounded-xl flex items-center justify-center text-2xl">🏠</div>
+                    <span class="text-xs font-black text-slate-800">Ajuda em Casa</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- PEDIDOS RECENTES & PERFIL DO VOLUNTÁRIO -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-2">
+
+            <div class="lg:col-span-2 space-y-3">
+                <h3 class="text-lg font-black text-slate-800 flex items-center gap-2">
+                    <i class="fa-solid fa-list-check text-brandTeal"></i> Pedidos Recentes / Em Andamento
+                </h3>
+
+                <div class="bg-white p-4 rounded-2xl border-2 border-slate-200 shadow-sm space-y-3">
+                    <div class="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl">💊</span>
+                            <div>
+                                <h4 class="text-sm font-black text-slate-900">Farmácia</h4>
+                                <span class="text-xs text-slate-500 font-bold">Hoje • 09:30</span>
+                            </div>
+                        </div>
+                        <span class="bg-emerald-100 text-emerald-800 text-xs font-black px-2.5 py-1 rounded-full border border-emerald-300">🟢 Ajudante encontrado</span>
+                    </div>
+
+                    <div class="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl">🛒</span>
+                            <div>
+                                <h4 class="text-sm font-black text-slate-900">Compras</h4>
+                                <span class="text-xs text-slate-500 font-bold">Hoje • 14:00</span>
+                            </div>
+                        </div>
+                        <span class="bg-amber-100 text-amber-800 text-xs font-black px-2.5 py-1 rounded-full border border-amber-300">🟡 Aguardando ajudante</span>
+                    </div>
+
+                    <div class="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl">🏥</span>
+                            <div>
+                                <h4 class="text-sm font-black text-slate-900">Consulta Médica</h4>
+                                <span class="text-xs text-slate-500 font-bold">Amanhã • 08:00</span>
+                            </div>
+                        </div>
+                        <span class="bg-blue-100 text-blue-800 text-xs font-black px-2.5 py-1 rounded-full border border-blue-300">🔵 Agendada</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-3">
+                <h3 class="text-lg font-black text-slate-800 flex items-center gap-2">
+                    <i class="fa-solid fa-shield-halved text-emerald-600"></i> Ajudante Vinculado
+                </h3>
+
+                <div class="bg-white p-5 rounded-2xl border-2 border-slate-200 shadow-sm space-y-3">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 bg-slate-100 text-slate-700 rounded-full flex items-center justify-center font-black text-xl border-2 border-slate-300">
+                            👨‍💼
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-1">
+                                <h4 class="text-base font-black text-slate-900">Carlos Silva</h4>
+                                <span title="Ajudante verificado" class="text-amber-500 text-xs">🏅</span>
+                            </div>
+                            <span class="text-xs font-bold text-slate-500">⭐ 4,9 • ✅ 37 ajudas concluídas</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-emerald-50 border border-emerald-200 p-2.5 rounded-xl text-xs font-bold text-emerald-800">
+                        <i class="fa-solid fa-circle-check"></i> Documentação e antecedentes verificados.
+                    </div>
+
+                    <div class="flex gap-2 pt-1">
+                        <button onclick="alert('Denúncia enviada à equipe de suporte.')" class="w-1/2 text-[11px] font-bold text-red-600 bg-red-50 p-2 rounded-lg border border-red-200 text-center">
+                            🚨 Denunciar
+                        </button>
+                        <button onclick="alert('Ajudante bloqueado para este idoso.')" class="w-1/2 text-[11px] font-bold text-slate-600 bg-slate-100 p-2 rounded-lg border border-slate-200 text-center">
+                            🚫 Bloquear
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- GRADE DE OPÇÕES IGUAL À DO IDOSO -->
-        <section class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+        <!-- AGENDA / HISTÓRICO -->
+        <section class="space-y-3 pt-2">
+            <h3 class="text-lg font-black text-slate-800 flex items-center gap-2">
+                <i class="fa-solid fa-calendar-days text-brandTeal"></i> Histórico de Cuidados (Últimos 7 dias)
+            </h3>
 
-            <button type="button" onclick="solicitarServico('Ir à Farmácia')" class="group text-left bg-white p-6 sm:p-8 rounded-3xl border-4 border-slate-200 hover:border-brandTeal shadow-md hover:shadow-xl transition-all duration-200 flex items-center gap-5 focus:outline-none">
-                <div class="w-20 h-20 sm:w-24 sm:h-24 bg-emerald-100 text-emerald-700 group-hover:bg-brandTeal group-hover:text-white rounded-3xl flex items-center justify-center text-4xl sm:text-5xl transition-colors shrink-0 border-2 border-emerald-300">
-                    <i class="fa-solid fa-prescription-bottle-medical"></i>
+            <div class="bg-white rounded-2xl border-2 border-slate-200 shadow-sm overflow-hidden">
+                <div class="p-4 border-b border-slate-100 bg-slate-50 flex items-center justify-between">
+                    <span class="text-xs font-black text-slate-600 uppercase">28/09</span>
+                    <div class="flex gap-4 text-xs font-bold text-slate-700">
+                        <span>💊 Farmácia <strong class="text-emerald-600">✅ Concluído</strong></span>
+                        <span>🛒 Compras <strong class="text-emerald-600">✅ Concluído</strong></span>
+                    </div>
                 </div>
-                <div class="space-y-1">
-                    <h4 class="text-2xl sm:text-3xl font-black text-slate-900 group-hover:text-brandTeal transition-colors">
-                        Ir à Farmácia
-                    </h4>
-                    <p class="text-slate-600 text-base sm:text-lg font-bold">
-                        Buscar remédios ou acompanhamento para o idoso.
-                    </p>
-                </div>
-            </button>
 
-            <button type="button" onclick="solicitarServico('Fazer Compras')" class="group text-left bg-white p-6 sm:p-8 rounded-3xl border-4 border-slate-200 hover:border-brandTeal shadow-md hover:shadow-xl transition-all duration-200 flex items-center gap-5 focus:outline-none">
-                <div class="w-20 h-20 sm:w-24 sm:h-24 bg-amber-100 text-amber-700 group-hover:bg-brandTeal group-hover:text-white rounded-3xl flex items-center justify-center text-4xl sm:text-5xl transition-colors shrink-0 border-2 border-amber-300">
-                    <i class="fa-solid fa-cart-shopping"></i>
+                <div class="p-4 border-b border-slate-100 flex items-center justify-between">
+                    <span class="text-xs font-black text-slate-600 uppercase">29/09</span>
+                    <span class="text-xs font-bold text-slate-700">🏠 Ajuda em casa <strong class="text-emerald-600">✅ Concluído</strong></span>
                 </div>
-                <div class="space-y-1">
-                    <h4 class="text-2xl sm:text-3xl font-black text-slate-900 group-hover:text-brandTeal transition-colors">
-                        Fazer Compras
-                    </h4>
-                    <p class="text-slate-600 text-base sm:text-lg font-bold">
-                        Solicitar ajuda com feira, mercado ou padaria.
-                    </p>
-                </div>
-            </button>
 
-            <button type="button" onclick="solicitarServico('Ajuda em Casa')" class="group text-left bg-white p-6 sm:p-8 rounded-3xl border-4 border-slate-200 hover:border-brandTeal shadow-md hover:shadow-xl transition-all duration-200 flex items-center gap-5 focus:outline-none">
-                <div class="w-20 h-20 sm:w-24 sm:h-24 bg-blue-100 text-blue-700 group-hover:bg-brandTeal group-hover:text-white rounded-3xl flex items-center justify-center text-4xl sm:text-5xl transition-colors shrink-0 border-2 border-blue-300">
-                    <i class="fa-solid fa-broom"></i>
+                <div class="p-4 bg-slate-50 flex items-center justify-between">
+                    <span class="text-xs font-black text-slate-600 uppercase">30/09</span>
+                    <span class="text-xs font-bold text-slate-700">🏥 Acompanhante <strong class="text-amber-600">🟡 Agendado</strong></span>
                 </div>
-                <div class="space-y-1">
-                    <h4 class="text-2xl sm:text-3xl font-black text-slate-900 group-hover:text-brandTeal transition-colors">
-                        Ajuda em Casa
-                    </h4>
-                    <p class="text-slate-600 text-base sm:text-lg font-bold">
-                        Auxílio em tarefas simples na residência do idoso.
-                    </p>
-                </div>
-            </button>
-
-            <button type="button" onclick="solicitarServico('Acompanhante')" class="group text-left bg-white p-6 sm:p-8 rounded-3xl border-4 border-slate-200 hover:border-brandTeal shadow-md hover:shadow-xl transition-all duration-200 flex items-center gap-5 focus:outline-none">
-                <div class="w-20 h-20 sm:w-24 sm:h-24 bg-purple-100 text-purple-700 group-hover:bg-brandTeal group-hover:text-white rounded-3xl flex items-center justify-center text-4xl sm:text-5xl transition-colors shrink-0 border-2 border-purple-300">
-                    <i class="fa-solid fa-user-group"></i>
-                </div>
-                <div class="space-y-1">
-                    <h4 class="text-2xl sm:text-3xl font-black text-slate-900 group-hover:text-brandTeal transition-colors">
-                        Acompanhante
-                    </h4>
-                    <p class="text-slate-600 text-base sm:text-lg font-bold">
-                        Companhia para consultas médicas ou passeios.
-                    </p>
-                </div>
-            </button>
-
+            </div>
         </section>
 
     </main>
 
-    <footer class="w-full bg-white border-t-2 border-slate-200 py-4 px-4 text-center">
-        <div class="max-w-5xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 text-slate-700 font-bold text-base">
-            <p>© 2026 Laço Amigo - Área do Responsável.</p>
+    <!-- MODAL DE EMERGÊNCIA COMPLETO -->
+    <div id="emergencyModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-md rounded-3xl border-4 border-red-500 p-6 space-y-6 shadow-2xl relative">
+            <div class="text-center space-y-2">
+                <div class="w-16 h-16 bg-red-100 text-brandRed rounded-full flex items-center justify-center text-3xl mx-auto border-2 border-red-300">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <h3 class="text-2xl font-black text-slate-900 uppercase">QUAL AJUDA PRECISA?</h3>
+                <p class="text-slate-600 text-sm font-bold">Escolha uma opção para conectar imediatamente:</p>
+            </div>
+
+            <div class="space-y-3">
+                <button id="btnNotifyFamily" type="button" class="w-full bg-brandTeal hover:bg-brandTealHover text-white p-4 rounded-2xl font-extrabold flex items-center gap-4 shadow-md transition-all">
+                    <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center text-2xl shrink-0">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <div class="text-left leading-tight">
+                        <span class="block text-lg">Avisar Minha Família</span>
+                        <span class="text-xs text-teal-100 font-semibold uppercase">ENVIA SINAL DE ALERTA</span>
+                    </div>
+                </button>
+
+                <a href="tel:192" class="w-full bg-brandRed hover:bg-brandRedHover text-white p-4 rounded-2xl font-extrabold flex items-center gap-4 shadow-md transition-all">
+                    <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center text-2xl shrink-0">
+                        <i class="fa-solid fa-truck-medical"></i>
+                    </div>
+                    <div class="text-left leading-tight">
+                        <span class="block text-lg">Ligar SAMU (192)</span>
+                        <span class="text-xs text-red-100 font-semibold uppercase">EMERGÊNCIA MÉDICA E RESGATE</span>
+                    </div>
+                </a>
+
+                <a href="tel:190" class="w-full bg-slate-800 hover:bg-slate-900 text-white p-4 rounded-2xl font-extrabold flex items-center gap-4 shadow-md transition-all">
+                    <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center text-2xl shrink-0">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <div class="text-left leading-tight">
+                        <span class="block text-lg">Ligar Polícia (190)</span>
+                        <span class="text-xs text-slate-300 font-semibold uppercase">SEGURANÇA E PROTEÇÃO</span>
+                    </div>
+                </a>
+            </div>
+
+            <button id="btnCloseEmergency" type="button" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 p-3 rounded-2xl text-base font-black border-2 border-slate-300">
+                Cancelar / Voltar
+            </button>
         </div>
+    </div>
+
+    <footer class="w-full bg-white border-t-2 border-slate-200 py-4 px-4 text-center">
+        <p class="text-slate-700 font-bold text-sm">© 2026 Laço Amigo - Área do Responsável.</p>
     </footer>
 
-    <!-- SCRIPT DE FECHAMENTO GARANTIDO DO SPLASH SCREEN -->
     <script>
         function closeSplash() {
             const splash = document.getElementById('splashScreen');
             if (splash) {
                 splash.style.opacity = '0';
                 splash.style.pointerEvents = 'none';
-                setTimeout(function() {
-                    splash.style.display = 'none';
-                }, 500);
+                setTimeout(function() { splash.style.display = 'none'; }, 500);
             }
         }
         window.addEventListener('DOMContentLoaded', function() { setTimeout(closeSplash, 1200); });
@@ -209,11 +383,15 @@
         document.addEventListener('DOMContentLoaded', () => {
             const savedData = localStorage.getItem(STORAGE_KEY);
             const userNameElement = document.getElementById('userName');
+            const respNameElement = document.getElementById('respName');
 
             if (savedData) {
                 try {
                     const user = JSON.parse(savedData);
-                    if (user.name) userNameElement.textContent = user.name;
+                    if (user.name) {
+                        userNameElement.textContent = user.name;
+                        if (respNameElement) respNameElement.textContent = user.name.split(' ')[0];
+                    }
                 } catch (e) {
                     console.error('Erro na sessão', e);
                 }
@@ -226,10 +404,19 @@
                     window.location.href = 'index.html';
                 });
             }
+
+            const emergencyModal = document.getElementById('emergencyModal');
+            const btnOpenEmergency = document.getElementById('btnOpenEmergency');
+            const btnCloseEmergency = document.getElementById('btnCloseEmergency');
+
+            if (btnOpenEmergency && emergencyModal && btnCloseEmergency) {
+                btnOpenEmergency.addEventListener('click', () => emergencyModal.classList.remove('hidden'));
+                btnCloseEmergency.addEventListener('click', () => emergencyModal.classList.add('hidden'));
+            }
         });
 
         function solicitarServico(servico) {
-            alert(`Solicitação de "${servico}" registrada em nome do idoso vinculado com sucesso!`);
+            alert(`Solicitação de "${servico}" registrada em nome do idoso vinculado!`);
         }
     </script>
 </body>
