@@ -1,9 +1,75 @@
 const STORAGE_KEY = 'laco_amigo_user_session';
 const USERS_DB_KEY = 'laco_amigo_registered_users';
+const ALERTS_KEY = 'laco_amigo_live_alerts';
+const SERVICES_KEY = 'laco_amigo_live_services';
+
+// Usuários padrão pré-cadastrados para testes
+const PRESET_USERS = [
+    {
+        name: 'Maria da Silva',
+        email: 'idoso@teste.com',
+        senha: '12345678',
+        perfil: 'Idoso',
+        telefone: '(81) 98888-1111',
+        cpf: '111.222.333-44',
+        cidade: 'Paulista',
+        estado: 'PE',
+        bairro: 'Centro',
+        rua: 'Rua das Flores',
+        numero: '100'
+    },
+    {
+        name: 'João da Silva',
+        email: 'responsavel@teste.com',
+        senha: '12345678',
+        perfil: 'Responsável',
+        telefone: '(81) 98888-2222',
+        cpf: '555.666.777-88',
+        cpfIdosoVinculado: '111.222.333-44',
+        cidade: 'Paulista',
+        estado: 'PE',
+        bairro: 'Centro',
+        rua: 'Rua das Flores',
+        numero: '100'
+    },
+    {
+        name: 'Carlos Silva',
+        email: 'voluntario@teste.com',
+        senha: '12345678',
+        perfil: 'Voluntário',
+        telefone: '(81) 98888-3333',
+        cpf: '999.888.777-66',
+        cidade: 'Paulista',
+        estado: 'PE',
+        bairro: 'Jardim Paulista',
+        rua: 'Av. Brasil',
+        numero: '50'
+    }
+];
 
 document.addEventListener('DOMContentLoaded', () => {
+    initPresetUsers();
     setupForms();
 });
+
+// Força a presença dos usuários de teste sem apagar cadastros manuais novos
+function initPresetUsers() {
+    let existingUsers = [];
+    try {
+        existingUsers = JSON.parse(localStorage.getItem(USERS_DB_KEY) || '[]');
+    } catch (_) {
+        existingUsers = [];
+    }
+
+    PRESET_USERS.forEach(preset => {
+        const found = existingUsers.some(u => u.email && u.email.toLowerCase() === preset.email.toLowerCase());
+        if (!found) {
+            existingUsers.push(preset);
+        }
+    });
+
+    localStorage.setItem(USERS_DB_KEY, JSON.stringify(existingUsers));
+}
 
 function togglePasswordVisibility(id) {
     const field = document.getElementById(id);
@@ -68,11 +134,11 @@ function setupForms() {
             const senhaInput = document.getElementById('loginSenha');
             if (!emailInput || !senhaInput) return;
 
-            const email = emailInput.value.trim();
+            const email = emailInput.value.trim().toLowerCase();
             const senha = senhaInput.value;
 
             const registeredUsers = JSON.parse(localStorage.getItem(USERS_DB_KEY) || '[]');
-            const user = registeredUsers.find(u => u.email && u.email.toLowerCase() === email.toLowerCase());
+            const user = registeredUsers.find(u => u.email && u.email.toLowerCase() === email);
 
             if (user) {
                 if (user.senha === senha) {
@@ -82,9 +148,7 @@ function setupForms() {
                     alert('Senha incorreta!');
                 }
             } else {
-                const defaultUser = { name: email.split('@')[0], email: email, perfil: 'Idoso' };
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultUser));
-                redirectToRolePage('Idoso');
+                alert('E-mail não encontrado!');
             }
         });
     }
@@ -206,4 +270,38 @@ function redirectToRolePage(perfil) {
     } else {
         window.location.href = 'home.html';
     }
+}
+
+// --- FUNÇÕES DE SINCRONIZAÇÃO EM TEMPO REAL PARA DEMONSTRAÇÃO ---
+
+// Registra um alerta direto do idoso ao responsável
+function criarAlertaIdoso(tipo, mensagem) {
+    const alertas = JSON.parse(localStorage.getItem(ALERTS_KEY) || '[]');
+    const novoAlerta = {
+        id: Date.now(),
+        tipo: tipo,
+        mensagem: mensagem,
+        horario: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        data: 'Hoje',
+        status: 'Pendente'
+    };
+    alertas.unshift(novoAlerta);
+    localStorage.setItem(ALERTS_KEY, JSON.stringify(alertas));
+}
+
+// Registra uma nova solicitação de serviço realizada pelo idoso
+function criarServicoIdoso(servico, icone) {
+    const servicos = JSON.parse(localStorage.getItem(SERVICES_KEY) || '[]');
+    const novoServico = {
+        id: Date.now(),
+        servico: servico,
+        icone: icone,
+        horario: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        data: 'Hoje',
+        voluntario: 'Aguardando Voluntário...',
+        status: 'Pendente',
+        avaliacao: 'Aguardando'
+    };
+    servicos.unshift(novoServico);
+    localStorage.setItem(SERVICES_KEY, JSON.stringify(servicos));
 }

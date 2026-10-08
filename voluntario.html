@@ -29,9 +29,8 @@
 <body class="min-h-screen flex flex-col justify-between text-slate-800 antialiased bg-[#F4F8F8]">
 
     <!-- SPLASH SCREEN -->
-    <div id="splashScreen" class="fixed inset-0 z-50 bg-gradient-to-b from-brandTeal to-teal-900 flex flex-col items-center justify-between p-6 transition-opacity duration-700">
+    <div id="splashScreen" class="fixed inset-0 z-50 bg-gradient-to-b from-brandTeal to-teal-900 flex flex-col items-center justify-between p-6 transition-opacity duration-500">
         <div></div>
-        
         <div class="flex flex-col items-center text-center space-y-4">
             <div class="relative w-36 h-36 flex items-center justify-center">
                 <div class="absolute inset-0 border-4 border-teal-300/30 border-t-brandRed rounded-full animate-spin"></div>
@@ -40,30 +39,27 @@
                 </div>
             </div>
             <h1 class="text-3xl font-black text-white">Laço <span class="text-brandRed">Amigo</span></h1>
-            <p class="text-teal-100 text-sm font-semibold">Laço amigo, um laço de cuidado</p>
+            <p class="text-teal-100 text-sm font-semibold">Laço Amigo, um laço de cuidado</p>
         </div>
-
-       
-            
+        <div class="text-center space-y-1">
             <p class="text-xs text-teal-100/90 font-medium leading-relaxed">
                 Facilitando o cuidado, a comunicação e a autonomia dos idosos.
             </p>
             <p class="text-[10px] text-teal-200/60 pt-1">Versão 2.0 Mega Update</p>
         </div>
-    
+    </div>
 
     <!-- HEADER -->
     <header class="w-full bg-white border-b-2 border-slate-200 px-4 py-4 sm:px-8 shadow-sm sticky top-0 z-30">
         <div class="max-w-5xl mx-auto flex justify-between items-center">
-            
             <div class="flex items-center gap-3 sm:gap-4">
                 <div class="w-12 h-12 sm:w-14 sm:h-14 bg-brandTeal text-white rounded-full flex items-center justify-center font-bold text-2xl shadow-sm border-2 border-teal-100 shrink-0">
-                    👨‍💼
+                    <i class="fa-solid fa-hands-holding-child"></i>
                 </div>
                 <div class="leading-tight">
                     <div class="flex items-center gap-2">
-                        <span class="text-xs sm:text-sm font-bold text-slate-500 uppercase tracking-wider block">Voluntário(a)</span>
-                        <span class="bg-teal-100 text-brandTeal text-xs font-black px-2 py-0.5 rounded-full border border-teal-300">🏅 Verificado</span>
+                        <span class="text-xs sm:text-sm font-bold text-brandTeal uppercase tracking-wider block">Área do Voluntário</span>
+                        <span id="headerRating" class="text-xs font-black text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200 hidden">⭐ <span id="ratingVal">5.0</span></span>
                     </div>
                     <h2 id="userName" class="text-lg sm:text-2xl font-black text-slate-900">Carlos Silva</h2>
                 </div>
@@ -76,7 +72,7 @@
                     </h1>
                 </div>
 
-                <button id="btnLogout" type="button" title="Sair do aplicativo" class="bg-slate-100 hover:bg-red-100 text-slate-700 hover:text-brandRed p-3 rounded-2xl border-2 border-slate-300 transition-all flex items-center gap-2 text-base font-extrabold focus:ring-4 focus:ring-red-400">
+                <button id="btnLogout" type="button" title="Sair" class="bg-slate-100 hover:bg-red-100 text-slate-700 hover:text-brandRed p-3 rounded-2xl border-2 border-slate-300 transition-all flex items-center gap-2 text-base font-extrabold">
                     <i class="fa-solid fa-right-from-bracket text-lg"></i>
                     <span class="hidden md:inline">Sair</span>
                 </button>
@@ -84,236 +80,301 @@
         </div>
     </header>
 
-    <!-- DASHBOARD DO VOLUNTÁRIO -->
+    <!-- CONTEÚDO PRINCIPAL -->
     <main class="flex-grow max-w-5xl w-full mx-auto p-4 sm:p-6 space-y-6">
-
-        <!-- STATUS DE ATENDIMENTO -->
-        <section class="bg-white p-5 rounded-3xl border-2 border-slate-200 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div class="flex items-center gap-4">
-                <div id="statusIndicator" class="w-4 h-4 bg-emerald-500 rounded-full animate-pulse"></div>
-                <div>
-                    <h3 class="text-lg font-black text-slate-800">Status de Atendimento</h3>
-                    <p id="statusText" class="text-slate-600 text-sm font-bold">Você está DISPONÍVEL para receber chamados na sua região.</p>
-                </div>
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div>
+                <h2 class="text-2xl sm:text-3xl font-black text-slate-900">Olá, <span id="voluntarioName">Carlos</span>! 👋</h2>
+                <p class="text-slate-600 font-semibold text-sm sm:text-base">Confira as solicitações de ajuda disponíveis na sua região.</p>
             </div>
-            
-            <button id="btnToggleStatus" type="button" class="w-full sm:w-auto bg-emerald-100 hover:bg-emerald-200 text-emerald-800 px-6 py-3 rounded-2xl font-extrabold border-2 border-emerald-300 transition-all text-sm flex items-center justify-center gap-2">
-                <i class="fa-solid fa-power-off"></i>
-                <span id="btnStatusText">Pausar Recebimento</span>
-            </button>
-        </section>
-
-        <!-- REPUTAÇÃO E ESTATÍSTICAS -->
-        <section class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            <div class="bg-white p-4 rounded-2xl border-2 border-slate-200 text-center">
-                <span class="text-3xl font-black text-brandTeal">37</span>
-                <p class="text-xs sm:text-sm font-bold text-slate-600 mt-1">Ajudas Concluídas</p>
+            <div class="flex items-center gap-2 bg-emerald-50 border border-emerald-300 px-4 py-2 rounded-2xl">
+                <span class="w-3 h-3 bg-emerald-500 rounded-full animate-ping"></span>
+                <span class="text-xs font-black text-emerald-800 uppercase">Modo Disponível Ativo</span>
             </div>
-            <div class="bg-white p-4 rounded-2xl border-2 border-slate-200 text-center">
-                <span class="text-3xl font-black text-amber-500">⭐ 4,9</span>
-                <p class="text-xs sm:text-sm font-bold text-slate-600 mt-1">Avaliação Média</p>
-            </div>
-            <div class="bg-white p-4 rounded-2xl border-2 border-slate-200 text-center">
-                <span class="text-3xl font-black text-emerald-600">2</span>
-                <p class="text-xs sm:text-sm font-bold text-slate-600 mt-1">Próximos a Você</p>
-            </div>
-            <div class="bg-white p-4 rounded-2xl border-2 border-slate-200 text-center">
-                <span class="text-3xl font-black text-brandRed">1</span>
-                <p class="text-xs sm:text-sm font-bold text-slate-600 mt-1">Alerta Urgente</p>
-            </div>
-        </section>
-
-        <!-- SOLICITAÇÕES PRÓXIMAS -->
-        <div class="flex items-center justify-between pt-2">
-            <h3 class="text-xl sm:text-2xl font-black text-slate-800 flex items-center gap-3">
-                <i class="fa-solid fa-bell text-brandTeal text-2xl"></i>
-                <span>Solicitações Próximas na Sua Região</span>
-            </h3>
-            <span class="bg-red-100 text-brandRed text-xs font-black px-3 py-1 rounded-full border border-red-200">
-                Em Tempo Real
-            </span>
         </div>
 
-        <section class="space-y-4">
-
-            <!-- URGÊNCIA -->
-            <div class="bg-red-50 border-4 border-red-500 p-6 rounded-3xl shadow-md space-y-4">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b-2 border-red-200 pb-3">
-                    <div class="flex items-center gap-3">
-                        <span class="bg-brandRed text-white text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider animate-bounce">
-                            <i class="fa-solid fa-triangle-exclamation mr-1"></i> EMERGÊNCIA
-                        </span>
-                        <span class="text-xs font-bold text-slate-500"><i class="fa-regular fa-clock mr-1"></i> Há 3 minutos</span>
-                    </div>
-                    <span class="text-sm font-extrabold text-slate-700"><i class="fa-solid fa-location-dot text-brandRed mr-1"></i> A 400m de você</span>
-                </div>
-
-                <div class="flex items-start gap-4">
-                    <div class="w-14 h-14 bg-red-200 text-brandRed rounded-2xl flex items-center justify-center text-2xl font-black shrink-0 border border-red-300">
-                        <i class="fa-solid fa-phone-volume"></i>
-                    </div>
-                    <div class="space-y-1">
-                        <div class="flex items-center gap-2">
-                            <h4 class="text-xl font-black text-slate-900">Dona Maria da Silva (78 anos)</h4>
-                            <span class="text-xs font-black text-amber-700 bg-amber-100 px-2 py-0.5 rounded-full">⭐ 4,8</span>
-                        </div>
-                        <p class="text-slate-700 text-sm font-extrabold">Alerta de suporte/acompanhamento imediato solicitado pelo responsável.</p>
-                        <p class="text-xs text-slate-500 font-bold">Paulista, PE - Centro</p>
-                    </div>
-                </div>
-
-                <div class="flex flex-col sm:flex-row gap-3 pt-2">
-                    <button type="button" onclick="acceptCall('Dona Maria da Silva')" class="w-full sm:w-1/2 bg-brandRed hover:bg-brandRedHover text-white font-extrabold p-3.5 rounded-2xl text-center transition-all shadow-md flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-hand-holding-hand text-lg"></i> Aceitar e Prestar Apoio
-                    </button>
-                    <a href="tel:81999999999" class="w-full sm:w-1/2 bg-white hover:bg-slate-100 text-slate-800 font-extrabold p-3.5 rounded-2xl text-center border-2 border-slate-300 transition-all flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-phone text-brandTeal"></i> Ligar para o Contato
-                    </a>
-                </div>
+        <!-- SOLICITAÇÕES PENDENTES -->
+        <section class="space-y-3">
+            <div class="flex items-center justify-between">
+                <h3 class="text-lg font-black text-slate-800 flex items-center gap-2">
+                    <i class="fa-solid fa-hand-holding-heart text-brandTeal"></i> Pedidos de Ajuda Disponíveis
+                </h3>
+                <span id="pendingBadge" class="text-xs font-black bg-brandTeal text-white px-2.5 py-1 rounded-full">0 chamados</span>
             </div>
 
-            <!-- CHAMADO COMUM COM BOTÃO DE AVALIAÇÃO DO IDOSO -->
-            <div class="bg-white border-2 border-slate-200 p-6 rounded-3xl shadow-sm space-y-4">
-                <div class="flex justify-between items-center border-b border-slate-100 pb-3">
-                    <span class="bg-amber-100 text-amber-800 text-xs font-black px-3 py-1 rounded-full border border-amber-300">
-                        🛒 Compras
-                    </span>
-                    <span class="text-xs font-bold text-slate-500"><i class="fa-solid fa-location-dot text-brandTeal mr-1"></i> A 1.2 km de você</span>
-                </div>
-
-                <div class="flex items-start gap-4">
-                    <div class="w-12 h-12 bg-amber-100 text-amber-800 rounded-2xl flex items-center justify-center text-xl shrink-0">
-                        🛒
-                    </div>
-                    <div>
-                        <div class="flex items-center gap-2">
-                            <h4 class="text-lg font-black text-slate-900">Seu Josevaldo (82 anos)</h4>
-                            <span class="text-xs font-black text-amber-700 bg-amber-100 px-2 py-0.5 rounded-full">⭐ 5,0</span>
-                        </div>
-                        <p class="text-slate-600 text-xs font-bold mt-0.5">Ajuda para buscar itens na padaria e supermercado local.</p>
-                    </div>
-                </div>
-
-                <div class="flex gap-2">
-                    <button type="button" onclick="acceptCall('Seu Josevaldo')" class="w-2/3 bg-brandTeal hover:bg-brandTealHover text-white font-black p-3 rounded-xl transition-all text-sm">
-                        Aceitar Pedido
-                    </button>
-                    <button type="button" onclick="openReviewSeniorModal('Seu Josevaldo')" class="w-1/3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold p-3 rounded-xl text-xs border border-slate-300">
-                        Avaliar Idoso
-                    </button>
-                </div>
-            </div>
-
+            <div id="volunteerRequestsContainer" class="bg-white p-5 rounded-3xl border-2 border-slate-200 shadow-sm space-y-3"></div>
         </section>
 
+        <!-- ATENDIMENTOS ACEITOS -->
+        <section class="space-y-3 pt-2">
+            <h3 class="text-lg font-black text-slate-800 flex items-center gap-2">
+                <i class="fa-solid fa-list-check text-emerald-600"></i> Meus Atendimentos Aceitos
+            </h3>
+
+            <div id="acceptedRequestsContainer" class="bg-white p-5 rounded-3xl border-2 border-slate-200 shadow-sm space-y-3"></div>
+        </section>
     </main>
 
-    <!-- MODAL DE AVALIAÇÃO DO IDOSO PELO VOLUNTÁRIO -->
-    <div id="reviewSeniorModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white w-full max-w-md rounded-3xl border-4 border-brandTeal p-6 space-y-4 shadow-2xl">
-            <div class="text-center space-y-1">
-                <span class="text-4xl">👴</span>
-                <h3 class="text-xl font-black text-slate-900">Avaliar Atendimento ao Idoso</h3>
-                <p id="reviewSeniorTarget" class="text-xs font-bold text-slate-600">Como foi a experiência de atendimento com Seu Josevaldo?</p>
+    <!-- MODAL DE CONFIRMAÇÃO & AVALIAÇÃO DO IDOSO PELO VOLUNTÁRIO -->
+    <div id="evalModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-md rounded-3xl border-2 border-slate-200 p-6 space-y-6 shadow-2xl">
+            <div id="stepConfirm" class="space-y-4 text-center">
+                <div class="w-16 h-16 bg-teal-100 text-brandTeal rounded-full flex items-center justify-center text-3xl mx-auto border-2 border-teal-200">
+                    <i class="fa-solid fa-circle-question"></i>
+                </div>
+                <h3 class="text-xl font-black text-slate-900">Você realizou o atendimento com sucesso?</h3>
+                <p class="text-xs text-slate-600 font-bold">Confirme a conclusão do serviço prestado a Dona Maria da Silva.</p>
+                <div class="grid grid-cols-2 gap-3 pt-2">
+                    <button type="button" onclick="respostaAtendimento(false)" class="bg-slate-100 hover:bg-slate-200 text-slate-700 py-3 rounded-2xl font-black border-2 border-slate-300">
+                        Não
+                    </button>
+                    <button type="button" onclick="respostaAtendimento(true)" class="bg-brandTeal hover:bg-brandTealHover text-white py-3 rounded-2xl font-black shadow-md">
+                        Sim
+                    </button>
+                </div>
             </div>
 
-            <div class="flex justify-center gap-2 text-2xl text-amber-400 py-2">
-                <button onclick="setSeniorRating(1)">★</button>
-                <button onclick="setSeniorRating(2)">★</button>
-                <button onclick="setSeniorRating(3)">★</button>
-                <button onclick="setSeniorRating(4)">★</button>
-                <button onclick="setSeniorRating(5)">★</button>
-            </div>
+            <div id="stepRating" class="space-y-4 text-center hidden">
+                <div class="w-16 h-16 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-3xl mx-auto border-2 border-amber-300">
+                    👵
+                </div>
+                <div>
+                    <h3 class="text-xl font-black text-slate-900">Avalie o Atendimento com o Idoso</h3>
+                    <p class="text-xs text-slate-600 font-bold mt-1">Como foi sua experiência auxiliando Dona Maria?</p>
+                </div>
 
-            <textarea id="reviewSeniorComment" placeholder="Comentário sobre a experiência (ex: Foi muito educado e atencioso)" class="input-field h-24 text-xs resize-none"></textarea>
+                <div class="flex justify-center gap-2 text-3xl cursor-pointer py-2" id="starContainer">
+                    <span onclick="setRating(1)" class="star text-slate-300 hover:text-amber-400 transition-colors">★</span>
+                    <span onclick="setRating(2)" class="star text-slate-300 hover:text-amber-400 transition-colors">★</span>
+                    <span onclick="setRating(3)" class="star text-slate-300 hover:text-amber-400 transition-colors">★</span>
+                    <span onclick="setRating(4)" class="star text-slate-300 hover:text-amber-400 transition-colors">★</span>
+                    <span onclick="setRating(5)" class="star text-slate-300 hover:text-amber-400 transition-colors">★</span>
+                </div>
 
-            <div class="flex gap-2">
-                <button onclick="closeReviewSeniorModal()" class="w-1/2 bg-slate-100 text-slate-700 font-extrabold p-3 rounded-xl border border-slate-300">Cancelar</button>
-                <button onclick="submitSeniorReview()" class="w-1/2 bg-brandTeal text-white font-extrabold p-3 rounded-xl">Registrar Avaliação</button>
+                <button type="button" onclick="finalizarAvaliacao()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white p-3.5 rounded-2xl font-black shadow-md">
+                    Enviar Avaliação e Concluir
+                </button>
             </div>
         </div>
     </div>
 
-    <footer class="w-full bg-white border-t-2 border-slate-200 py-4 px-4 text-center mt-6">
-        <p class="text-slate-700 font-bold text-sm">© 2026 Laço Amigo - Área do Voluntário.</p>
+    <footer class="w-full bg-white border-t-2 border-slate-200 py-4 px-4 text-center">
+        <p class="text-slate-700 font-bold text-sm">© 2026 Laço Amigo - Painel do Voluntário.</p>
     </footer>
 
     <script>
-        function closeSplash() {
+        let currentServiceId = null;
+        let selectedStars = 5;
+
+        setTimeout(() => {
             const splash = document.getElementById('splashScreen');
             if (splash) {
                 splash.style.opacity = '0';
                 splash.style.pointerEvents = 'none';
-                setTimeout(function() { splash.style.display = 'none'; }, 500);
+                setTimeout(() => splash.style.display = 'none', 500);
             }
-        }
-        window.addEventListener('DOMContentLoaded', function() { setTimeout(closeSplash, 1200); });
-        window.addEventListener('load', function() { setTimeout(closeSplash, 1200); });
-        setTimeout(closeSplash, 2000);
-    </script>
-
-    <script>
-        const STORAGE_KEY = 'laco_amigo_user_session';
+        }, 800);
 
         document.addEventListener('DOMContentLoaded', () => {
-            const savedData = localStorage.getItem(STORAGE_KEY);
-            const userNameElement = document.getElementById('userName');
-
+            const savedData = localStorage.getItem('laco_amigo_user_session');
             if (savedData) {
                 try {
                     const user = JSON.parse(savedData);
-                    if (user.name) userNameElement.textContent = user.name;
-                } catch (e) {
-                    console.error('Erro na leitura de sessão', e);
-                }
+                    if (user.name) {
+                        document.getElementById('userName').textContent = user.name;
+                        document.getElementById('voluntarioName').textContent = user.name.split(' ')[0];
+                    }
+                } catch (_) {}
             }
 
             const btnLogout = document.getElementById('btnLogout');
             if (btnLogout) {
                 btnLogout.addEventListener('click', () => {
-                    localStorage.removeItem(STORAGE_KEY);
+                    localStorage.removeItem('laco_amigo_user_session');
                     window.location.href = 'index.html';
                 });
             }
 
-            const btnToggleStatus = document.getElementById('btnToggleStatus');
-            const statusIndicator = document.getElementById('statusIndicator');
-            const statusText = document.getElementById('statusText');
-            const btnStatusText = document.getElementById('btnStatusText');
-            let isAvailable = true;
-
-            if (btnToggleStatus) {
-                btnToggleStatus.addEventListener('click', () => {
-                    isAvailable = !isAvailable;
-                    if (isAvailable) {
-                        statusIndicator.className = 'w-4 h-4 bg-emerald-500 rounded-full animate-pulse';
-                        statusText.textContent = 'Você está DISPONÍVEL para receber chamados na sua região.';
-                        btnStatusText.textContent = 'Pausar Recebimento';
-                    } else {
-                        statusIndicator.className = 'w-4 h-4 bg-slate-400 rounded-full';
-                        statusText.textContent = 'Status INDISPONÍVEL temporariamente.';
-                        btnStatusText.textContent = 'Ficar Disponível';
-                    }
-                });
-            }
+            renderVoluntario();
+            updateHeaderRating();
+            window.addEventListener('storage', () => {
+                renderVoluntario();
+                updateHeaderRating();
+            });
+            setInterval(renderVoluntario, 1200);
         });
 
-        function acceptCall(name) {
-            alert(`Você aceitou atender ${name}! Os detalhes de contato foram liberados no seu painel.`);
+        function updateHeaderRating() {
+            const ratings = JSON.parse(localStorage.getItem('laco_amigo_ratings_voluntario') || '[]');
+            if (ratings.length > 0) {
+                const sum = ratings.reduce((a, b) => a + b, 0);
+                const avg = (sum / ratings.length).toFixed(1);
+                document.getElementById('ratingVal').textContent = avg;
+                document.getElementById('headerRating').classList.remove('hidden');
+            }
         }
 
-        let selectedSeniorRating = 5;
-        function openReviewSeniorModal(target) {
-            document.getElementById('reviewSeniorTarget').textContent = `Como foi o atendimento com ${target}?`;
-            document.getElementById('reviewSeniorModal').classList.remove('hidden');
+        function renderVoluntario() {
+            const servicos = JSON.parse(localStorage.getItem('laco_amigo_live_services') || '[]');
+            const containerDisponiveis = document.getElementById('volunteerRequestsContainer');
+            const containerAceitos = document.getElementById('acceptedRequestsContainer');
+            const pendingBadge = document.getElementById('pendingBadge');
+
+            const pendentes = servicos.filter(s => s.status === 'Pendente');
+            const aceitos = servicos.filter(s => s.status !== 'Pendente');
+
+            if (pendingBadge) pendingBadge.textContent = `${pendentes.length} pendente(s)`;
+
+            if (pendentes.length === 0) {
+                containerDisponiveis.innerHTML = `
+                    <div class="p-8 text-center text-slate-500 font-bold text-xs bg-slate-50 rounded-2xl border border-dashed border-slate-300">
+                        Nenhuma solicitação de ajuda aberta no momento. Quando o idoso pedir ajuda, ela aparecerá aqui instantaneamente!
+                    </div>
+                `;
+            } else {
+                containerDisponiveis.innerHTML = pendentes.map(item => `
+                    <div class="p-5 bg-teal-50/60 rounded-2xl border-2 border-teal-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="flex items-start gap-4">
+                            <div class="w-14 h-14 bg-white text-teal-800 rounded-2xl flex items-center justify-center text-3xl shrink-0 border border-teal-200 shadow-sm">
+                                ${item.icone}
+                            </div>
+                            <div class="space-y-1">
+                                <div class="flex items-center gap-2">
+                                    <h4 class="text-lg font-black text-slate-900">${item.servico}</h4>
+                                    <span class="bg-amber-100 text-amber-800 text-[10px] font-black px-2.5 py-0.5 rounded-full border border-amber-300">
+                                        🟡 Novo Pedido
+                                    </span>
+                                </div>
+                                <p class="text-xs font-bold text-slate-600">Solicitado por: <strong class="text-slate-900">Dona Maria da Silva</strong></p>
+                                <span class="text-[11px] text-slate-500 font-bold block">${item.data} • às ${item.horario}</span>
+                            </div>
+                        </div>
+                        <button onclick="aceitarServico(${item.id})" class="bg-brandTeal hover:bg-brandTealHover text-white text-xs font-black px-5 py-3 rounded-xl shrink-0 transition-all shadow-md flex items-center justify-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-emerald-300 text-base"></i> Aceitar e Ajudar no WhatsApp
+                        </button>
+                    </div>
+                `).join('');
+            }
+
+            if (aceitos.length === 0) {
+                containerAceitos.innerHTML = `
+                    <div class="p-6 text-center text-slate-500 font-bold text-xs bg-slate-50 rounded-2xl border border-slate-200">
+                        Você ainda não aceitou nenhum pedido hoje.
+                    </div>
+                `;
+            } else {
+                containerAceitos.innerHTML = aceitos.map(item => {
+                    const jáAvaliou = item.avaliacaoVoluntarioEnviada || item.status === 'Concluido_Voluntario' || item.status === 'Concluído';
+                    return `
+                    <div class="p-5 bg-white rounded-2xl border-2 ${item.status === 'Concluído' ? 'border-emerald-300 bg-emerald-50/30' : 'border-slate-200'} flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-slate-100 text-slate-800 rounded-2xl flex items-center justify-center text-2xl shrink-0 border border-slate-200">
+                                ${item.icone}
+                            </div>
+                            <div class="space-y-1">
+                                <div class="flex items-center gap-2">
+                                    <h4 class="text-base font-black text-slate-900">${item.servico}</h4>
+                                    <span class="${item.status === 'Concluído' ? 'bg-emerald-100 text-emerald-800 border-emerald-300' : 'bg-blue-100 text-blue-800 border-blue-300'} text-[10px] font-black px-2.5 py-0.5 rounded-full border">
+                                        ${item.status === 'Concluído' ? '✅ Concluído por ambos' : '🔵 Em Andamento'}
+                                    </span>
+                                </div>
+                                <p class="text-xs font-bold text-slate-600">Atendimento para: Dona Maria da Silva</p>
+                                <span class="text-[11px] text-slate-500 font-bold block">${item.data} • às ${item.horario}</span>
+                            </div>
+                        </div>
+                        ${!jáAvaliou ? `
+                            <button onclick="iniciarConclusao(${item.id})" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black px-4 py-2.5 rounded-xl shrink-0 transition-all shadow-sm">
+                                <i class="fa-solid fa-check-double mr-1"></i> Marcar como Concluído
+                            </button>
+                        ` : `
+                            <span class="text-xs font-black text-emerald-700 bg-emerald-100 px-3 py-1.5 rounded-xl border border-emerald-300">
+                                Você já avaliou
+                            </span>
+                        `}
+                    </div>
+                `}).join('');
+            }
         }
-        function closeReviewSeniorModal() {
-            document.getElementById('reviewSeniorModal').classList.add('hidden');
+
+        function aceitarServico(id) {
+            let servicos = JSON.parse(localStorage.getItem('laco_amigo_live_services') || '[]');
+            const voluntarioNome = document.getElementById('userName').textContent || 'Carlos Silva';
+            let servicoNome = '';
+
+            servicos = servicos.map(s => {
+                if (s.id === id) {
+                    servicoNome = s.servico;
+                    return { ...s, status: 'Em Andamento', voluntario: voluntarioNome };
+                }
+                return s;
+            });
+
+            localStorage.setItem('laco_amigo_live_services', JSON.stringify(servicos));
+            renderVoluntario();
+
+            const phoneIdoso = '5581988881111';
+            const text = encodeURIComponent(`Olá Dona Maria! Sou o voluntário ${voluntarioNome} do Laço Amigo. Vi o seu pedido de "${servicoNome}" e estou aqui para lhe ajudar!`);
+            
+            window.open(`https://wa.me/${phoneIdoso}?text=${text}`, '_blank');
         }
-        function setSeniorRating(val) { selectedSeniorRating = val; alert(`Nota ${val} atribuída ao idoso!`); }
-        function submitSeniorReview() {
-            alert(`Avaliação registrada com sucesso no perfil do idoso!`);
-            closeReviewSeniorModal();
+
+        function iniciarConclusao(id) {
+            currentServiceId = id;
+            document.getElementById('stepConfirm').classList.remove('hidden');
+            document.getElementById('stepRating').classList.add('hidden');
+            document.getElementById('evalModal').classList.remove('hidden');
+        }
+
+        function respostaAtendimento(sucesso) {
+            if (sucesso) {
+                document.getElementById('stepConfirm').classList.add('hidden');
+                document.getElementById('stepRating').classList.remove('hidden');
+                setRating(5);
+            } else {
+                document.getElementById('evalModal').classList.add('hidden');
+            }
+        }
+
+        function setRating(stars) {
+            selectedStars = stars;
+            const elements = document.querySelectorAll('#starContainer .star');
+            elements.forEach((el, index) => {
+                if (index < stars) {
+                    el.classList.add('text-amber-400');
+                    el.classList.remove('text-slate-300');
+                } else {
+                    el.classList.add('text-slate-300');
+                    el.classList.remove('text-amber-400');
+                }
+            });
+        }
+
+        function finalizarAvaliacao() {
+            let servicos = JSON.parse(localStorage.getItem('laco_amigo_live_services') || '[]');
+            
+            servicos = servicos.map(s => {
+                if (s.id === currentServiceId) {
+                    // Se o idoso já avaliou antes, fecha o ciclo como "Concluído"
+                    const novoStatus = s.status === 'Concluido_Idoso' ? 'Concluído' : 'Concluido_Voluntario';
+                    return { 
+                        ...s, 
+                        status: novoStatus, 
+                        avaliacaoVoluntarioEnviada: true,
+                        notaDadaPeloVoluntario: selectedStars 
+                    };
+                }
+                return s;
+            });
+            localStorage.setItem('laco_amigo_live_services', JSON.stringify(servicos));
+
+            // Salva nota recebida pelo idoso para calcular média dele
+            const ratings = JSON.parse(localStorage.getItem('laco_amigo_ratings_idoso') || '[]');
+            ratings.push(selectedStars);
+            localStorage.setItem('laco_amigo_ratings_idoso', JSON.stringify(ratings));
+
+            document.getElementById('evalModal').classList.add('hidden');
+            renderVoluntario();
+            alert('Atendimento concluído e avaliação enviada com sucesso!');
         }
     </script>
 </body>

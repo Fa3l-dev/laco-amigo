@@ -29,9 +29,8 @@
 <body class="min-h-screen flex flex-col justify-between text-slate-800 antialiased bg-[#F4F8F8]">
 
     <!-- SPLASH SCREEN -->
-    <div id="splashScreen" class="fixed inset-0 z-50 bg-gradient-to-b from-brandTeal to-teal-900 flex flex-col items-center justify-between p-6 transition-opacity duration-700">
+    <div id="splashScreen" class="fixed inset-0 z-50 bg-gradient-to-b from-brandTeal to-teal-900 flex flex-col items-center justify-between p-6 transition-opacity duration-500">
         <div></div>
-        
         <div class="flex flex-col items-center text-center space-y-4">
             <div class="relative w-36 h-36 flex items-center justify-center">
                 <div class="absolute inset-0 border-4 border-teal-300/30 border-t-brandRed rounded-full animate-spin"></div>
@@ -42,16 +41,15 @@
             <h1 class="text-3xl font-black text-white">Laço <span class="text-brandRed">Amigo</span></h1>
             <p class="text-teal-100 text-sm font-semibold">Laço Amigo, um laço de cuidado</p>
         </div>
-
-       
+        <div class="text-center space-y-1">
             <p class="text-xs text-teal-100/90 font-medium leading-relaxed">
-                Facilitando o cuidado, a comunicação e a autonomia dos idosos.
+                Facilitando o cuidado, a comunicação e a autonomy dos idosos.
             </p>
             <p class="text-[10px] text-teal-200/60 pt-1">Versão 2.0 Mega Update</p>
         </div>
     </div>
 
-    <!-- HEADER DE ALTA VISIBILIDADE -->
+    <!-- HEADER -->
     <header class="w-full bg-white border-b-2 border-slate-200 px-4 py-4 sm:px-8 shadow-sm sticky top-0 z-30">
         <div class="max-w-5xl mx-auto flex justify-between items-center">
             <div class="flex items-center gap-3 sm:gap-4">
@@ -61,7 +59,7 @@
                 <div class="leading-tight">
                     <div class="flex items-center gap-2">
                         <span class="text-xs sm:text-sm font-bold text-slate-500 uppercase tracking-wider block">Olá, bem-vindo(a)</span>
-                        <span class="text-xs font-black text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200">⭐ 4,8 (24)</span>
+                        <span id="headerRating" class="text-xs font-black text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200 hidden">⭐ <span id="ratingVal">5.0</span></span>
                     </div>
                     <h2 id="userName" class="text-lg sm:text-2xl font-black text-slate-900">Dona Maria</h2>
                 </div>
@@ -74,7 +72,7 @@
                     </h1>
                 </div>
 
-                <button id="btnLogout" type="button" title="Sair do aplicativo" class="bg-slate-100 hover:bg-red-100 text-slate-700 hover:text-brandRed p-3 rounded-2xl border-2 border-slate-300 transition-all flex items-center gap-2 text-base font-extrabold focus:ring-4 focus:ring-red-400">
+                <button id="btnLogout" type="button" title="Sair do aplicativo" class="bg-slate-100 hover:bg-red-100 text-slate-700 hover:text-brandRed p-3 rounded-2xl border-2 border-slate-300 transition-all flex items-center gap-2 text-base font-extrabold">
                     <i class="fa-solid fa-right-from-bracket text-lg"></i>
                     <span class="hidden md:inline">Sair</span>
                 </button>
@@ -82,10 +80,7 @@
         </div>
     </header>
 
-    <!-- DASHBOARD DO IDOSO -->
     <main class="flex-grow max-w-5xl w-full mx-auto p-4 sm:p-6 space-y-6">
-
-        <!-- BOTÃO DE EMERGÊNCIA DISCRETO E EFICIENTE -->
         <section class="flex justify-between items-center bg-red-50 border-2 border-red-300 p-4 rounded-3xl">
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 bg-brandRed text-white rounded-full flex items-center justify-center text-lg animate-pulse shrink-0">
@@ -96,46 +91,53 @@
                     <p class="text-xs text-red-700 font-bold">Ligue para familiares, SAMU 192 ou Polícia 190.</p>
                 </div>
             </div>
-            <button id="btnOpenEmergency" type="button" class="bg-brandRed hover:bg-brandRedHover text-white px-4 py-2.5 rounded-2xl text-xs font-black uppercase shadow-md transition-all shrink-0">
+            <button onclick="abrirModalEmergencia()" type="button" class="bg-brandRed hover:bg-brandRedHover text-white px-4 py-2.5 rounded-2xl text-xs font-black uppercase shadow-md transition-all shrink-0">
                 Chamar Socorro
             </button>
         </section>
 
-        <!-- SEÇÃO: MEU BEM-ESTAR -->
+        <!-- BEM ESTAR DO IDOSO -->
         <section class="bg-white p-5 rounded-3xl border-2 border-slate-200 shadow-sm space-y-3">
             <h3 class="text-sm font-black text-slate-600 uppercase tracking-wider flex items-center gap-2">
                 <i class="fa-solid fa-heart-pulse text-brandRed"></i> Meu Bem-Estar Hoje
             </h3>
             <p class="text-sm font-extrabold text-slate-800">Como você está se sentindo neste momento?</p>
 
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <button type="button" onclick="updateWellness('Bem')" class="p-4 bg-emerald-50 hover:bg-emerald-100 border-2 border-emerald-300 rounded-2xl flex items-center gap-3 transition-all text-left">
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <button type="button" onclick="updateWellness('Bem', '😊')" class="p-4 bg-emerald-50 hover:bg-emerald-100 border-2 border-emerald-300 rounded-2xl flex flex-col sm:flex-row items-center gap-3 transition-all text-center sm:text-left">
                     <span class="text-3xl">😊</span>
                     <div>
                         <strong class="text-sm font-black text-emerald-900 block">Estou Bem</strong>
-                        <span class="text-xs text-emerald-700 font-bold">Sem queixas agora</span>
+                        <span class="text-[11px] text-emerald-700 font-bold">Sem queixas</span>
                     </div>
                 </button>
 
-                <button type="button" onclick="updateWellness('Normal')" class="p-4 bg-amber-50 hover:bg-amber-100 border-2 border-amber-300 rounded-2xl flex items-center gap-3 transition-all text-left">
+                <button type="button" onclick="updateWellness('Normal', '😐')" class="p-4 bg-amber-50 hover:bg-amber-100 border-2 border-amber-300 rounded-2xl flex flex-col sm:flex-row items-center gap-3 transition-all text-center sm:text-left">
                     <span class="text-3xl">😐</span>
                     <div>
                         <strong class="text-sm font-black text-amber-900 block">Estou Normal</strong>
-                        <span class="text-xs text-amber-700 font-bold">Dia tranquilo</span>
+                        <span class="text-[11px] text-amber-700 font-bold">Dia tranquilo</span>
                     </div>
                 </button>
 
-                <button type="button" onclick="updateWellness('Preciso de atenção')" class="p-4 bg-red-50 hover:bg-red-100 border-2 border-red-300 rounded-2xl flex items-center gap-3 transition-all text-left">
+                <button type="button" onclick="updateWellness('Triste', '😢')" class="p-4 bg-indigo-50 hover:bg-indigo-100 border-2 border-indigo-300 rounded-2xl flex flex-col sm:flex-row items-center gap-3 transition-all text-center sm:text-left">
+                    <span class="text-3xl">😢</span>
+                    <div>
+                        <strong class="text-sm font-black text-indigo-900 block">Estou Triste</strong>
+                        <span class="text-[11px] text-indigo-700 font-bold">Preciso conversar</span>
+                    </div>
+                </button>
+
+                <button type="button" onclick="updateWellness('Preciso de atenção', '😟')" class="p-4 bg-red-50 hover:bg-red-100 border-2 border-red-300 rounded-2xl flex flex-col sm:flex-row items-center gap-3 transition-all text-center sm:text-left">
                     <span class="text-3xl">😟</span>
                     <div>
                         <strong class="text-sm font-black text-red-900 block">Preciso de Atenção</strong>
-                        <span class="text-xs text-red-700 font-bold">Avisa meu responsável</span>
+                        <span class="text-[11px] text-red-700 font-bold">Avisa meu responsável</span>
                     </div>
                 </button>
             </div>
         </section>
 
-        <!-- SEÇÃO: O QUE VOCÊ PRECISA HOJE (AÇÕES RÁPIDAS) -->
         <div class="pt-2">
             <h3 class="text-xl sm:text-2xl font-black text-slate-800 flex items-center gap-3">
                 <i class="fa-solid fa-hand-holding-heart text-brandTeal text-2xl"></i>
@@ -145,130 +147,83 @@
         </div>
 
         <section class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-
-            <button type="button" onclick="solicitarAjuda('Ir à Farmácia')" class="group text-left bg-white p-6 rounded-3xl border-4 border-slate-200 hover:border-brandTeal shadow-md hover:shadow-xl transition-all duration-200 flex items-center gap-5">
-                <div class="w-16 h-16 sm:w-20 sm:h-20 bg-emerald-100 text-emerald-700 group-hover:bg-brandTeal group-hover:text-white rounded-3xl flex items-center justify-center text-3xl sm:text-4xl transition-colors shrink-0 border-2 border-emerald-300">
+            <button type="button" onclick="solicitarAjuda('Ir à Farmácia')" class="group text-left bg-white p-6 rounded-3xl border-4 border-slate-200 hover:border-brandTeal shadow-md transition-all flex items-center gap-5">
+                <div class="w-16 h-16 sm:w-20 sm:h-20 bg-emerald-100 text-emerald-700 rounded-3xl flex items-center justify-center text-3xl sm:text-4xl shrink-0 border-2 border-emerald-300">
                     💊
                 </div>
                 <div>
-                    <h4 class="text-xl sm:text-2xl font-black text-slate-900 group-hover:text-brandTeal transition-colors">
-                        Ir à Farmácia
-                    </h4>
-                    <p class="text-slate-600 text-xs sm:text-sm font-bold mt-1">
-                        Remédios ou acompanhamento até o local.
-                    </p>
+                    <h4 class="text-xl sm:text-2xl font-black text-slate-900">Ir à Farmácia</h4>
+                    <p class="text-slate-600 text-xs sm:text-sm font-bold mt-1">Remédios ou acompanhamento até o local.</p>
                 </div>
             </button>
 
-            <button type="button" onclick="solicitarAjuda('Fazer Compras')" class="group text-left bg-white p-6 rounded-3xl border-4 border-slate-200 hover:border-brandTeal shadow-md hover:shadow-xl transition-all duration-200 flex items-center gap-5">
-                <div class="w-16 h-16 sm:w-20 sm:h-20 bg-amber-100 text-amber-700 group-hover:bg-brandTeal group-hover:text-white rounded-3xl flex items-center justify-center text-3xl sm:text-4xl transition-colors shrink-0 border-2 border-amber-300">
+            <button type="button" onclick="solicitarAjuda('Fazer Compras')" class="group text-left bg-white p-6 rounded-3xl border-4 border-slate-200 hover:border-brandTeal shadow-md transition-all flex items-center gap-5">
+                <div class="w-16 h-16 sm:w-20 sm:h-20 bg-amber-100 text-amber-700 rounded-3xl flex items-center justify-center text-3xl sm:text-4xl shrink-0 border-2 border-amber-300">
                     🛒
                 </div>
                 <div>
-                    <h4 class="text-xl sm:text-2xl font-black text-slate-900 group-hover:text-brandTeal transition-colors">
-                        Fazer Compras
-                    </h4>
-                    <p class="text-slate-600 text-xs sm:text-sm font-bold mt-1">
-                        Mercado, feira livre ou padaria.
-                    </p>
+                    <h4 class="text-xl sm:text-2xl font-black text-slate-900">Fazer Compras</h4>
+                    <p class="text-slate-600 text-xs sm:text-sm font-bold mt-1">Mercado, feira livre ou padaria.</p>
                 </div>
             </button>
 
-            <button type="button" onclick="solicitarAjuda('Ajuda em Casa')" class="group text-left bg-white p-6 rounded-3xl border-4 border-slate-200 hover:border-brandTeal shadow-md hover:shadow-xl transition-all duration-200 flex items-center gap-5">
-                <div class="w-16 h-16 sm:w-20 sm:h-20 bg-blue-100 text-blue-700 group-hover:bg-brandTeal group-hover:text-white rounded-3xl flex items-center justify-center text-3xl sm:text-4xl transition-colors shrink-0 border-2 border-blue-300">
+            <button type="button" onclick="solicitarAjuda('Ajuda em Casa')" class="group text-left bg-white p-6 rounded-3xl border-4 border-slate-200 hover:border-brandTeal shadow-md transition-all flex items-center gap-5">
+                <div class="w-16 h-16 sm:w-20 sm:h-20 bg-blue-100 text-blue-700 rounded-3xl flex items-center justify-center text-3xl sm:text-4xl shrink-0 border-2 border-blue-300">
                     🏠
                 </div>
                 <div>
-                    <h4 class="text-xl sm:text-2xl font-black text-slate-900 group-hover:text-brandTeal transition-colors">
-                        Ajuda em Casa
-                    </h4>
-                    <p class="text-slate-600 text-xs sm:text-sm font-bold mt-1">
-                        Pequenas tarefas e organização do lar.
-                    </p>
+                    <h4 class="text-xl sm:text-2xl font-black text-slate-900">Ajuda em Casa</h4>
+                    <p class="text-slate-600 text-xs sm:text-sm font-bold mt-1">Pequenas tarefas e organização do lar.</p>
                 </div>
             </button>
 
-            <button type="button" onclick="solicitarAjuda('Acompanhante')" class="group text-left bg-white p-6 rounded-3xl border-4 border-slate-200 hover:border-brandTeal shadow-md hover:shadow-xl transition-all duration-200 flex items-center gap-5">
-                <div class="w-16 h-16 sm:w-20 sm:h-20 bg-purple-100 text-purple-700 group-hover:bg-brandTeal group-hover:text-white rounded-3xl flex items-center justify-center text-4xl sm:text-5xl transition-colors shrink-0 border-2 border-purple-300">
+            <button type="button" onclick="solicitarAjuda('Acompanhante')" class="group text-left bg-white p-6 rounded-3xl border-4 border-slate-200 hover:border-brandTeal shadow-md transition-all flex items-center gap-5">
+                <div class="w-16 h-16 sm:w-20 sm:h-20 bg-purple-100 text-purple-700 rounded-3xl flex items-center justify-center text-4xl sm:text-5xl shrink-0 border-2 border-purple-300">
                     🏥
                 </div>
                 <div>
-                    <h4 class="text-xl sm:text-2xl font-black text-slate-900 group-hover:text-brandTeal transition-colors">
-                        Acompanhante
-                    </h4>
-                    <p class="text-slate-600 text-xs sm:text-sm font-bold mt-1">
-                        Companhia em consultas ou passeios.
-                    </p>
+                    <h4 class="text-xl sm:text-2xl font-black text-slate-900">Acompanhante</h4>
+                    <p class="text-slate-600 text-xs sm:text-sm font-bold mt-1">Companhia em consultas ou passeios.</p>
                 </div>
             </button>
-
         </section>
 
-        <!-- SEÇÃO: MEUS PEDIDOS RECENTES E AVALIAÇÃO DO VOLUNTÁRIO -->
+        <!-- MEUS PEDIDOS RECENTES -->
         <section class="space-y-3 pt-2">
             <h3 class="text-lg font-black text-slate-800 flex items-center gap-2">
                 <i class="fa-solid fa-list-check text-brandTeal"></i> Meus Pedidos Recentes
             </h3>
 
-            <div class="bg-white p-5 rounded-3xl border-2 border-slate-200 shadow-sm space-y-3">
-                
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-200 gap-3">
-                    <div class="flex items-center gap-3">
-                        <span class="text-3xl">💊</span>
-                        <div>
-                            <h4 class="text-base font-black text-slate-900">Farmácia</h4>
-                            <span class="text-xs text-slate-500 font-bold">Hoje • 09:30 • Voluntário Carlos Silva</span>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <span class="bg-emerald-100 text-emerald-800 text-xs font-black px-3 py-1 rounded-full border border-emerald-300">🟢 Ajudante Encontrado</span>
-                        <button onclick="openReviewModal('Carlos Silva')" class="bg-brandTeal hover:bg-brandTealHover text-white text-xs font-black px-3 py-1.5 rounded-xl">Avaliar</button>
-                    </div>
-                </div>
-
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-200 gap-3">
-                    <div class="flex items-center gap-3">
-                        <span class="text-3xl">🛒</span>
-                        <div>
-                            <h4 class="text-base font-black text-slate-900">Compras da Semana</h4>
-                            <span class="text-xs text-slate-500 font-bold">Hoje • 14:00</span>
-                        </div>
-                    </div>
-                    <span class="bg-amber-100 text-amber-800 text-xs font-black px-3 py-1 rounded-full border border-amber-300">🟡 Aguardando Ajudante</span>
-                </div>
-
-            </div>
+            <div id="myRequestsContainer" class="bg-white p-5 rounded-3xl border-2 border-slate-200 shadow-sm space-y-3"></div>
         </section>
-
     </main>
 
-    <!-- MODAL DE AVALIAÇÃO DO VOLUNTÁRIO -->
-    <div id="reviewModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white w-full max-w-md rounded-3xl border-4 border-brandTeal p-6 space-y-4 shadow-2xl">
-            <div class="text-center space-y-1">
-                <span class="text-4xl">⭐</span>
-                <h3 class="text-xl font-black text-slate-900">Avaliar Voluntário</h3>
-                <p id="reviewTarget" class="text-xs font-bold text-slate-600">Como foi seu atendimento com Carlos Silva?</p>
+    <!-- MODAL DE AVALIAÇÃO DO VOLUNTÁRIO PELO IDOSO -->
+    <div id="evalModalIdoso" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-md rounded-3xl border-2 border-slate-200 p-6 space-y-6 shadow-2xl text-center">
+            <div class="w-16 h-16 bg-teal-100 text-brandTeal rounded-full flex items-center justify-center text-3xl mx-auto border-2 border-teal-300">
+                <i class="fa-solid fa-hands-holding-child"></i>
+            </div>
+            <div>
+                <h3 class="text-xl font-black text-slate-900">Avalie a ajuda do Voluntário</h3>
+                <p class="text-xs text-slate-600 font-bold mt-1">Como foi o atendimento prestado a você?</p>
             </div>
 
-            <div class="flex justify-center gap-2 text-2xl text-amber-400 py-2">
-                <button onclick="setRating(1)">★</button>
-                <button onclick="setRating(2)">★</button>
-                <button onclick="setRating(3)">★</button>
-                <button onclick="setRating(4)">★</button>
-                <button onclick="setRating(5)">★</button>
+            <div class="flex justify-center gap-2 text-3xl cursor-pointer py-2" id="starContainerIdoso">
+                <span onclick="setRatingIdoso(1)" class="starIdoso text-slate-300 hover:text-amber-400 transition-colors">★</span>
+                <span onclick="setRatingIdoso(2)" class="starIdoso text-slate-300 hover:text-amber-400 transition-colors">★</span>
+                <span onclick="setRatingIdoso(3)" class="starIdoso text-slate-300 hover:text-amber-400 transition-colors">★</span>
+                <span onclick="setRatingIdoso(4)" class="starIdoso text-slate-300 hover:text-amber-400 transition-colors">★</span>
+                <span onclick="setRatingIdoso(5)" class="starIdoso text-slate-300 hover:text-amber-400 transition-colors">★</span>
             </div>
 
-            <textarea id="reviewComment" placeholder="Deixe um elogio ou comentário (opcional)" class="input-field h-24 text-xs resize-none"></textarea>
-
-            <div class="flex gap-2">
-                <button onclick="closeReviewModal()" class="w-1/2 bg-slate-100 text-slate-700 font-extrabold p-3 rounded-xl border border-slate-300">Cancelar</button>
-                <button onclick="submitReview()" class="w-1/2 bg-brandTeal text-white font-extrabold p-3 rounded-xl">Enviar Avaliação</button>
-            </div>
+            <button type="button" onclick="finalizarAvaliacaoIdoso()" class="w-full bg-brandTeal hover:bg-brandTealHover text-white p-3.5 rounded-2xl font-black shadow-md">
+                Enviar Avaliação
+            </button>
         </div>
     </div>
 
-    <!-- MODAL DE EMERGÊNCIA COMPLETO -->
+    <!-- MODAL DE EMERGÊNCIA -->
     <div id="emergencyModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white w-full max-w-md rounded-3xl border-4 border-red-500 p-6 space-y-6 shadow-2xl relative">
             <div class="text-center space-y-2">
@@ -280,7 +235,7 @@
             </div>
 
             <div class="space-y-3">
-                <button id="btnNotifyFamily" type="button" class="w-full bg-brandTeal hover:bg-brandTealHover text-white p-4 rounded-2xl font-extrabold flex items-center gap-4 shadow-md transition-all">
+                <button type="button" onclick="avisarFamiliaAgora()" class="w-full bg-brandTeal hover:bg-brandTealHover text-white p-4 rounded-2xl font-extrabold flex items-center gap-4 shadow-md transition-all">
                     <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center text-2xl shrink-0">
                         <i class="fa-solid fa-users"></i>
                     </div>
@@ -311,7 +266,7 @@
                 </a>
             </div>
 
-            <button id="btnCloseEmergency" type="button" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 p-3 rounded-2xl text-base font-black border-2 border-slate-300">
+            <button type="button" onclick="fecharModalEmergencia()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 p-3 rounded-2xl text-base font-black border-2 border-slate-300">
                 Cancelar / Voltar
             </button>
         </div>
@@ -322,81 +277,226 @@
     </footer>
 
     <script>
-        function closeSplash() {
+        let currentEvalServiceId = null;
+        let selectedStarsIdoso = 5;
+
+        setTimeout(() => {
             const splash = document.getElementById('splashScreen');
             if (splash) {
                 splash.style.opacity = '0';
                 splash.style.pointerEvents = 'none';
-                setTimeout(function() { splash.style.display = 'none'; }, 500);
+                setTimeout(() => splash.style.display = 'none', 500);
+            }
+        }, 800);
+
+        function abrirModalEmergencia() {
+            document.getElementById('emergencyModal').classList.remove('hidden');
+        }
+
+        function fecharModalEmergencia() {
+            document.getElementById('emergencyModal').classList.add('hidden');
+        }
+
+        function updateHeaderRating() {
+            const ratings = JSON.parse(localStorage.getItem('laco_amigo_ratings_idoso') || '[]');
+            if (ratings.length > 0) {
+                const sum = ratings.reduce((a, b) => a + b, 0);
+                const avg = (sum / ratings.length).toFixed(1);
+                document.getElementById('ratingVal').textContent = avg;
+                document.getElementById('headerRating').classList.remove('hidden');
             }
         }
-        window.addEventListener('DOMContentLoaded', function() { setTimeout(closeSplash, 1200); });
-        window.addEventListener('load', function() { setTimeout(closeSplash, 1200); });
-        setTimeout(closeSplash, 2000);
-    </script>
 
-    <script>
-        const STORAGE_KEY = 'laco_amigo_user_session';
+        function registrarAlertaLocal(tipo, mensagem) {
+            const alertas = JSON.parse(localStorage.getItem('laco_amigo_live_alerts') || '[]');
+            alertas.unshift({
+                id: Date.now(),
+                tipo: tipo,
+                mensagem: mensagem,
+                horario: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                data: 'Hoje',
+                status: 'Pendente'
+            });
+            localStorage.setItem('laco_amigo_live_alerts', JSON.stringify(alertas));
+        }
+
+        function registrarServicoLocal(servico, icone) {
+            const servicos = JSON.parse(localStorage.getItem('laco_amigo_live_services') || '[]');
+            servicos.unshift({
+                id: Date.now(),
+                servico: servico,
+                icone: icone,
+                horario: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                data: 'Hoje',
+                voluntario: 'Aguardando Voluntário...',
+                status: 'Pendente'
+            });
+            localStorage.setItem('laco_amigo_live_services', JSON.stringify(servicos));
+            renderMeusPedidos();
+        }
+
+        function renderMeusPedidos() {
+            const container = document.getElementById('myRequestsContainer');
+            const servicos = JSON.parse(localStorage.getItem('laco_amigo_live_services') || '[]');
+
+            if (servicos.length === 0) {
+                container.innerHTML = `
+                    <div class="p-6 text-center text-slate-500 font-bold text-xs bg-slate-50 rounded-2xl border border-dashed border-slate-300">
+                        Você ainda não fez nenhum pedido de ajuda hoje. Toque em uma das opções acima!
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = servicos.map(item => {
+                const jaAvaliouIdoso = item.avaliacaoIdosoEnviada || item.status === 'Concluido_Idoso' || item.status === 'Concluído';
+                
+                return `
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-200 gap-3">
+                    <div class="flex items-center gap-3">
+                        <span class="text-3xl">${item.icone}</span>
+                        <div>
+                            <h4 class="text-base font-black text-slate-900">${item.servico}</h4>
+                            <span class="text-xs text-slate-500 font-bold">Hoje • ${item.horario} ${item.voluntario !== 'Aguardando Voluntário...' ? '• Voluntário: ' + item.voluntario : ''}</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 flex-wrap">
+                        ${item.status === 'Pendente' ? `
+                            <span class="bg-amber-100 text-amber-800 text-xs font-black px-3 py-1 rounded-full border border-amber-300">🟡 Aguardando Voluntário</span>
+                            <button onclick="cancelarServico(${item.id})" class="text-xs font-black text-red-600 hover:text-red-800 bg-red-50 hover:bg-red-100 border border-red-200 px-3 py-1 rounded-full transition-all">
+                                Cancelar
+                            </button>
+                        ` : jaAvaliouIdoso ? `
+                            <span class="bg-emerald-100 text-emerald-800 text-xs font-black px-3 py-1 rounded-full border border-emerald-300">
+                                ${item.status === 'Concluído' ? '✅ Concluído por ambos' : '✅ Você já avaliou'}
+                            </span>
+                        ` : `
+                            <span class="bg-blue-100 text-blue-800 text-xs font-black px-3 py-1 rounded-full border border-blue-300">🔵 Voluntário a Caminho</span>
+                            <button onclick="abrirAvaliacao(${item.id})" class="text-xs font-black text-emerald-800 bg-emerald-100 hover:bg-emerald-200 border border-emerald-300 px-3 py-1 rounded-full transition-all">
+                                Marcar como Concluído e Avaliar
+                            </button>
+                            <button onclick="cancelarServico(${item.id})" class="text-xs font-black text-red-600 hover:text-red-800 bg-red-50 hover:bg-red-100 border border-red-200 px-3 py-1 rounded-full transition-all">
+                                Cancelar
+                            </button>
+                        `}
+                    </div>
+                </div>
+            `}).join('');
+        }
+
+        function cancelarServico(id) {
+            if (confirm('Tem certeza que deseja cancelar esta solicitação?')) {
+                let servicos = JSON.parse(localStorage.getItem('laco_amigo_live_services') || '[]');
+                servicos = servicos.filter(s => s.id !== id);
+                localStorage.setItem('laco_amigo_live_services', JSON.stringify(servicos));
+                renderMeusPedidos();
+            }
+        }
+
+        function abrirAvaliacao(id) {
+            currentEvalServiceId = id;
+            setRatingIdoso(5);
+            document.getElementById('evalModalIdoso').classList.remove('hidden');
+        }
+
+        function setRatingIdoso(stars) {
+            selectedStarsIdoso = stars;
+            const elements = document.querySelectorAll('#starContainerIdoso .starIdoso');
+            elements.forEach((el, index) => {
+                if (index < stars) {
+                    el.classList.add('text-amber-400');
+                    el.classList.remove('text-slate-300');
+                } else {
+                    el.classList.add('text-slate-300');
+                    el.classList.remove('text-amber-400');
+                }
+            });
+        }
+
+        function finalizarAvaliacaoIdoso() {
+            let servicos = JSON.parse(localStorage.getItem('laco_amigo_live_services') || '[]');
+            
+            servicos = servicos.map(s => {
+                if (s.id === currentEvalServiceId) {
+                    const novoStatus = s.status === 'Concluido_Voluntario' ? 'Concluído' : 'Concluido_Idoso';
+                    return { 
+                        ...s, 
+                        status: novoStatus, 
+                        avaliacaoIdosoEnviada: true,
+                        notaDadaPeloIdoso: selectedStarsIdoso 
+                    };
+                }
+                return s;
+            });
+            localStorage.setItem('laco_amigo_live_services', JSON.stringify(servicos));
+
+            const ratings = JSON.parse(localStorage.getItem('laco_amigo_ratings_voluntario') || '[]');
+            ratings.push(selectedStarsIdoso);
+            localStorage.setItem('laco_amigo_ratings_voluntario', JSON.stringify(ratings));
+
+            document.getElementById('evalModalIdoso').classList.add('hidden');
+            renderMeusPedidos();
+            alert('Serviço concluído e voluntário avaliado com sucesso!');
+        }
 
         document.addEventListener('DOMContentLoaded', () => {
-            const savedData = localStorage.getItem(STORAGE_KEY);
-            const userNameElement = document.getElementById('userName');
+            renderMeusPedidos();
+            updateHeaderRating();
+            window.addEventListener('storage', () => {
+                renderMeusPedidos();
+                updateHeaderRating();
+            });
+            setInterval(renderMeusPedidos, 1200);
 
+            const savedData = localStorage.getItem('laco_amigo_user_session');
             if (savedData) {
                 try {
                     const user = JSON.parse(savedData);
-                    if (user.name) userNameElement.textContent = user.name;
-                } catch (e) {
-                    console.error('Erro na sessão', e);
-                }
+                    if (user.name) document.getElementById('userName').textContent = user.name;
+                } catch (_) {}
             }
 
             const btnLogout = document.getElementById('btnLogout');
             if (btnLogout) {
                 btnLogout.addEventListener('click', () => {
-                    localStorage.removeItem(STORAGE_KEY);
+                    localStorage.removeItem('laco_amigo_user_session');
                     window.location.href = 'index.html';
-                });
-            }
-
-            const emergencyModal = document.getElementById('emergencyModal');
-            const btnOpenEmergency = document.getElementById('btnOpenEmergency');
-            const btnCloseEmergency = document.getElementById('btnCloseEmergency');
-            const btnNotifyFamily = document.getElementById('btnNotifyFamily');
-
-            if (btnOpenEmergency && emergencyModal && btnCloseEmergency) {
-                btnOpenEmergency.addEventListener('click', () => emergencyModal.classList.remove('hidden'));
-                btnCloseEmergency.addEventListener('click', () => emergencyModal.classList.add('hidden'));
-            }
-
-            if (btnNotifyFamily) {
-                btnNotifyFamily.addEventListener('click', () => {
-                    alert('Alerta enviado com sucesso ao seu responsável cadastrado!');
-                    emergencyModal.classList.add('hidden');
                 });
             }
         });
 
+        function avisarFamiliaAgora() {
+            registrarAlertaLocal('EMERGÊNCIA', 'Dona Maria acionou o botão "Avisar Minha Família"!');
+            alert('Alerta enviado com sucesso ao seu responsável!');
+            fecharModalEmergencia();
+        }
+
         function solicitarAjuda(servico) {
-            alert(`Sua solicitação de "${servico}" foi enviada com sucesso! Um voluntário próximo responderá em breve.`);
+            const icones = {
+                'Ir à Farmácia': '💊',
+                'Fazer Compras': '🛒',
+                'Ajuda em Casa': '🏠',
+                'Acompanhante': '🏥'
+            };
+            registrarServicoLocal(servico, icones[servico] || '🤝');
+            alert(`Sua solicitação de "${servico}" foi enviada aos voluntários!`);
         }
 
-        function updateWellness(status) {
-            alert(`Seu bem-estar foi atualizado para: "${status}". O seu responsável vinculado já pode visualizar.`);
-        }
+        // ATUALIZAÇÃO DO BEM-ESTAR E ENVIO AO PAINEL DO RESPONSÁVEL
+        function updateWellness(status, emoji) {
+            // Salva o humor atual no localStorage
+            localStorage.setItem('laco_amigo_idoso_humor', JSON.stringify({
+                status: status,
+                emoji: emoji,
+                horario: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                data: 'Hoje'
+            }));
 
-        let selectedRating = 5;
-        function openReviewModal(target) {
-            document.getElementById('reviewTarget').textContent = `Como foi seu atendimento com ${target}?`;
-            document.getElementById('reviewModal').classList.remove('hidden');
-        }
-        function closeReviewModal() {
-            document.getElementById('reviewModal').classList.add('hidden');
-        }
-        function setRating(val) { selectedRating = val; alert(`Nota ${val} selecionada!`); }
-        function submitReview() {
-            alert(`Obrigado! Avaliação enviada ao perfil do voluntário com sucesso.`);
-            closeReviewModal();
+            // Envia um registro de alerta para o responsável ser notificado
+            const mensagemHumor = `Dona Maria atualizou seu humor hoje para: ${emoji} ${status}`;
+            registrarAlertaLocal('Humor Diário', mensagemHumor);
+
+            alert(`Seu humor foi atualizado para "${emoji} ${status}" e notificado ao seu responsável!`);
         }
     </script>
 </body>

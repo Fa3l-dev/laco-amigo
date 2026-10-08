@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laço Amigo - Área do Responsável</title>
+    <title>Laço Amigo - Painel do Responsável</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -29,7 +29,7 @@
 <body class="min-h-screen flex flex-col justify-between text-slate-800 antialiased bg-[#F4F8F8]">
 
     <!-- SPLASH SCREEN -->
-    <div id="splashScreen" class="fixed inset-0 z-50 bg-gradient-to-b from-brandTeal to-teal-900 flex flex-col items-center justify-between p-6 transition-opacity duration-700">
+    <div id="splashScreen" class="fixed inset-0 z-50 bg-gradient-to-b from-brandTeal to-teal-900 flex flex-col items-center justify-between p-6 transition-opacity duration-500">
         <div></div>
         
         <div class="flex flex-col items-center text-center space-y-4">
@@ -43,14 +43,13 @@
             <p class="text-teal-100 text-sm font-semibold">Laço amigo, um laço de cuidado</p>
         </div>
 
-        
-            </p>
+        <div class="text-center space-y-1">
             <p class="text-xs text-teal-100/90 font-medium leading-relaxed">
                 Facilitando o cuidado, a comunicação e a autonomia dos idosos.
             </p>
             <p class="text-[10px] text-teal-200/60 pt-1">Versão 2.0 Mega Update</p>
         </div>
-    
+    </div>
 
     <!-- HEADER -->
     <header class="w-full bg-white border-b-2 border-slate-200 px-4 py-4 sm:px-8 shadow-sm sticky top-0 z-30">
@@ -60,8 +59,8 @@
                     <i class="fa-solid fa-user-shield"></i>
                 </div>
                 <div class="leading-tight">
-                    <span class="text-xs sm:text-sm font-bold text-amber-600 uppercase tracking-wider block">Responsável</span>
-                    <h2 id="userName" class="text-lg sm:text-2xl font-black text-slate-900">Usuário</h2>
+                    <span class="text-xs sm:text-sm font-bold text-amber-600 uppercase tracking-wider block">Área do Responsável</span>
+                    <h2 id="userName" class="text-lg sm:text-2xl font-black text-slate-900">João da Silva</h2>
                 </div>
             </div>
 
@@ -80,264 +79,103 @@
         </div>
     </header>
 
-    <!-- DASHBOARD DO RESPONSÁVEL (MANTIDO E INTEGRADO) -->
+    <!-- PAINEL EXCLUSIVO DO RESPONSÁVEL -->
     <main class="flex-grow max-w-5xl w-full mx-auto p-4 sm:p-6 space-y-6">
 
-        <!-- SAUDAÇÃO & BOTÃO DE EMERGÊNCIA -->
+        <!-- CABEÇALHO & BOTÃO DE SOCORRO -->
         <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
                 <h2 class="text-2xl sm:text-3xl font-black text-slate-900">Olá, <span id="respName">João</span>! 👋</h2>
-                <p class="text-slate-600 font-semibold text-sm sm:text-base">Como está o cuidado de <strong class="text-brandTeal">Dona Maria da Silva</strong> hoje?</p>
+                <p class="text-slate-600 font-semibold text-sm sm:text-base">Acompanhamento e histórico de solicitações de <strong class="text-brandTeal">Dona Maria da Silva</strong>.</p>
             </div>
 
-            <button id="btnOpenEmergency" type="button" class="w-full sm:w-auto bg-brandRed hover:bg-brandRedHover text-white px-5 py-3 rounded-2xl font-black text-sm shadow-md transition-all flex items-center justify-center gap-2 border-2 border-red-700 shrink-0">
-                <i class="fa-solid fa-triangle-exclamation text-yellow-300 animate-pulse"></i>
-                <span>SOLICITAR EMERGÊNCIA</span>
+            <button onclick="abrirModalEmergencia()" type="button" class="w-full sm:w-auto bg-brandRed hover:bg-brandRedHover text-white px-5 py-3 rounded-2xl font-black text-sm shadow-md transition-all flex items-center justify-center gap-2 border-2 border-red-700 shrink-0">
+                <i class="fa-solid fa-phone-volume text-yellow-300 animate-pulse"></i>
+                <span>CHAMAR SOCORRO</span>
             </button>
         </div>
 
-        <!-- CARD DO IDOSO VINCULADO -->
-        <section class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-md">
-            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
-                <div class="flex items-center gap-4">
-                    <div class="w-16 h-16 bg-teal-100 text-brandTeal rounded-2xl flex items-center justify-center text-3xl font-black shrink-0 border-2 border-teal-200">
-                        👵
-                    </div>
-                    <div>
-                        <div class="flex items-center gap-2">
-                            <h3 class="text-xl sm:text-2xl font-black text-slate-900">Maria da Silva</h3>
-                            <span class="bg-emerald-100 text-emerald-800 text-xs font-black px-2.5 py-0.5 rounded-full border border-emerald-300">🟢 Tudo certo</span>
-                        </div>
-                        <p class="text-xs text-slate-500 font-bold mt-0.5">Última atividade: hoje às 08:42 • 📍 Paulista, PE</p>
-                    </div>
+        <!-- RESUMO DO IDOSO VINCULADO -->
+        <section class="bg-white p-6 rounded-3xl border-2 border-slate-200 shadow-sm space-y-4">
+            <div class="flex items-center gap-4 border-b border-slate-100 pb-4">
+                <div class="w-16 h-16 bg-teal-100 text-brandTeal rounded-2xl flex items-center justify-center text-3xl font-black shrink-0 border-2 border-teal-200">
+                    👵
                 </div>
-
-                <button type="button" onclick="alert('Exibindo histórico de idoso.')" class="bg-teal-50 hover:bg-teal-100 text-brandTeal border-2 border-teal-200 px-4 py-2 rounded-xl text-xs font-black transition-colors w-full sm:w-auto text-center">
-                    Ver perfil do idoso
-                </button>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h3 class="text-xl sm:text-2xl font-black text-slate-900">Maria da Silva</h3>
+                        <span class="bg-emerald-100 text-emerald-800 text-xs font-black px-2.5 py-0.5 rounded-full border border-emerald-300">🟢 Monitoramento Ativo</span>
+                    </div>
+                    <p class="text-xs text-slate-500 font-bold mt-0.5">Idoso sob sua responsabilidade • 📍 Paulista, PE</p>
+                </div>
             </div>
 
-            <!-- BEM-ESTAR DO IDOSO -->
-            <div class="pt-4">
-                <h4 class="text-xs font-black text-slate-500 uppercase tracking-wider mb-2">Como está o idoso hoje?</h4>
-                <div class="grid grid-cols-3 gap-3">
-                    <div class="bg-emerald-50 border-2 border-emerald-300 p-3 rounded-2xl flex items-center justify-center sm:justify-start gap-2">
-                        <span class="text-2xl">😊</span>
-                        <span class="text-xs sm:text-sm font-black text-emerald-900">Bem (Informado às 08:00)</span>
-                    </div>
-                    <div class="bg-slate-50 border border-slate-200 p-3 rounded-2xl flex items-center justify-center sm:justify-start gap-2 opacity-50">
-                        <span class="text-2xl">😐</span>
-                        <span class="text-xs sm:text-sm font-bold text-slate-600 hidden sm:inline">Normal</span>
-                    </div>
-                    <div class="bg-slate-50 border border-slate-200 p-3 rounded-2xl flex items-center justify-center sm:justify-start gap-2 opacity-50">
-                        <span class="text-2xl">😟</span>
-                        <span class="text-xs sm:text-sm font-bold text-slate-600 hidden sm:inline">Precisa de atenção</span>
-                    </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div class="bg-slate-50 border border-slate-200 p-3.5 rounded-2xl">
+                    <span class="text-xs font-bold text-slate-500 uppercase block">Notificações e Humor</span>
+                    <strong id="totalAlertsCount" class="text-sm font-black text-brandTeal mt-1 block">0 registro(s)</strong>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 p-3.5 rounded-2xl">
+                    <span class="text-xs font-bold text-slate-500 uppercase block">Serviços Solicitados</span>
+                    <strong id="totalServicesCount" class="text-sm font-black text-brandTeal mt-1 block">0 serviço(s)</strong>
+                </div>
+                <div class="bg-slate-50 border border-slate-200 p-3.5 rounded-2xl">
+                    <span class="text-xs font-bold text-slate-500 uppercase block">Conexão</span>
+                    <strong class="text-sm font-black text-emerald-700 flex items-center gap-1.5 mt-1">
+                        <span class="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-ping"></span> Tempo Real Ativo
+                    </strong>
                 </div>
             </div>
         </section>
 
-        <!-- SEÇÃO DE ALERTAS IMPORTANTES -->
+        <!-- 1. SOLICITAÇÕES DE AJUDA E HUMOR DO IDOSO -->
         <section class="space-y-3">
-            <h3 class="text-lg font-black text-slate-800 flex items-center gap-2">
-                <i class="fa-solid fa-bell text-amber-500"></i> Alertas Importantes
-            </h3>
+            <div class="flex items-center justify-between">
+                <h3 class="text-lg font-black text-slate-800 flex items-center gap-2">
+                    <i class="fa-solid fa-heart-circle-check text-brandTeal"></i> Atualizações de Humor e Chamados
+                </h3>
+                <button onclick="limparAlertas()" class="text-xs font-bold text-slate-400 hover:text-brandRed underline">Limpar Registros</button>
+            </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                <div class="bg-amber-50 border-2 border-amber-300 p-4 rounded-2xl flex items-start gap-3 shadow-sm">
-                    <div class="w-10 h-10 bg-amber-200 text-amber-800 rounded-xl flex items-center justify-center text-lg shrink-0">💊</div>
-                    <div>
-                        <h4 class="text-xs font-black text-amber-900 uppercase">Medicamento</h4>
-                        <p class="text-xs font-bold text-amber-800 mt-0.5">O lembrete das 14:00 ainda não foi confirmado.</p>
-                    </div>
-                </div>
-
-                <div class="bg-blue-50 border-2 border-blue-300 p-4 rounded-2xl flex items-start gap-3 shadow-sm">
-                    <div class="w-10 h-10 bg-blue-200 text-blue-800 rounded-xl flex items-center justify-center text-lg shrink-0">🏥</div>
-                    <div>
-                        <h4 class="text-xs font-black text-blue-900 uppercase">Consulta</h4>
-                        <p class="text-xs font-bold text-blue-800 mt-0.5">Consulta marcada para amanhã às 08:30.</p>
-                    </div>
-                </div>
-
-                <div class="bg-emerald-50 border-2 border-emerald-300 p-4 rounded-2xl flex items-start gap-3 shadow-sm">
-                    <div class="w-10 h-10 bg-emerald-200 text-emerald-800 rounded-xl flex items-center justify-center text-lg shrink-0">🤝</div>
-                    <div>
-                        <h4 class="text-xs font-black text-emerald-900 uppercase">Ajuda Confirmada</h4>
-                        <p class="text-xs font-bold text-emerald-800 mt-0.5">O ajudante Carlos confirmou presença.</p>
-                    </div>
-                </div>
+            <div id="alertsContainer" class="bg-white p-5 rounded-3xl border-2 border-slate-200 shadow-sm space-y-3">
+                <!-- Renderizado via JavaScript -->
             </div>
         </section>
 
-        <!-- AÇÕES RÁPIDAS -->
+        <!-- 2. HISTÓRICO DE SERVIÇOS DO IDOSO -->
         <section class="space-y-3 pt-2">
-            <div>
-                <h3 class="text-xl font-black text-slate-800 flex items-center gap-2">
-                    <i class="fa-solid fa-bolt text-brandTeal"></i> Ações Rápidas
-                </h3>
-                <p class="text-xs font-bold text-slate-500">Solicite um serviço em nome de Dona Maria:</p>
-            </div>
-
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                <button type="button" onclick="solicitarServico('Ir à Farmácia')" class="bg-white p-4 rounded-2xl border-2 border-slate-200 hover:border-brandTeal shadow-sm hover:shadow-md transition-all flex flex-col items-center text-center gap-2">
-                    <div class="w-12 h-12 bg-emerald-100 text-emerald-700 rounded-xl flex items-center justify-center text-2xl">💊</div>
-                    <span class="text-xs font-black text-slate-800">Solicitar Farmácia</span>
-                </button>
-
-                <button type="button" onclick="solicitarServico('Fazer Compras')" class="bg-white p-4 rounded-2xl border-2 border-slate-200 hover:border-brandTeal shadow-sm hover:shadow-md transition-all flex flex-col items-center text-center gap-2">
-                    <div class="w-12 h-12 bg-amber-100 text-amber-700 rounded-xl flex items-center justify-center text-2xl">🛒</div>
-                    <span class="text-xs font-black text-slate-800">Solicitar Compras</span>
-                </button>
-
-                <button type="button" onclick="solicitarServico('Acompanhante')" class="bg-white p-4 rounded-2xl border-2 border-slate-200 hover:border-brandTeal shadow-md hover:shadow-md transition-all flex flex-col items-center text-center gap-2">
-                    <div class="w-12 h-12 bg-purple-100 text-purple-700 rounded-xl flex items-center justify-center text-2xl">🏥</div>
-                    <span class="text-xs font-black text-slate-800">Acompanhante</span>
-                </button>
-
-                <button type="button" onclick="solicitarServico('Ajuda em Casa')" class="bg-white p-4 rounded-2xl border-2 border-slate-200 hover:border-brandTeal shadow-sm hover:shadow-md transition-all flex flex-col items-center text-center gap-2">
-                    <div class="w-12 h-12 bg-blue-100 text-blue-700 rounded-xl flex items-center justify-center text-2xl">🏠</div>
-                    <span class="text-xs font-black text-slate-800">Ajuda em Casa</span>
-                </button>
-            </div>
-        </section>
-
-        <!-- PEDIDOS RECENTES & PERFIL DO VOLUNTÁRIO -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-2">
-
-            <div class="lg:col-span-2 space-y-3">
+            <div class="flex items-center justify-between">
                 <h3 class="text-lg font-black text-slate-800 flex items-center gap-2">
-                    <i class="fa-solid fa-list-check text-brandTeal"></i> Pedidos Recentes / Em Andamento
+                    <i class="fa-solid fa-clock-rotate-left text-brandTeal"></i> Histórico de Serviços Solicitados
                 </h3>
-
-                <div class="bg-white p-4 rounded-2xl border-2 border-slate-200 shadow-sm space-y-3">
-                    <div class="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
-                        <div class="flex items-center gap-3">
-                            <span class="text-2xl">💊</span>
-                            <div>
-                                <h4 class="text-sm font-black text-slate-900">Farmácia</h4>
-                                <span class="text-xs text-slate-500 font-bold">Hoje • 09:30</span>
-                            </div>
-                        </div>
-                        <span class="bg-emerald-100 text-emerald-800 text-xs font-black px-2.5 py-1 rounded-full border border-emerald-300">🟢 Ajudante encontrado</span>
-                    </div>
-
-                    <div class="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
-                        <div class="flex items-center gap-3">
-                            <span class="text-2xl">🛒</span>
-                            <div>
-                                <h4 class="text-sm font-black text-slate-900">Compras</h4>
-                                <span class="text-xs text-slate-500 font-bold">Hoje • 14:00</span>
-                            </div>
-                        </div>
-                        <span class="bg-amber-100 text-amber-800 text-xs font-black px-2.5 py-1 rounded-full border border-amber-300">🟡 Aguardando ajudante</span>
-                    </div>
-
-                    <div class="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
-                        <div class="flex items-center gap-3">
-                            <span class="text-2xl">🏥</span>
-                            <div>
-                                <h4 class="text-sm font-black text-slate-900">Consulta Médica</h4>
-                                <span class="text-xs text-slate-500 font-bold">Amanhã • 08:00</span>
-                            </div>
-                        </div>
-                        <span class="bg-blue-100 text-blue-800 text-xs font-black px-2.5 py-1 rounded-full border border-blue-300">🔵 Agendada</span>
-                    </div>
-                </div>
+                <button onclick="limparHistorico()" class="text-xs font-bold text-slate-400 hover:text-brandTeal underline">Limpar Histórico</button>
             </div>
 
-            <div class="space-y-3">
-                <h3 class="text-lg font-black text-slate-800 flex items-center gap-2">
-                    <i class="fa-solid fa-shield-halved text-emerald-600"></i> Ajudante Vinculado
-                </h3>
-
-                <div class="bg-white p-5 rounded-2xl border-2 border-slate-200 shadow-sm space-y-3">
-                    <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 bg-slate-100 text-slate-700 rounded-full flex items-center justify-center font-black text-xl border-2 border-slate-300">
-                            👨‍💼
-                        </div>
-                        <div>
-                            <div class="flex items-center gap-1">
-                                <h4 class="text-base font-black text-slate-900">Carlos Silva</h4>
-                                <span title="Ajudante verificado" class="text-amber-500 text-xs">🏅</span>
-                            </div>
-                            <span class="text-xs font-bold text-slate-500">⭐ 4,9 • ✅ 37 ajudas concluídas</span>
-                        </div>
-                    </div>
-
-                    <div class="bg-emerald-50 border border-emerald-200 p-2.5 rounded-xl text-xs font-bold text-emerald-800">
-                        <i class="fa-solid fa-circle-check"></i> Documentação e antecedentes verificados.
-                    </div>
-
-                    <div class="flex gap-2 pt-1">
-                        <button onclick="alert('Denúncia enviada à equipe de suporte.')" class="w-1/2 text-[11px] font-bold text-red-600 bg-red-50 p-2 rounded-lg border border-red-200 text-center">
-                            🚨 Denunciar
-                        </button>
-                        <button onclick="alert('Ajudante bloqueado para este idoso.')" class="w-1/2 text-[11px] font-bold text-slate-600 bg-slate-100 p-2 rounded-lg border border-slate-200 text-center">
-                            🚫 Bloquear
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- AGENDA / HISTÓRICO -->
-        <section class="space-y-3 pt-2">
-            <h3 class="text-lg font-black text-slate-800 flex items-center gap-2">
-                <i class="fa-solid fa-calendar-days text-brandTeal"></i> Histórico de Cuidados (Últimos 7 dias)
-            </h3>
-
-            <div class="bg-white rounded-2xl border-2 border-slate-200 shadow-sm overflow-hidden">
-                <div class="p-4 border-b border-slate-100 bg-slate-50 flex items-center justify-between">
-                    <span class="text-xs font-black text-slate-600 uppercase">28/09</span>
-                    <div class="flex gap-4 text-xs font-bold text-slate-700">
-                        <span>💊 Farmácia <strong class="text-emerald-600">✅ Concluído</strong></span>
-                        <span>🛒 Compras <strong class="text-emerald-600">✅ Concluído</strong></span>
-                    </div>
-                </div>
-
-                <div class="p-4 border-b border-slate-100 flex items-center justify-between">
-                    <span class="text-xs font-black text-slate-600 uppercase">29/09</span>
-                    <span class="text-xs font-bold text-slate-700">🏠 Ajuda em casa <strong class="text-emerald-600">✅ Concluído</strong></span>
-                </div>
-
-                <div class="p-4 bg-slate-50 flex items-center justify-between">
-                    <span class="text-xs font-black text-slate-600 uppercase">30/09</span>
-                    <span class="text-xs font-bold text-slate-700">🏥 Acompanhante <strong class="text-amber-600">🟡 Agendado</strong></span>
-                </div>
+            <div id="servicesContainer" class="bg-white rounded-3xl border-2 border-slate-200 shadow-sm overflow-hidden divide-y-2 divide-slate-100">
+                <!-- Renderizado via JavaScript -->
             </div>
         </section>
 
     </main>
 
-    <!-- MODAL DE EMERGÊNCIA COMPLETO -->
+    <!-- MODAL DE SOCORRO RESTRITO -->
     <div id="emergencyModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white w-full max-w-md rounded-3xl border-4 border-red-500 p-6 space-y-6 shadow-2xl relative">
             <div class="text-center space-y-2">
                 <div class="w-16 h-16 bg-red-100 text-brandRed rounded-full flex items-center justify-center text-3xl mx-auto border-2 border-red-300">
                     <i class="fa-solid fa-triangle-exclamation"></i>
                 </div>
-                <h3 class="text-2xl font-black text-slate-900 uppercase">QUAL AJUDA PRECISA?</h3>
-                <p class="text-slate-600 text-sm font-bold">Escolha uma opção para conectar imediatamente:</p>
+                <h3 class="text-2xl font-black text-slate-900 uppercase">CHAMAR SOCORRO</h3>
+                <p class="text-slate-600 text-sm font-bold">Ligar diretamente para os serviços essenciais:</p>
             </div>
 
             <div class="space-y-3">
-                <button id="btnNotifyFamily" type="button" class="w-full bg-brandTeal hover:bg-brandTealHover text-white p-4 rounded-2xl font-extrabold flex items-center gap-4 shadow-md transition-all">
-                    <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center text-2xl shrink-0">
-                        <i class="fa-solid fa-users"></i>
-                    </div>
-                    <div class="text-left leading-tight">
-                        <span class="block text-lg">Avisar Minha Família</span>
-                        <span class="text-xs text-teal-100 font-semibold uppercase">ENVIA SINAL DE ALERTA</span>
-                    </div>
-                </button>
-
                 <a href="tel:192" class="w-full bg-brandRed hover:bg-brandRedHover text-white p-4 rounded-2xl font-extrabold flex items-center gap-4 shadow-md transition-all">
                     <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center text-2xl shrink-0">
                         <i class="fa-solid fa-truck-medical"></i>
                     </div>
                     <div class="text-left leading-tight">
-                        <span class="block text-lg">Ligar SAMU (192)</span>
+                        <span class="block text-lg">SAMU (192)</span>
                         <span class="text-xs text-red-100 font-semibold uppercase">EMERGÊNCIA MÉDICA E RESGATE</span>
                     </div>
                 </a>
@@ -347,76 +185,211 @@
                         <i class="fa-solid fa-shield-halved"></i>
                     </div>
                     <div class="text-left leading-tight">
-                        <span class="block text-lg">Ligar Polícia (190)</span>
+                        <span class="block text-lg">Polícia Militar (190)</span>
                         <span class="text-xs text-slate-300 font-semibold uppercase">SEGURANÇA E PROTEÇÃO</span>
+                    </div>
+                </a>
+
+                <a href="tel:193" class="w-full bg-amber-600 hover:bg-amber-700 text-white p-4 rounded-2xl font-extrabold flex items-center gap-4 shadow-md transition-all">
+                    <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center text-2xl shrink-0">
+                        <i class="fa-solid fa-fire-extinguisher"></i>
+                    </div>
+                    <div class="text-left leading-tight">
+                        <span class="block text-lg">Bombeiros (193)</span>
+                        <span class="text-xs text-amber-100 font-semibold uppercase">INCÊNDIOS E SOCORRO URGENTE</span>
                     </div>
                 </a>
             </div>
 
-            <button id="btnCloseEmergency" type="button" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 p-3 rounded-2xl text-base font-black border-2 border-slate-300">
+            <button type="button" onclick="fecharModalEmergencia()" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 p-3 rounded-2xl text-base font-black border-2 border-slate-300">
                 Cancelar / Voltar
             </button>
         </div>
     </div>
 
-    <footer class="w-full bg-white border-t-2 border-slate-200 py-4 px-4 text-center">
-        <p class="text-slate-700 font-bold text-sm">© 2026 Laço Amigo - Área do Responsável.</p>
+    <footer class="w-full bg-white border-t-2 border-slate-200 py-4 px-4 text-center mt-6">
+        <p class="text-slate-700 font-bold text-sm">© 2026 Laço Amigo - Painel do Responsável.</p>
     </footer>
 
     <script>
-        function closeSplash() {
+        setTimeout(() => {
             const splash = document.getElementById('splashScreen');
             if (splash) {
                 splash.style.opacity = '0';
                 splash.style.pointerEvents = 'none';
-                setTimeout(function() { splash.style.display = 'none'; }, 500);
+                setTimeout(() => splash.style.display = 'none', 500);
             }
-        }
-        window.addEventListener('DOMContentLoaded', function() { setTimeout(closeSplash, 1200); });
-        window.addEventListener('load', function() { setTimeout(closeSplash, 1200); });
-        setTimeout(closeSplash, 2000);
-    </script>
+        }, 800);
 
-    <script>
-        const STORAGE_KEY = 'laco_amigo_user_session';
+        function abrirModalEmergencia() {
+            document.getElementById('emergencyModal').classList.remove('hidden');
+        }
+
+        function fecharModalEmergencia() {
+            document.getElementById('emergencyModal').classList.add('hidden');
+        }
 
         document.addEventListener('DOMContentLoaded', () => {
-            const savedData = localStorage.getItem(STORAGE_KEY);
-            const userNameElement = document.getElementById('userName');
-            const respNameElement = document.getElementById('respName');
-
+            const savedData = localStorage.getItem('laco_amigo_user_session');
             if (savedData) {
                 try {
                     const user = JSON.parse(savedData);
                     if (user.name) {
-                        userNameElement.textContent = user.name;
-                        if (respNameElement) respNameElement.textContent = user.name.split(' ')[0];
+                        document.getElementById('userName').textContent = user.name;
+                        document.getElementById('respName').textContent = user.name.split(' ')[0];
                     }
-                } catch (e) {
-                    console.error('Erro na sessão', e);
-                }
+                } catch (_) {}
             }
 
             const btnLogout = document.getElementById('btnLogout');
             if (btnLogout) {
                 btnLogout.addEventListener('click', () => {
-                    localStorage.removeItem(STORAGE_KEY);
+                    localStorage.removeItem('laco_amigo_user_session');
                     window.location.href = 'index.html';
                 });
             }
 
-            const emergencyModal = document.getElementById('emergencyModal');
-            const btnOpenEmergency = document.getElementById('btnOpenEmergency');
-            const btnCloseEmergency = document.getElementById('btnCloseEmergency');
-
-            if (btnOpenEmergency && emergencyModal && btnCloseEmergency) {
-                btnOpenEmergency.addEventListener('click', () => emergencyModal.classList.remove('hidden'));
-                btnCloseEmergency.addEventListener('click', () => emergencyModal.classList.add('hidden'));
-            }
+            renderPainel();
+            window.addEventListener('storage', renderPainel);
+            setInterval(renderPainel, 1500);
         });
 
-        function solicitarServico(servico) {
-            alert(`Solicitação de "${servico}" registrada em nome do idoso vinculado!`);
+        function renderPainel() {
+            renderAlertas();
+            renderServicos();
+        }
+
+        function renderAlertas() {
+            const container = document.getElementById('alertsContainer');
+            const countElement = document.getElementById('totalAlertsCount');
+            const alertas = JSON.parse(localStorage.getItem('laco_amigo_live_alerts') || '[]');
+
+            if (countElement) countElement.textContent = `${alertas.length} registro(s)`;
+
+            if (alertas.length === 0) {
+                container.innerHTML = `
+                    <div class="p-6 text-center text-slate-500 font-bold text-xs bg-slate-50 rounded-2xl border border-dashed border-slate-300">
+                        Nenhum registro de humor ou chamado enviado por Dona Maria recentemente.
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = alertas.map(item => {
+                const isEmergencia = item.tipo === 'EMERGÊNCIA' || item.tipo === 'Atenção Solicitada';
+                const isHumor = item.tipo === 'Humor Diário';
+
+                if (isEmergencia) {
+                    return `
+                    <div class="p-4 bg-red-50 rounded-2xl border-2 border-red-300 flex flex-col sm:flex-row sm:items-center justify-between gap-3 animate-pulse">
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 bg-brandRed text-white rounded-xl flex items-center justify-center text-lg shrink-0 shadow-sm">
+                                <i class="fa-solid fa-bell"></i>
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-2">
+                                    <h4 class="text-sm font-black text-red-900">${item.tipo}</h4>
+                                    <span class="bg-red-200 text-red-800 text-[10px] font-black px-2 py-0.5 rounded-full uppercase">ALERTA URGENTE</span>
+                                </div>
+                                <p class="text-xs font-bold text-red-700 mt-0.5">${item.mensagem}</p>
+                                <span class="text-[11px] text-slate-500 font-bold block mt-1">${item.data} • às ${item.horario}</span>
+                            </div>
+                        </div>
+                        <button onclick="alert('Iniciando ligação para Dona Maria: (81) 98888-1111...')" class="bg-brandRed hover:bg-brandRedHover text-white text-xs font-black px-4 py-2.5 rounded-xl shrink-0 transition-all shadow-sm">
+                            <i class="fa-solid fa-phone mr-1"></i> Ligar para Idoso
+                        </button>
+                    </div>`;
+                } else if (isHumor) {
+                    return `
+                    <div class="p-4 bg-indigo-50/70 rounded-2xl border-2 border-indigo-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 bg-indigo-600 text-white rounded-xl flex items-center justify-center text-lg shrink-0 shadow-sm">
+                                <i class="fa-solid fa-face-smile"></i>
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-2">
+                                    <h4 class="text-sm font-black text-indigo-950">Registro de Bem-Estar</h4>
+                                    <span class="bg-indigo-100 text-indigo-800 text-[10px] font-black px-2 py-0.5 rounded-full uppercase">Informativo</span>
+                                </div>
+                                <p class="text-xs font-bold text-indigo-900 mt-0.5">${item.mensagem}</p>
+                                <span class="text-[11px] text-slate-500 font-bold block mt-1">${item.data} • às ${item.horario}</span>
+                            </div>
+                        </div>
+                        <button onclick="alert('Iniciando ligação afetiva para Dona Maria: (81) 98888-1111...')" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-black px-4 py-2.5 rounded-xl shrink-0 transition-all shadow-sm">
+                            <i class="fa-solid fa-phone mr-1"></i> Conversar com Idoso
+                        </button>
+                    </div>`;
+                } else {
+                    return `
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 bg-slate-700 text-white rounded-xl flex items-center justify-center text-lg shrink-0 shadow-sm">
+                                <i class="fa-solid fa-info"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-black text-slate-900">${item.tipo}</h4>
+                                <p class="text-xs font-bold text-slate-600 mt-0.5">${item.mensagem}</p>
+                                <span class="text-[11px] text-slate-400 font-bold block mt-1">${item.data} • às ${item.horario}</span>
+                            </div>
+                        </div>
+                    </div>`;
+                }
+            }).join('');
+        }
+
+        function renderServicos() {
+            const container = document.getElementById('servicesContainer');
+            const countElement = document.getElementById('totalServicesCount');
+            const servicos = JSON.parse(localStorage.getItem('laco_amigo_live_services') || '[]');
+
+            if (countElement) countElement.textContent = `${servicos.length} serviço(s)`;
+
+            if (servicos.length === 0) {
+                container.innerHTML = `
+                    <div class="p-6 text-center text-slate-500 font-bold text-xs bg-slate-50">
+                        Nenhum pedido de serviço registrado por Dona Maria até o momento.
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = servicos.map(item => `
+                <div class="p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-slate-50/50 transition-colors">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-emerald-100 text-emerald-800 rounded-2xl flex items-center justify-center text-2xl shrink-0 border border-emerald-200 shadow-sm">
+                            ${item.icone}
+                        </div>
+                        <div class="space-y-1">
+                            <div class="flex items-center gap-2">
+                                <h4 class="text-base font-black text-slate-900">${item.servico}</h4>
+                                <span class="bg-emerald-100 text-emerald-800 text-[10px] font-black px-2.5 py-0.5 rounded-full border border-emerald-300">
+                                    🟢 Solicitado
+                                </span>
+                            </div>
+                            <p class="text-xs text-slate-600 font-bold">Pedido de auxílio registrado por Dona Maria da Silva.</p>
+                            <div class="flex flex-wrap items-center gap-3 pt-1 text-xs text-slate-500 font-semibold">
+                                <span><i class="fa-regular fa-calendar mr-1"></i> ${item.data} • ${item.horario}</span>
+                                <span>•</span>
+                                <span class="text-slate-800 font-black"><i class="fa-solid fa-user-heart text-brandTeal mr-1"></i> ${item.voluntario}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-left md:text-right shrink-0 bg-slate-50 p-3 rounded-2xl border border-slate-200 md:bg-transparent md:p-0 md:border-none">
+                        <span class="text-[11px] text-slate-500 font-bold block">Status</span>
+                        <span class="text-brandTeal text-xs font-black uppercase">${item.status}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function limparAlertas() {
+            localStorage.removeItem('laco_amigo_live_alerts');
+            renderPainel();
+        }
+
+        function limparHistorico() {
+            localStorage.removeItem('laco_amigo_live_services');
+            renderPainel();
         }
     </script>
 </body>
