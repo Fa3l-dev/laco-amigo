@@ -1,50 +1,27 @@
-const STORAGE_KEY = 'laco_amigo_user_session';
-const USERS_DB_KEY = 'laco_amigo_registered_users';
-const ALERTS_KEY = 'laco_amigo_live_alerts';
-const SERVICES_KEY = 'laco_amigo_live_services';
+// CONFIGURAÇÃO DO FIREBASE (Projeto lacoamigo-b498f)
+const firebaseConfig = {
+  apiKey: "AIzaSyClec_7x_jR1O7MYS7wZOLu_CSDUeNGQ1Q",
+  authDomain: "laco-amigo.firebaseapp.com",
+  databaseURL: "https://laco-amigo-default-rtdb.firebaseio.com",
+  projectId: "laco-amigo",
+  storageBucket: "laco-amigo.firebasestorage.app",
+  messagingSenderId: "1034440780614",
+  appId: "1:1034440780614:web:57061cfbdbc50b345b1347",
+  measurementId: "G-3Y09NLWNXC"
+};
 
-// Usuários padrão pré-cadastrados para testes
+if (typeof firebase !== 'undefined' && !firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+}
+const db = typeof firebase !== 'undefined' ? firebase.database() : null;
+
+const STORAGE_KEY = 'laco_amigo_user_session';
+let tempUserData = {};
+
 const PRESET_USERS = [
-    {
-        name: 'Maria da Silva',
-        email: 'idoso@teste.com',
-        senha: '12345678',
-        perfil: 'Idoso',
-        telefone: '(81) 98888-1111',
-        cpf: '111.222.333-44',
-        cidade: 'Paulista',
-        estado: 'PE',
-        bairro: 'Centro',
-        rua: 'Rua das Flores',
-        numero: '100'
-    },
-    {
-        name: 'João da Silva',
-        email: 'responsavel@teste.com',
-        senha: '12345678',
-        perfil: 'Responsável',
-        telefone: '(81) 98888-2222',
-        cpf: '555.666.777-88',
-        cpfIdosoVinculado: '111.222.333-44',
-        cidade: 'Paulista',
-        estado: 'PE',
-        bairro: 'Centro',
-        rua: 'Rua das Flores',
-        numero: '100'
-    },
-    {
-        name: 'Carlos Silva',
-        email: 'voluntario@teste.com',
-        senha: '12345678',
-        perfil: 'Voluntário',
-        telefone: '(81) 98888-3333',
-        cpf: '999.888.777-66',
-        cidade: 'Paulista',
-        estado: 'PE',
-        bairro: 'Jardim Paulista',
-        rua: 'Av. Brasil',
-        numero: '50'
-    }
+    { name: 'Maria da Silva', email: 'idoso@teste.com', senha: '12345678', perfil: 'Idoso', telefone: '(81) 98888-1111', cpf: '111.222.333-44' },
+    { name: 'João da Silva', email: 'responsavel@teste.com', senha: '12345678', perfil: 'Responsável', telefone: '(81) 98888-2222', cpf: '555.666.777-88', cpfIdosoVinculado: '111.222.333-44' },
+    { name: 'Carlos Silva', email: 'voluntario@teste.com', senha: '12345678', perfil: 'Voluntário', telefone: '(81) 98888-3333', cpf: '999.888.777-66' }
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -52,118 +29,92 @@ document.addEventListener('DOMContentLoaded', () => {
     setupForms();
 });
 
-// Força a presença dos usuários de teste sem apagar cadastros manuais novos
 function initPresetUsers() {
-    let existingUsers = [];
-    try {
-        existingUsers = JSON.parse(localStorage.getItem(USERS_DB_KEY) || '[]');
-    } catch (_) {
-        existingUsers = [];
-    }
-
-    PRESET_USERS.forEach(preset => {
-        const found = existingUsers.some(u => u.email && u.email.toLowerCase() === preset.email.toLowerCase());
-        if (!found) {
-            existingUsers.push(preset);
+    if (!db) return;
+    db.ref('users').once('value', snapshot => {
+        if (!snapshot.exists()) {
+            PRESET_USERS.forEach(user => db.ref('users').push(user));
         }
     });
-
-    localStorage.setItem(USERS_DB_KEY, JSON.stringify(existingUsers));
-}
-
-function togglePasswordVisibility(id) {
-    const field = document.getElementById(id);
-    if (!field) return;
-    field.type = field.type === 'password' ? 'text' : 'password';
 }
 
 function showCadastro() {
-    const formLogin = document.getElementById('formLogin');
-    const formCadastro = document.getElementById('formCadastro');
+    document.getElementById('formLogin')?.classList.add('hidden');
+    document.getElementById('formCadastro')?.classList.remove('hidden');
     const screenTitle = document.getElementById('screenTitle');
-
-    if (formLogin) formLogin.classList.add('hidden');
-    if (formCadastro) formCadastro.classList.remove('hidden');
     if (screenTitle) screenTitle.textContent = 'Criar sua Conta';
 }
 
 function showLogin() {
-    const formCadastro = document.getElementById('formCadastro');
-    const stepPerfil = document.getElementById('stepPerfil');
-    const stepResponsavel = document.getElementById('stepResponsavel');
-    const formLogin = document.getElementById('formLogin');
+    document.getElementById('formCadastro')?.classList.add('hidden');
+    document.getElementById('stepPerfil')?.classList.add('hidden');
+    document.getElementById('stepResponsavel')?.classList.add('hidden');
     const screenTitle = document.getElementById('screenTitle');
-
-    if (formCadastro) formCadastro.classList.add('hidden');
-    if (stepPerfil) stepPerfil.classList.add('hidden');
-    if (stepResponsavel) stepResponsavel.classList.add('hidden');
     if (screenTitle) {
         screenTitle.classList.remove('hidden');
         screenTitle.textContent = 'Entrar no App';
     }
-    if (formLogin) formLogin.classList.remove('hidden');
+    document.getElementById('formLogin')?.classList.remove('hidden');
 }
 
 function backToCadastro() {
-    const stepPerfil = document.getElementById('stepPerfil');
-    const screenTitle = document.getElementById('screenTitle');
-    const formCadastro = document.getElementById('formCadastro');
-
-    if (stepPerfil) stepPerfil.classList.add('hidden');
-    if (screenTitle) screenTitle.classList.remove('hidden');
-    if (formCadastro) formCadastro.classList.remove('hidden');
+    document.getElementById('stepPerfil')?.classList.add('hidden');
+    document.getElementById('screenTitle')?.classList.remove('hidden');
+    document.getElementById('formCadastro')?.classList.remove('hidden');
 }
 
 function backToPerfil() {
-    const stepResponsavel = document.getElementById('stepResponsavel');
-    const stepPerfil = document.getElementById('stepPerfil');
-
-    if (stepResponsavel) stepResponsavel.classList.add('hidden');
-    if (stepPerfil) stepPerfil.classList.remove('hidden');
+    document.getElementById('stepResponsavel')?.classList.add('hidden');
+    document.getElementById('stepPerfil')?.classList.remove('hidden');
 }
 
-let tempUserData = {};
+function togglePasswordVisibility(id) {
+    const field = document.getElementById(id);
+    if (field) field.type = field.type === 'password' ? 'text' : 'password';
+}
 
 function setupForms() {
-    // 1. LOGIN
     const formLogin = document.getElementById('formLogin');
     if (formLogin) {
-        formLogin.addEventListener('submit', (e) => {
+        formLogin.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const emailInput = document.getElementById('loginEmail');
-            const senhaInput = document.getElementById('loginSenha');
-            if (!emailInput || !senhaInput) return;
+            const email = document.getElementById('loginEmail')?.value.trim().toLowerCase();
+            const senha = document.getElementById('loginSenha')?.value;
 
-            const email = emailInput.value.trim().toLowerCase();
-            const senha = senhaInput.value;
+            if (!email || !senha) return alert('Preencha todos os campos!');
 
-            const registeredUsers = JSON.parse(localStorage.getItem(USERS_DB_KEY) || '[]');
-            const user = registeredUsers.find(u => u.email && u.email.toLowerCase() === email);
+            try {
+                if (db) {
+                    const snapshot = await db.ref('users').once('value');
+                    const usersObj = snapshot.val() || {};
+                    const usersList = Object.values(usersObj);
+                    const user = usersList.find(u => u.email && u.email.toLowerCase() === email);
 
-            if (user) {
-                if (user.senha === senha) {
-                    localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
-                    redirectToRolePage(user.perfil);
-                } else {
-                    alert('Senha incorreta!');
+                    if (user) {
+                        if (user.senha === senha) {
+                            localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
+                            redirectToRolePage(user.perfil);
+                        } else {
+                            alert('Senha incorreta!');
+                        }
+                    } else {
+                        alert('E-mail não encontrado!');
+                    }
                 }
-            } else {
-                alert('E-mail não encontrado!');
+            } catch (err) {
+                console.error(err);
+                alert('Erro na conexão.');
             }
         });
     }
 
-    // 2. CADASTRO GERAL
     const formCadastro = document.getElementById('formCadastro');
     if (formCadastro) {
         formCadastro.addEventListener('submit', (e) => {
             e.preventDefault();
             const senha = document.getElementById('senha').value;
-            const confirmar = document.getElementById('confirmarSenha').value;
-
-            if (senha !== confirmar) {
-                alert('As senhas não coincidem!');
-                return;
+            if (senha !== document.getElementById('confirmarSenha').value) {
+                return alert('As senhas não coincidem!');
             }
 
             tempUserData = {
@@ -180,27 +131,24 @@ function setupForms() {
             };
 
             document.getElementById('formCadastro').classList.add('hidden');
-            document.getElementById('screenTitle').classList.add('hidden');
+            document.getElementById('screenTitle')?.classList.add('hidden');
             document.getElementById('stepPerfil').classList.remove('hidden');
         });
     }
 
-    // 3. RESPONSÁVEL: VINCULAR CPF IDOSO
     const formCpfIdoso = document.getElementById('formCpfIdoso');
     if (formCpfIdoso) {
-        formCpfIdoso.addEventListener('submit', (e) => {
+        formCpfIdoso.addEventListener('submit', async (e) => {
             e.preventDefault();
             tempUserData.cpfIdosoVinculado = document.getElementById('cpfIdosoExistente').value.trim();
-            finalizarCadastroResponsavel();
+            await finalizarCadastro();
         });
     }
 
-    // 4. RESPONSÁVEL: CADASTRAR NOVO IDOSO
     const formCadastroIdoso = document.getElementById('formCadastroIdoso');
     if (formCadastroIdoso) {
-        formCadastroIdoso.addEventListener('submit', (e) => {
+        formCadastroIdoso.addEventListener('submit', async (e) => {
             e.preventDefault();
-
             const novoIdoso = {
                 name: document.getElementById('nomeIdoso').value.trim(),
                 email: document.getElementById('emailIdoso').value.trim(),
@@ -210,56 +158,45 @@ function setupForms() {
                 perfil: 'Idoso'
             };
 
-            const registeredUsers = JSON.parse(localStorage.getItem(USERS_DB_KEY) || '[]');
-            registeredUsers.push(novoIdoso);
-            localStorage.setItem(USERS_DB_KEY, JSON.stringify(registeredUsers));
-
+            if (db) await db.ref('users').push(novoIdoso);
             tempUserData.cpfIdosoVinculado = novoIdoso.cpf;
-            alert(`O idoso ${novoIdoso.name} foi cadastrado com sucesso!`);
-
-            finalizarCadastroResponsavel();
+            tempUserData.nomeIdosoVinculado = novoIdoso.name;
+            await finalizarCadastro();
         });
     }
 }
 
-function selectPerfil(perfil) {
+// Função atualizada como ASYNC para tratar a chamada assíncrona do Firebase
+async function selectPerfil(perfil) {
     tempUserData.perfil = perfil;
 
     if (perfil === 'Responsável') {
-        document.getElementById('stepPerfil').classList.add('hidden');
-        document.getElementById('stepResponsavel').classList.remove('hidden');
+        document.getElementById('stepPerfil')?.classList.add('hidden');
+        document.getElementById('stepResponsavel')?.classList.remove('hidden');
     } else {
-        const registeredUsers = JSON.parse(localStorage.getItem(USERS_DB_KEY) || '[]');
-        registeredUsers.push(tempUserData);
-        localStorage.setItem(USERS_DB_KEY, JSON.stringify(registeredUsers));
-
-        alert(`Cadastro realizado com sucesso como "${perfil}"! Faça seu login.`);
-        showLogin();
-        const loginEmail = document.getElementById('loginEmail');
-        if (loginEmail) loginEmail.value = tempUserData.email;
+        await finalizarCadastro();
     }
 }
 
-function toggleFormularioIdoso(opcao) {
-    const formCpf = document.getElementById('formCpfIdoso');
-    const formCad = document.getElementById('formCadastroIdoso');
-
-    if (opcao === 'sim') {
-        if (formCpf) formCpf.classList.remove('hidden');
-        if (formCad) formCad.classList.add('hidden');
-    } else {
-        if (formCpf) formCpf.classList.add('hidden');
-        if (formCad) formCad.classList.remove('hidden');
+async function finalizarCadastro() {
+    // 1. Tenta salvar no Firebase se a conexão estiver configurada
+    if (db) {
+        try {
+            await db.ref('users').push(tempUserData);
+        } catch (err) {
+            console.warn('Não foi possível salvar no Firebase, prosseguindo localmente:', err);
+        }
     }
-}
 
-function finalizarCadastroResponsavel() {
-    const registeredUsers = JSON.parse(localStorage.getItem(USERS_DB_KEY) || '[]');
-    registeredUsers.push(tempUserData);
-    localStorage.setItem(USERS_DB_KEY, JSON.stringify(registeredUsers));
-
+    // 2. Salva a sessão do usuário no navegador para manter o login ativo
     localStorage.setItem(STORAGE_KEY, JSON.stringify(tempUserData));
-    window.location.href = 'responsavel.html';
+
+    // 3. Redireciona imediatamente para a tela correspondente ao perfil
+    redirectToRolePage(tempUserData.perfil);
+}
+function toggleFormularioIdoso(opcao) {
+    document.getElementById('formCpfIdoso')?.classList.toggle('hidden', opcao !== 'sim');
+    document.getElementById('formCadastroIdoso')?.classList.toggle('hidden', opcao !== 'nao');
 }
 
 function redirectToRolePage(perfil) {
@@ -272,36 +209,47 @@ function redirectToRolePage(perfil) {
     }
 }
 
-// --- FUNÇÕES DE SINCRONIZAÇÃO EM TEMPO REAL PARA DEMONSTRAÇÃO ---
-
-// Registra um alerta direto do idoso ao responsável
-function criarAlertaIdoso(tipo, mensagem) {
-    const alertas = JSON.parse(localStorage.getItem(ALERTS_KEY) || '[]');
-    const novoAlerta = {
-        id: Date.now(),
+// TRANSMISSÃO FIREBASE EM TEMPO REAL
+function criarAlertaIdoso(tipo, mensagem, nomeIdoso) {
+    if (!db) return;
+    db.ref('alerts').push({
         tipo: tipo,
         mensagem: mensagem,
+        nomeIdoso: nomeIdoso || 'Idoso',
         horario: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         data: 'Hoje',
-        status: 'Pendente'
-    };
-    alertas.unshift(novoAlerta);
-    localStorage.setItem(ALERTS_KEY, JSON.stringify(alertas));
+        timestamp: firebase.database.ServerValue.TIMESTAMP
+    });
 }
 
-// Registra uma nova solicitação de serviço realizada pelo idoso
-function criarServicoIdoso(servico, icone) {
-    const servicos = JSON.parse(localStorage.getItem(SERVICES_KEY) || '[]');
-    const novoServico = {
-        id: Date.now(),
+function criarServicoIdoso(servico, icone, nomeIdoso) {
+    if (!db) return;
+    db.ref('services').push({
         servico: servico,
         icone: icone,
+        nomeIdoso: nomeIdoso || 'Idoso',
         horario: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         data: 'Hoje',
         voluntario: 'Aguardando Voluntário...',
         status: 'Pendente',
-        avaliacao: 'Aguardando'
-    };
-    servicos.unshift(novoServico);
-    localStorage.setItem(SERVICES_KEY, JSON.stringify(servicos));
+        timestamp: firebase.database.ServerValue.TIMESTAMP
+    });
+}
+
+function ouvirAlertasEmTempoReal(callback) {
+    if (!db) return;
+    db.ref('alerts').on('value', snapshot => {
+        const data = snapshot.val() || {};
+        const lista = Object.keys(data).map(key => ({ id: key, ...data[key] })).reverse();
+        callback(lista);
+    });
+}
+
+function ouvirServicosEmTempoReal(callback) {
+    if (!db) return;
+    db.ref('services').on('value', snapshot => {
+        const data = snapshot.val() || {};
+        const lista = Object.keys(data).map(key => ({ id: key, ...data[key] })).reverse();
+        callback(lista);
+    });
 }
