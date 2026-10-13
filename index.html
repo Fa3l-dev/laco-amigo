@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Laço Amigo - Entrar e Cadastrar</title>
+    
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -21,10 +25,8 @@
 </head>
 <body class="min-h-screen flex flex-col justify-between text-slate-800 bg-[#F4F8F8] relative overflow-x-hidden">
 
-    <!-- SPLASH SCREEN / CARREGAMENTO MODERNO -->
     <div id="splashScreen" class="fixed inset-0 z-50 bg-gradient-to-b from-brandTeal to-teal-900 flex flex-col items-center justify-between p-6 transition-opacity duration-700">
         <div></div>
-        
         <div class="flex flex-col items-center text-center space-y-4">
             <div class="relative w-36 h-36 flex items-center justify-center">
                 <div class="absolute inset-0 border-4 border-teal-300/30 border-t-brandRed rounded-full animate-spin"></div>
@@ -35,14 +37,9 @@
             <h1 class="text-3xl font-black text-white">Laço <span class="text-brandRed">Amigo</span></h1>
             <p class="text-teal-100 text-sm font-semibold">Laço amigo, um laço de cuidado</p>
         </div>
+        <p class="text-[10px] text-teal-200/60 pt-1">Versão 2.0 Mega Update</p>
+    </div>
 
-     
-            
-            <p class="text-[10px] text-teal-200/60 pt-1">Versão 2.0 Mega Update</p>
-        </div>
-    
-
-    <!-- HEADER -->
     <header class="w-full bg-white/95 backdrop-blur-md border-b-2 border-slate-200 px-6 py-3 sticky top-0 z-30 flex justify-between items-center shadow-sm">
         <div class="flex items-center gap-2">
             <div class="w-9 h-9 rounded-full overflow-hidden flex items-center justify-center border border-slate-200 shadow-sm">
@@ -53,11 +50,9 @@
         <h1 class="text-2xl font-black text-brandTeal">Laço <span class="text-brandRed">Amigo</span></h1>
     </header>
 
-    <!-- CONTEÚDO PRINCIPAL (LOGIN E CADASTRO) -->
     <main class="flex-grow flex items-center justify-center p-4 z-10">
         <div class="max-w-lg w-full bg-white rounded-3xl shadow-xl border-2 border-slate-200 p-6 sm:p-8 my-4">
 
-            <!-- LOGO CENTRAL -->
             <div class="flex flex-col items-center mb-6">
                 <div class="w-20 h-20 bg-white rounded-full overflow-hidden flex items-center justify-center mb-2 shadow-sm border-2 border-slate-100">
                     <img src="logo.png" alt="Logo Laço Amigo" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/150'">
@@ -65,7 +60,6 @@
                 <h2 id="screenTitle" class="text-xl font-black text-slate-800">Entrar no App</h2>
             </div>
 
-            <!-- FORMULÁRIO DE LOGIN -->
             <form id="formLogin" class="space-y-4">
                 <div>
                     <label for="loginEmail" class="block text-xs font-bold text-slate-600 mb-1">E-mail <span class="text-red-500">*</span></label>
@@ -90,7 +84,6 @@
                 </p>
             </form>
 
-            <!-- FORMULÁRIO DE CADASTRO -->
             <form id="formCadastro" class="space-y-3.5 hidden">
                 <div>
                     <label class="form-label">Nome Completo <span class="text-red-500">*</span></label>
@@ -194,7 +187,6 @@
                 </p>
             </form>
 
-            <!-- PASSO 2: SELEÇÃO DE PERFIL -->
             <section id="stepPerfil" class="hidden space-y-4">
                 <div class="text-center mb-4">
                     <span class="bg-teal-100 text-brandTeal text-xs font-bold px-3 py-1 rounded-full">PASSO 2 DE 2</span>
@@ -230,7 +222,6 @@
                 </button>
             </section>
 
-            <!-- VÍNCULO DO RESPONSÁVEL -->
             <section id="stepResponsavel" class="hidden space-y-4">
                 <div class="text-center mb-2">
                     <span class="bg-amber-100 text-amber-700 text-xs font-bold px-3 py-1 rounded-full">VÍNCULO DE IDOSO</span>
@@ -312,7 +303,6 @@
             }
         }
         window.addEventListener('DOMContentLoaded', function() { setTimeout(closeSplash, 1200); });
-        window.addEventListener('load', function() { setTimeout(closeSplash, 1200); });
         setTimeout(closeSplash, 2000);
     </script>
     <script src="script.js"></script>
